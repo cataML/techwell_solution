@@ -1,0 +1,581 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Services{% endblock %}
+{% block content %}
+ <!-- Hero Section -->
+<section class="hero-service">
+  <div class="hero-overlay">
+    <div class="hero-content">
+      <h2>Our Services</h2>
+      <p>
+        Providing fast, reliable, and secure computer and internet services for all
+        your personal, academic, and professional needs. From online applications to
+        printing and data entry, we’ve got you covered.
+      </p>
+      <div class="buttons">
+        <a href="{% url 'digital:book_now' %}" class="btn-pri">Book a Service</a>
+        <a href="{% url 'digital:contact_us' %}" class="btn-sec">Contact us</a>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="services" class="services">
+  <div class="container">
+    <h2>Explore Our Services</h2>
+    <p class="section-intro">
+      At Techwell CyberCafe, we provide a wide range of reliable, fast, and secure services to meet your digital, academic, and professional needs. Explore what we offer below.
+    </p>
+
+    <div class="services-grid" id="servicesGrid">
+
+      <!-- Government Services -->
+      <div class="service-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1590192746144-b92a837f8ddf?q=80&w=1470&auto=format&fit=crop" alt=""></div>
+        <h3>Government Services</h3>
+        <p class="short-desc">Professional assistance with online government services, handled efficiently and securely.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li><strong>KRA:</strong> Tax registration, PIN retrieval, and filing returns</li>
+            <li><strong>NTSA:</strong> Driving license applications, logbook services, and vehicle registration</li>
+            <li><strong>HELB:</strong> Student loan applications, repayment management, and balance inquiries</li>
+            <li><strong>eCitizen:</strong> Passport applications, business registration, and other government services</li>
+            <li><strong>TSC:</strong> Teachers Service Commission services at affordable prices</li>
+            <li>Other online government services as required by clients</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+      <!-- Printing & Scanning -->
+      <div class="service-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1630327722923-5ebd594ddda9?q=80&w=1470&auto=format&fit=crop" alt=""></div>
+        <h3>Printing & Scanning</h3>
+        <p class="short-desc">Fast and high-quality printing and scanning for personal, academic, and professional needs.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li>Document printing: PDF, Word, Excel, PowerPoint</li>
+            <li>Assignment and report printing</li>
+            <li>Color and black & white printing</li>
+            <li>Photo and image printing</li>
+            <li>Document scanning to PDF or image formats</li>
+            <li>Bulk printing and scanning services for businesses or schools</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+      <!-- Data Entry & Typing -->
+      <div class="service-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?q=80&w=1470&auto=format&fit=crop" alt=""></div>
+        <h3>Data Entry & Typing</h3>
+        <p class="short-desc">Accurate and efficient data entry and typing services using modern tools.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li>Microsoft Word & Excel for documents and spreadsheets</li>
+            <li>Google Docs & Google Sheets for online collaboration</li>
+            <li>SPSS for statistical data entry and research analysis</li>
+            <li>Database management and MS Access data entry</li>
+            <li>Form filling and transcription of handwritten or printed documents</li>
+            <li>PDF editing, conversion, and typing from scanned documents</li>
+            <li>Typing services for letters, resumes, reports, and essays</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+      <!-- PC & Gaming Access -->
+      <div class="service-card">
+        <div class="icon"><img src="https://plus.unsplash.com/premium_photo-1724167806287-5a9978cb77cb?q=80&w=1026&auto=format&fit=crop" alt=""></div>
+        <h3>PC & Gaming Access</h3>
+        <p class="short-desc">High-performance computers for work, study, or gaming with reliable internet.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li>High-speed internet for seamless online gaming and browsing</li>
+            <li>Access to popular PC games and gaming platforms</li>
+            <li>Comfortable gaming stations with ergonomic setups</li>
+            <li>Software for productivity, coding, and multimedia editing</li>
+            <li>Support for multiplayer and online gaming sessions</li>
+            <li>Short-term or hourly PC usage for work or leisure</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+      <!-- Lamination -->
+      <div class="service-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1656784095237-3fcb8f5971b8?q=80&w=1470&auto=format&fit=crop" alt=""></div>
+        <h3>Lamination</h3>
+        <p class="short-desc">Professional lamination to protect important documents.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li>Certificates and academic documents</li>
+            <li>Identification cards and badges</li>
+            <li>Official letters and legal papers</li>
+            <li>Menus, flyers, and promotional materials</li>
+            <li>Custom-sized lamination for special documents</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+      <!-- Computer Applications -->
+      <div class="service-card">
+        <div class="icon"><img src="https://images.unsplash.com/photo-1556636530-6b7482d80e3d?q=80&w=1470&auto=format&fit=crop" alt=""></div>
+        <h3>Computer Applications</h3>
+        <p class="short-desc">Learn essential IT skills and software applications for work, school, and personal use.</p>
+        <div class="full-desc" style="display:none;">
+          <ul>
+            <li>Microsoft Office Suite (Word, Excel, PowerPoint, Outlook)</li>
+            <li>Google Workspace (Docs, Sheets, Slides, Forms)</li>
+            <li>Basic graphic design and image editing tools</li>
+            <li>SPSS and other data analysis software</li>
+            <li>Typing and document formatting skills</li>
+            <li>Email setup and internet research techniques</li>
+            <li>Introduction to coding and basic programming tools</li>
+          </ul>
+        </div>
+        <button class="learn-more-btn">Learn More</button>
+        <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
+      </div>
+
+    </div>
+
+    <div class="pagination">
+      <button id="prevBtn" disabled>Prev</button>
+      <span id="pageInfo">1 / 2</span>
+      <button id="nextBtn">Next</button>
+    </div>
+  </div>
+</section>
+<section class="pricing-section">
+  <div class="container">
+    <h2>Our Pricing</h2>
+    <p class="subtitle">Affordable and transparent rates for all your digital, printing, and government service needs.</p>
+
+    <!-- Tabs -->
+    <div class="pricing-tabs">
+      <button class="tab-btn active" data-tab="digital">Digital Access</button>
+      <button class="tab-btn" data-tab="printing">Printing & Docs</button>
+      <button class="tab-btn" data-tab="gov">Government Services</button>
+    </div>
+
+    <!-- Tab Content -->
+    <div class="pricing-grid tab-content" id="digital">
+      <div class="pricing-card">
+        <h3>Internet Access</h3>
+        <p class="price">KES 50 / 1 hour</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>High-speed internet</li>
+            <li>Hourly or daily plans</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>Computer Rental</h3>
+        <p class="price">KES 100 / 2 hours</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Modern PCs with internet access</li>
+            <li>Gaming & workstations available</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>PC & Gaming Access</h3>
+        <p class="price">KES 50 /  hour</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>High-speed internet for seamless online gaming and browsing</li>
+            <li>Comfortable gaming stations with ergonomic setups</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-grid tab-content" id="printing" style="display:none;">
+      <div class="pricing-card">
+        <h3>Printing</h3>
+        <p class="price">KES 10 / per page</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Color & black/white printing</li>
+            <li>PDF, Word, Excel documents</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>Scanning</h3>
+        <p class="price">KES 20 / per page</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Scan to PDF or image format</li>
+            <li>High-quality, fast scanning</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>Photocopying</h3>
+        <p class="price">KES 10 / per page</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Quick photocopying service</li>
+            <li>Single or bulk copies</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>Typing / Document Prep</h3>
+        <p class="price">KES 150 / per document</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Word, Excel, PDF typing</li>
+            <li>Document formatting & preparation</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>Lamination</h3>
+        <p class="price">KES 50 / per sheet</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Certificates, IDs, and documents</li>
+            <li>Professional lamination</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+        <div class="pricing-card">
+        <h3>PDF Conversion</h3>
+        <p class="price">KES 50 / per sheet</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>PDF to word/Jpeg</li>
+            <li>Word/Jpeg to PDF</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="pricing-grid tab-content" id="gov" style="display:none;">
+      <div class="pricing-card">
+        <h3>Government Services</h3>
+        <p class="price">KES 200 / per application</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>KRA, HELB, eCitizen services</li>
+            <li>Professional and fast processing</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <h3>TSC Services</h3>
+        <p class="price">KES 250 / per task</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+            <li>Teacher registration, verification</li>
+            <li>Fast, affordable service</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+       <div class="pricing-card">
+        <h3>SHA/ NSSF Services</h3>
+        <p class="price">KES 200 / per task</p>
+        <button class="toggle-btn">View Details</button>
+        <div class="details" style="display:none;">
+          <ul>
+         <li>SHA (Taifa Care) registration and contribution management</li>
+        <li>NSSF account registration and tracking</li>
+          </ul>
+          <a href="{% url 'digital:book_now' %}" class="btn">Book Now</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- Why Choose Us Section -->
+<section class="why-choose">
+  <div class="container">
+    <h2>Why Choose Us</h2>
+    <div class="choose-grid">
+      <div class="choose-card">
+        <i class="fas fa-bolt"></i>
+        <h3>Super Fast Internet</h3>
+        <p>Enjoy lightning-fast connectivity for browsing, gaming, and online services.</p>
+      </div>
+      <div class="choose-card">
+        <i class="fas fa-lock"></i>
+        <h3>Secure & Confidential</h3>
+        <p>Your data and documents are handled with the highest level of privacy.</p>
+      </div>
+      <div class="choose-card">
+        <i class="fas fa-handshake"></i>
+        <h3>Trusted by 1000+ Clients</h3>
+        <p>We are the go-to cyber hub in Nairobi, serving students and professionals daily.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="steps-section">
+  <div class="container">
+    <h2>How It Works</h2>
+    <p class="steps-intro">Follow these simple steps to get any service done at Techwell CyberCafé.</p>
+
+    <div class="steps-wrapper">
+      <!-- Step 1 -->
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Choose a Service</h3>
+        <p>Select what you need—printing, online applications, typing, scanning, or payments.</p>
+      </div>
+
+      <div class="step-arrow">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+
+      <!-- Step 2 -->
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Submit Your Details</h3>
+        <p>Provide the documents or information required for your selected service.</p>
+      </div>
+
+      <div class="step-arrow">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+
+      <!-- Step 3 -->
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>We Process Quickly</h3>
+        <p>Our team works on your request instantly with accuracy and professionalism.</p>
+      </div>
+
+      <div class="step-arrow">
+        <i class="fas fa-arrow-right"></i>
+      </div>
+
+      <!-- Step 4 -->
+      <div class="step-card">
+        <div class="step-number">4</div>
+        <h3>Collect or Download</h3>
+        <p>Get your documents processed, printed, scanned, or submitted with ease.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="testimonials" class="testimonials">
+  <div class="container">
+    <h2>What Our Clients Say</h2>
+    <div class="testimonial-marquee">
+      <div class="marquee-content">
+
+        <!-- Testimonial 1 -->
+        <div class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 1">
+          <p>“Fast internet and friendly service. I always come here.”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>John Mwangi</h4>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1530785602389-07594beb8b73?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 2">
+          <p>“Very reliable for KRA and HELB services. Highly recommend!”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <h4>Grace Mukhwana</h4>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1614890107637-fe96d74acf4b?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 3">
+          <p>“Affordable printing and scanning, very convenient.”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="far fa-star"></i>
+          </div>
+          <h4>Kevin Otieno</h4>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1667422234416-f833075962bb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 4">
+          <p>“Great place for gaming and internet browsing.”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>Sarah Wambui</h4>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="testimonial-card">
+          <img src="https://plus.unsplash.com/premium_photo-1663040111191-c585a609fd9c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 5">
+          <p>“Trusted by many students for quick services. Love it!”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>Peter Kiptum</h4>
+        </div>
+
+        <!-- Duplicate for smooth loop -->
+        <div class="testimonial-card">
+          <img src="https://images.unsplash.com/photo-1615204937608-614bc888e88f?q=80&w=1026&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Client 1">
+          <p>“Fast internet and friendly service. I always come here.”</p>
+          <div class="stars">
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i><i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+          </div>
+          <h4>John Mwangi</h4>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+<section class="cta-section">
+  <div class="container">
+    <h2>Ready to Get Started?</h2>
+    <p class="subtitle">Whether you need internet access, printing, TSC services, or document assistance, we’ve got you covered.</p>
+
+    <div class="cta-buttons">
+      <a href="{% url 'digital:book_now' %}" class="btn-pri">Book  Session</a>
+      <a href="{% url 'digital:contact_us' %}" class="btn-sec">Contact us</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const cards = document.querySelectorAll(".service-card");
+  let currentPage = 1;
+
+  function getItemsPerPage() {
+    if (window.innerWidth >= 900) return 3; // Desktop
+    if (window.innerWidth >= 600) return 2; // Tablet
+    return 1; // Mobile
+  }
+
+  function showPage(page) {
+    const itemsPerPage = getItemsPerPage();
+    const totalPages = Math.ceil(cards.length / itemsPerPage);
+
+    cards.forEach((card, index) => {
+      card.style.display =
+        index >= (page - 1) * itemsPerPage && index < page * itemsPerPage
+          ? "block"
+          : "none";
+    });
+
+    document.getElementById("pageInfo").textContent = `${page} / ${totalPages}`;
+    document.getElementById("prevBtn").disabled = page === 1;
+    document.getElementById("nextBtn").disabled = page === totalPages;
+  }
+
+  function goToPage(delta) {
+    currentPage += delta;
+    showPage(currentPage);
+  }
+
+  document.getElementById("prevBtn").addEventListener("click", () => goToPage(-1));
+  document.getElementById("nextBtn").addEventListener("click", () => goToPage(1));
+
+  // Recalculate on resize
+  window.addEventListener("resize", () => {
+    currentPage = 1; // reset to page 1
+    showPage(currentPage);
+  });
+
+  // Initialize
+  showPage(currentPage);
+});
+</script>
+<script>
+  const buttons = document.querySelectorAll('.learn-more-btn');
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const fullDesc = button.previousElementSibling;
+      if (fullDesc.style.display === "none") {
+        fullDesc.style.display = "block";
+        button.textContent = "Show Less";
+      } else {
+        fullDesc.style.display = "none";
+        button.textContent = "Learn More";
+      }
+    });
+  });
+</script>
+<script>
+// Tabs
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabContents = document.querySelectorAll('.tab-content');
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    tabContents.forEach(content => {
+      content.style.display = content.id === tab ? 'grid' : 'none';
+    });
+  });
+});
+
+// Toggle details
+const toggleButtons = document.querySelectorAll('.toggle-btn');
+toggleButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const details = btn.nextElementSibling;
+    if(details.style.display === 'none' || details.style.display === ''){
+      details.style.display = 'block';
+      btn.textContent = 'Hide Details';
+    } else {
+      details.style.display = 'none';
+      btn.textContent = 'View Details';
+    }
+  });
+});
+</script>
+{% endblock %}

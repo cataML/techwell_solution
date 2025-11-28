@@ -1,0 +1,31 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+<main class="main">
+    <header>
+        <h1>Pending Tasks</h1>
+        <p>Total: {{ tasks|length }}</p>
+    </header>
+
+    <section class="card">
+        {% if tasks %}
+        <ul class="list">
+            {% for task in tasks %}
+            <li>
+                <div>
+                    <p><strong>{{ task.title }}</strong></p>
+                    {% if task.deadline %}<p>Due: {{ task.deadline }}</p>{% endif %}
+                </div>
+                <span class="priority {% if task.priority == 'high' %}high{% elif task.priority == 'normal' %}normal{% else %}low{% endif %}">
+                    {{ task.priority|capfirst }}
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No pending tasks.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

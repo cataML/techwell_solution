@@ -1,0 +1,40 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Profile{% endblock %}
+{% block content %}
+<div class="profile-container">
+  <h2>Hello, {{ request.user.first_name|default:request.user.username }} 👋</h2>
+
+  <div class="profile-card">
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+    <p><strong>Name:</strong> {{ profile.full_name|default:"Not set" }}</p>
+    <p><strong>Phone:</strong> {{ profile.phone|default:"Not set" }}</p>
+  </div>
+
+  <h3>Update Account Info</h3>
+   <form method="post">
+  {% csrf_token %}
+  
+  <p>
+    {{ form.full_name.label_tag }}
+    {{ form.full_name }}
+    {{ form.full_name.errors }}
+  </p>
+
+  <p>
+    {{ form.email.label_tag }}
+    {{ form.email }}
+    {{ form.email.errors }}
+  </p>
+
+  <p>
+    {{ form.phone.label_tag }}
+    {{ form.phone }}
+    {{ form.phone.errors }}
+  </p>
+
+  <button type="submit">Save Changes</button>
+</form>
+</div>
+</div>
+{% endblock %}

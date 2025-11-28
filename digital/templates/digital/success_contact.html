@@ -1,0 +1,10 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Successful{% endblock %}
+{% block content %}
+<div class="success-container">
+        <h1>✅ Message Sent successfully!</h1>
+        <p>Thank you for reaching out. We’ll get back to you as soon as possible.</p>
+        <a href="{% url 'digital:index' %}">Return Home</a>
+    </div>
+{% endblock %}

@@ -4,6 +4,8 @@ from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 import requests
 from therapy_hub.models import Booking
+from prodev.models import QuoteRequest
+from digital.models import BookNow 
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -187,7 +189,7 @@ def checkout(request):
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
-
+@login_required
 def checkout_therapy(request, pk):
     booking = get_object_or_404(Booking, id=pk)
 
@@ -236,4 +238,56 @@ def checkout_therapy(request, pk):
     
     return render(request, 'payments/checkout_therapy.html', context)
 
-       
+def checkout_prodev(request, pk):
+    quote_Request = get_object_or_404(QuoteRequest, id=pk)
+    context = {'quote_Request': quote_Request}
+    return render(request, 'payments/checkout_prodev.html', context)
+
+
+@login_required
+def checkout_digital(request, pk):
+    book_now = get_object_or_404(BookNow, id=pk)
+
+    service_key = (
+        book_now.service.lower()
+        .replace(" ", "_")
+        .replace("/", "")
+        .replace("__", "_")
+        .strip()
+    )
+
+    conversion_map = {
+        "tsc_services": "tsc",
+        "sha_nssf_services": "sha_nssf",
+        "data_entry": "data_entry",
+        "pdf_conversion": "pdf_conversion",
+        "computer_lessons": "computer_lessons",
+        "typng": "typing", 
+        "daily pass": "daily pass",
+        "monthly subscription": "monthly subscription",
+    }
+
+    service_key = conversion_map.get(service_key, service_key)
+
+    SERVICE_PRICES = {
+        'government': 200,
+        'tsc': 250,
+        'sha_nssf': 300,
+        'data_entry': 150,
+        'typing': 1,
+        'pdf_conversion': 100,
+        'daily_pass': 300,
+        'monthly subscription': 4500,
+        'other': 100,
+    }
+
+    amount = SERVICE_PRICES.get(service_key, 0)
+
+    context = {
+        'booking': book_now,
+        'amount': amount,
+        'service_name': book_now.service,
+        'source': 'digital',
+    }
+
+    return render(request, 'payments/checkout_digital.html', context)     

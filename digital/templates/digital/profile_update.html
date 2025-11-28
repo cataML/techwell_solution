@@ -1,0 +1,16 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Update Profile{% endblock %}
+{% block content %}
+<div style="max-width: 600px; margin: 2rem auto; padding: 1.5rem; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+    <h2>✏️ Update Your Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" style="padding: .75rem 1.25rem; background: #301934; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
+            Save Changes
+        </button>
+        <a href="{% url 'digital:client' %}" style="margin-left: 1rem; text-decoration: none; color: #555;">Cancel</a>
+    </form>
+</div>
+{% endblock %}

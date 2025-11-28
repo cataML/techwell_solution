@@ -1,0 +1,52 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Signup{% endblock %}
+{% block content %}
+<div class="form-container">
+    <form method="post" action="{% url 'digital:sign_up' %}">
+        {% csrf_token %}
+        <h2>Sign Up</h2>
+
+        <label>Username:</label>
+        {{ form.username }}
+
+        <label>Full Name:</label>
+        {{ form.full_name }}
+
+        <label>Email:</label>
+        {{ form.email }}
+
+      
+        <label>Phone Number:</label>
+        {{ form.phone }}
+        
+         <div>
+            <label>Role:</label>
+            {{ form.role }}
+        </div><br>
+        
+        <label>Password:</label>
+        {{ form.password1 }}
+
+        <label>Confirm Password:</label>
+        {{ form.password2 }}
+
+        <button type="submit">Sign Up</button>
+        <p>Already have an account? <a href="{% url 'digital:log_in' %}">Login</a></p>
+    </form>
+</div>
+{% if form.errors %}
+    <div class="form-errors">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

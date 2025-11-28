@@ -1,0 +1,36 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+<main class="main">
+    <header>
+        <h1>Payments</h1>
+        <p>Total: {{ payments|length }}</p>
+    </header>
+
+    <section class="card">
+        {% if payments %}
+        <table class="payments-table">
+            <thead>
+                <tr>
+                    <th>Client</th>
+                    <th>Amount</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pay in payments %}
+                <tr>
+                    <td>{{ pay.client_name }}</td>
+                    <td>KES {{ pay.amount }}</td>
+                    <td>{{ pay.date }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No payments found.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

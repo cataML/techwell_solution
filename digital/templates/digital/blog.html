@@ -1,0 +1,178 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Blog{% endblock %}
+{% block content %}
+<section class="hero-section">
+  <div class="container">
+    <h1>Cyber Cafe Tips & News</h1>
+    <p class="subtitle">Stay updated with the latest in tech, services, and online tips.</p>
+  </div>
+</section>
+
+
+<section class="blog-section">
+  <div class="container">
+
+    <h2 class="section-title">Our Blogs</h2>
+
+    <div class="blog-layout">
+      
+      <div class="blog-grid" id="blogGrid">
+
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1750666502982-99447b26c134?q=80&w=1470&auto=format&fit=crop" alt="Internet Speed Tips" class="blog-image">
+          <h3>How to Speed Up Your Internet at Home</h3>
+          <p class="excerpt">Practical tips to get faster and more reliable internet at home or in the cafe.</p>
+          <p class="date">Sept 23, 2025</p>
+          <div class="full-content">
+            <p>Having slow internet can be frustrating. Here are some proven steps:</p>
+            <ul>
+              <li>Place your router in a central location for better coverage.</li>
+              <li>Limit the number of connected devices during heavy use.</li>
+              <li>Update router firmware for improved performance.</li>
+              <li>Use wired Ethernet for high-stability tasks.</li>
+            </ul>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+
+        <div class="blog-card">
+          <img src="https://images.unsplash.com/photo-1630327722923-5ebd594ddda9?q=80&w=1470&auto=format&fit=crop" alt="Printing Hacks" class="blog-image">
+          <h3>Top 5 Printing Hacks Students Should Know</h3>
+          <p class="excerpt">Save time, paper, and money when printing documents at a cyber cafe.</p>
+          <p class="date">Sept 20, 2025</p>
+          <div class="full-content">
+            <ul>
+              <li>Preview documents before printing.</li>
+              <li>Use double-sided printing.</li>
+              <li>Print in draft mode for simple pages.</li>
+              <li>Convert files to PDF for consistency.</li>
+            </ul>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+
+
+        <div class="blog-card">
+          <img src="https://rimeastafrica.org/wp-content/uploads/2017/06/ecitizen.png" alt="Government Services" class="blog-image">
+          <h3>Government Services Made Easy</h3>
+          <p class="excerpt">Step-by-step guide to submitting KRA, NTSA, HELB, and TSC applications online efficiently.</p>
+          <p class="date">Sept 18, 2025</p>
+          <div class="full-content">
+            <ul>
+              <li>KRA – filing returns & printing PIN.</li>
+              <li>NTSA – renewing licenses.</li>
+              <li>HELB – loan statements & clearance.</li>
+              <li>TSC – registration & promotions.</li>
+            </ul>
+          </div>
+          <button class="read-more-btn">Read More</button>
+        </div>
+      </div>
+
+      <aside class="sidebar">
+
+        <div class="sidebar-box">
+          <h3 class="sidebar-title">Categories</h3>
+          <ul class="sidebar-list">
+            <li><a href="https://www.cnet.com/tech-tips/">Tech Tips</a></li>
+            <li><a href="https://www.cisco.com/site/us/en/learn/topics/security/what-is-cybersecurity.html">Cyber Security</a></li>
+            <li><a href="{% url 'digital:service' %}">Online Services</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-box">
+          <h3 class="sidebar-title">Recent Posts</h3>
+          <ul class="recent-posts">
+            <li>
+              <a href="https://cyberfraudhub.org/news/safer-internet-day-2025">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9meKStt6O6JaWkMi1rqXPAw_CNqor92Mc8A&s">
+                <span>How to Stay Safe Online in 2025</span>
+              </a>
+            </li>
+
+            <li>
+              <a href="https://yourshortlist.com/the-importance-of-data-security/">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT8ztgPMEH0jPeublzqwmBrKy5364x9T-9tVQ&s">
+                <span>Why Data Security Matters</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </aside>
+    </div>
+    <div class="pagination">
+      <button id="prevBtn" disabled>Previous</button>
+      <span id="pageIndicator">Page 1</span>
+      <button id="nextBtn">Next</button>
+    </div>
+
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to Get Started?</h2>
+    <p>Join our community and stay ahead with the latest tech tips & services.</p>
+    <a href="{% url 'digital:contact_us' %}" class="cta-btn">Contact Us</a>
+  </div>
+</section>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const buttons = document.querySelectorAll(".read-more-btn");
+
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const fullContent = button.previousElementSibling;
+        if (fullContent.style.display === "none" || fullContent.style.display === "") {
+          fullContent.style.display = "block";
+          button.textContent = "Show Less";
+        } else {
+          fullContent.style.display = "none";
+          button.textContent = "Read More";
+        }
+      });
+    });
+  });
+</script>
+<script>
+  const postsPerPage = 3; 
+  const blogGrid = document.getElementById('blogGrid');
+  const blogCards = blogGrid.querySelectorAll('.blog-card');
+  const totalPosts = blogCards.length;
+  const totalPages = Math.ceil(totalPosts / postsPerPage);
+
+  let currentPage = 1;
+
+  function showPage(page) {
+    blogCards.forEach((card, index) => {
+      card.style.display = "none";
+      if (index >= (page - 1) * postsPerPage && index < page * postsPerPage) {
+        card.style.display = "block";
+      }
+    });
+
+    document.getElementById('pageIndicator').textContent = `Page ${page} of ${totalPages}`;
+    document.getElementById('prevBtn').disabled = page === 1;
+    document.getElementById('nextBtn').disabled = page === totalPages;
+  }
+
+  document.getElementById('prevBtn').addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      showPage(currentPage);
+    }
+  });
+
+  document.getElementById('nextBtn').addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      showPage(currentPage);
+    }
+  });
+
+  // Initialize first page
+  showPage(currentPage);
+</script>
+{% endblock %}

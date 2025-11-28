@@ -1,0 +1,86 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+<div class="container-dash">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Staff Panel</h2>
+    <nav>
+      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
+      <a href="{% url 'digital:staff_appointments' %}" class="nav-link">Appointments</a>
+      <a href="{% url 'digital:staff_tasks' %}" class="nav-link">Tasks</a>
+      <a href="{% url 'digital:staff_payments' %}" class="nav-link">Payments</a>
+      <a href="{% url 'digital:staff_messages' %}" class="nav-link">Messages</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <header>
+      <h1>Welcome, {{ staff_name }}</h1>
+      <p>Role: <span class="role">{{ staff_role|capfirst }}</span></p>
+    </header>
+
+    <!-- Stats -->
+    <div class="stats">
+      <div class="stat-card">
+        <h3>Today's Appointments</h3>
+        <p class="stat-number">{{ todays_appointments }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Pending Tasks</h3>
+        <p class="stat-number">{{ pending_tasks }}</p>
+      </div>
+      <div class="stat-card">
+        <h3>Payments Received</h3>
+        <p class="stat-number">KES {{ payments_received }}</p>
+      </div>
+    </div>
+
+    <!-- Appointments -->
+    <section class="card">
+      <h2>Upcoming Appointments</h2>
+      {% if appointments %}
+      <ul class="list">
+        {% for appt in appointments %}
+        <li>
+          <div>
+            <p>{{ appt.client_name }}</p>
+            <p>{{ appt.date }} • {{ appt.time }}</p>
+          </div>
+          <span class="status">{{ appt.status }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No upcoming appointments.</p>
+      {% endif %}
+    </section>
+
+    <!-- Tasks -->
+    <section class="card">
+      <h2>Pending Tasks</h2>
+      {% if tasks %}
+      <ul class="list">
+        {% for task in tasks %}
+        <li>
+          <div>
+            <p>{{ task.title }}</p>
+            {% if task.deadline %}<p>Due: {{ task.deadline }}</p>{% endif %}
+          </div>
+          <span class="priority {% if task.priority == 'high' %}high{% elif task.priority == 'normal' %}normal{% else %}low{% endif %}">
+            {{ task.priority|capfirst }}
+          </span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No pending tasks.</p>
+      {% endif %}
+    </section>
+
+  </main>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+<main class="main">
+
+    <header>
+        <h1>Appointments</h1>
+        <p>Total: {{ appointments|length }}</p>
+    </header>
+
+    <section class="card">
+        {% if appointments %}
+        <ul class="list">
+            {% for appt in appointments %}
+            <li>
+                <div>
+                    <p><strong>Client:</strong> {{ appt.client_name }}</p>
+                    <p><strong>Date:</strong> {{ appt.date }} • <strong>Time:</strong> {{ appt.time }}</p>
+                    <p><strong>Status:</strong> {{ appt.status|capfirst }}</p>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No appointments found.</p>
+        {% endif %}
+    </section>
+
+</main>
+{% endblock %}

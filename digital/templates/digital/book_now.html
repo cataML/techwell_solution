@@ -1,0 +1,36 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Booking{% endblock %}
+{% block content %}
+<section id="booking-intro" class="booking-intro animate-on-load">
+  <div class="container">
+    <h2>Book Your Slot</h2>
+    <p class="intro">
+      Reserve your service or computer session in advance for a faster, hassle-free experience.
+      Walk-ins are welcome, but booking ensures priority service and guaranteed availability.
+    </p>
+
+    <div class="buttons">
+      <a href="{% url 'digital:service' %}" class="btn-pri">Explore Services</a>
+      <a href="{% url 'digital:contact_us' %}" class="btn-sec">Contact Us</a>
+    </div>
+
+  </div>
+</section>
+<section class="booking-form">
+  <div class="booking-container">
+    <h2>Book Your Slot</h2>
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="btn-submit">Book Now</button>
+    </form>
+  </div>
+</section>
+<!-- Help Section -->
+<div class="help-section animate-on-load">
+  <p class="help-title">💡 Need help with booking?</p>
+  <p>Call us at <strong>+254 792 501 015</strong></p>
+  <p>Email us at <strong>info@techwellsolution.com</strong></p>
+</div>
+{% endblock %}

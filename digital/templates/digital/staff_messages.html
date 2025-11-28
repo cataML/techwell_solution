@@ -1,0 +1,27 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+<main class="main">
+    <header>
+        <h1>Messages</h1>
+        <p>Total: {{ messages|length }}</p>
+    </header>
+
+    <section class="card">
+        {% if messages %}
+        <ul class="list">
+            {% for msg in messages %}
+            <li class="message-item">
+                <p><strong>{{ msg.sender }}</strong></p>
+                <p>{{ msg.preview }}</p>
+                <p class="date">{{ msg.date_sent }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p>No messages found.</p>
+        {% endif %}
+    </section>
+</main>
+{% endblock %}

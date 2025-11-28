@@ -1,0 +1,15 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Success{% endblock %}
+{% block content %}
+<h2>Booking Details</h2>
+<p>Name: {{ booking.name }}</p>
+<p>Service: {{ booking.service }}</p>
+<p>Status: {{ booking.status }}</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Complete Booking</button>
+</form>
+
+{% endblock %}

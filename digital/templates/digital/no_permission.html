@@ -1,0 +1,8 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Success{% endblock %}
+{% block content %}
+<h2>Access Denied</h2>
+<p>You do not have permission to view this page.</p>
+<a href="{% url 'digital:staff_dashboard' %}">Back to Dashboard</a>
+{% endblock %}
