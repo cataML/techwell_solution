@@ -1,0 +1,10 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Contact{% endblock %}
+{% block content %}
+  <div class="success-container">
+        <h1>✅ Message Sent successfully!</h1>
+        <p>Thank you for reaching out. We’ll get back to you as soon as possible.</p>
+        <a href="{% url 'therapy_hub:index' %}">Return Home</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Earnings Report{% endblock %}
+
+{% block content %}
+<section class="earnings-report-section p-6 md:p-8">
+    <div class="report-header text-center mb-8">
+        <h2 class="text-3xl font-semibold mb-2 text-green-700">💰 Detailed Earnings Report</h2>
+        <p class="text-gray-500">All completed sessions and payments for this month.</p>
+    </div>
+
+    <div class="report-table-container overflow-x-auto">
+        <table class="report-table w-full bg-white rounded-xl shadow-md">
+            <thead class="bg-green-100 text-green-800">
+                <tr>
+                    <th class="py-3 px-4 text-left">Date</th>
+                    <th class="py-3 px-4 text-left">Client</th>
+                    <th class="py-3 px-4 text-left">Service</th>
+                    <th class="py-3 px-4 text-right">Amount (KES)</th>
+                    <th class="py-3 px-4 text-left">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in detailed_earnings %}
+                <tr class="border-b">
+                    <td class="py-3 px-4">{{ session.date|date:"d M Y" }}</td>
+                    <td class="py-3 px-4">{{ session.client_name }}</td>
+                    <td class="py-3 px-4">{{ session.service_name }}</td>
+                    <td class="py-3 px-4 text-right text-green-700 font-semibold">{{ session.amount|floatformat:2 }}</td>
+                    <td class="py-3 px-4">
+                        {% if session.completed %}
+                            <span class="text-green-600 font-medium">Completed</span>
+                        {% else %}
+                            <span class="text-red-600 font-medium">Pending</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="py-4 text-center text-gray-500">No earnings to show for this period.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <tfoot class="bg-green-50 font-semibold">
+                <tr>
+                    <td colspan="3" class="py-3 px-4 text-left">Total Earnings:</td>
+                    <td class="py-3 px-4 text-right text-green-700">KES {{ total_earnings|floatformat:2 }}</td>
+                    <td></td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <div class="report-footer text-center mt-6">
+        <a href="{% url 'therapy_hub:counsellor_dashboard' %}" class="inline-block bg-green-700 hover:bg-green-800 text-white px-6 py-2 rounded-lg shadow transition">
+            Back to Dashboard
+        </a>
+    </div>
+</section>
+{% endblock %}

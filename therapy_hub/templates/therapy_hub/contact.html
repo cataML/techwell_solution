@@ -1,0 +1,73 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Contact{% endblock %}
+{% block content %}
+<section class="contact-section">
+    <h2>Get in Touch</h2>
+    <h6 style="color: black;">We re here to listen and support you.</h6>
+    <p>Whether you re ready to book a session, have a question about our courses, or simply want to learn more, the Techwell Therapy team is here for you. </p>
+      <p>Reach out today, your journey to healing starts with a conversation</p>
+    <div class="form-container">
+        <form method="POST" class="contact-form">
+            {% csrf_token %}
+
+            <div class="form-group">
+                {{ form.name.label_tag }}
+                {{ form.name }}
+                {% if form.name.errors %}
+                    <small class="error-text">{{ form.name.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.email.label_tag }}
+                {{ form.email }}
+                {% if form.email.errors %}
+                    <small class="error-text">{{ form.email.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.subject.label_tag }}
+                {{ form.subject }}
+                {% if form.subject.errors %}
+                    <small class="error-text">{{ form.subject.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                {{ form.message.label_tag }}
+                {{ form.message }}
+                {% if form.message.errors %}
+                    <small class="error-text">{{ form.message.errors.0 }}</small>
+                {% endif %}
+            </div>
+
+        <button type="submit" class="book-btn">Send Message</button>
+    </form>
+</div>
+
+<div class="reach-container">
+        <div class="reach-card"><h4>Reach us directly:</h4></div>
+            <div class="reach-card">
+            <p class="paragraph"><i class="fas fa-home me-2"></i>Nairobi, Kenya</p>
+            <p class="paragraph"><i class="fas fa-envelope me-2"></i>info@techwellsolution.com</p>
+            <p class="paragraph"><i class="fas fa-envelope me-2"></i>erastusivelia@gmail.co</p>
+            <p class="paragraph"><i class="fas fa-phone me-2"></i>+254 711 897 242/ +254 792 501 015</p>
+        </div>
+        <div class="reach-card">
+            <div class="footer-social">
+                <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://x.com" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+                <a href="https://instagram.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.tiktok.com/@erastus_ivelia" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.youtube.com/@erastusivelia7502" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+</section>
+{% endblock %}

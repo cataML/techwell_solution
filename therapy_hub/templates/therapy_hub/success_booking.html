@@ -1,0 +1,12 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Contact{% endblock %}
+{% block content %}
+    <div class="success-box">
+        <h1>🎉 Booking Confirmed!</h1>
+        <p>Thank you for booking with us.  
+            We’ve received your details and will send you a confirmation email shortly.
+        </p>
+        <a href="{% url 'index' %}">Return Home</a>
+    </div>
+{% endblock %}

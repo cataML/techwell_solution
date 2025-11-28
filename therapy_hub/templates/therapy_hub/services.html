@@ -1,0 +1,516 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Therapy Hub | Services{% endblock %}
+
+{% block content %}
+
+<section class="service-section">
+  <div class="hero-content">
+    <h1>About Tech Well Therapy</h1>
+    <p>At TechWell Therapy, we offer a range of services designed to support mental health and
+         overall well-being. From individual and couples therapy to organizational wellness programs, 
+         our goal is to make professional and compassionate care accessible. With expertise and 
+         empathy, we provide tailored solutions that guide you toward healing, growth, and resilience.
+    </p>
+    <a href="{% url 'therapy_hub:case_study' %}" class="book-btn">Discover Programmes</a>
+  </div>
+</section>
+  <!-- Services Section -->
+<section class="services-section">
+    <section class="content-section">
+      <h2>Our Services</h2>
+      <p>At Techwell Therapy, we provide a wide range of counselling, therapy, and wellness services designed to meet
+         you where you are. Whether you’re seeking individual support, family guidance, or group therapy, our compassionate
+        professionals are here to walk with you on your journey toward healing and growth.</p>
+    </section>
+    <div class="services-grid">
+      <!-- Individual Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Individual Therapy">
+          </div>
+          <div class="card-content">
+            <h3>Individual Therapy</h3>
+            <p>Private one-on-one sessions in a safe, supportive space. Build resilience and discover healthy coping strategies tailored to your unique needs and circumstances.</p>
+            <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+            
+            <!-- Couples Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1532634922-8fe0b757fb13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Couples Therapy">
+          </div>
+          <div class="card-content">
+              <h3>Couples Therapy</h3>
+              <p>Guided sessions to strengthen relationships. Improve communication, resolve conflicts, and rebuild intimacy with professional guidance in a neutral space.</p>
+              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+            
+            <!-- Corporate Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Corporate Therapy">
+          </div>
+          <div class="card-content">
+              <h3>Corporate Therapy</h3>
+              <p>Workplace programs that boost employee wellbeing. Address stress, burnout, and team challenges to create a healthier, more productive work environment.</p>
+              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+            
+            <!-- Stress Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Stress Therapy">
+          </div>
+          <div class="card-content">
+              <h3>Stress Therapy</h3>
+              <p>Learn practical techniques to handle daily stress. Regain balance and peace of mind through evidence-based approaches tailored to your lifestyle.</p>
+              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+            
+            <!-- Depression Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+              <img src="{% static 'images_therapy/depression.jpg' %}" alt="Depression Therapy">
+          </div>
+          <div class="card-content">
+              <h3>Depression Therapy</h3>
+              <p>Compassionate support for those facing depression. Find hope and healing through proven methods in a safe, non-judgmental environment.</p>
+          </div>
+        </div>
+            
+            <!-- Anxiety Therapy -->
+        <div class="service-card">
+          <div class="card-image">
+              <img src="{% static 'images_therapy/anxiety.jpg' %}" alt="Anxiety Therapy">
+          </div>
+          <div class="card-content">
+              <h3>Anxiety Therapy</h3>
+              <p>Targeted sessions to manage worry and fear. Regain control and live with confidence through personalized strategies and professional support.</p>
+              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+    </div>
+
+        <!-- Pagination-->
+  <div class="pagination">
+    <button class="prev">Prev</button>
+    <span class="page-info"></span>
+    <button class="next">Next</button>
+  </div>
+</section>
+<section class="benefits">
+  <section class="content-section">
+     <h2>🌱 Benefits of Counselling</h2>
+    <p class="lead">What clients gain from a supportive counselling journey.</p>
+  </section>
+ 
+
+
+  <div class="grid">
+    <div class="card">
+      <div class="icon-wrap">
+        <i class="fas fa-hands-helping"></i>
+      </div>
+      <h3>Emotional Support</h3>
+      <p>A safe and caring space to be heard.</p>
+    </div>
+    <div class="card">
+      <div class="icon-wrap">
+        <i class="fas fa-shield-alt"></i>
+      </div>
+      <h3>Increased Resilience</h3>
+      <p>Develop strength to bounce back from life’s challenges.</p>
+    </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Improved Mental Clarity</h3>
+        <p>Clearer thinking and better decisions.</p>
+      </div>
+      
+      <div class="card">
+        <div class="icon-wrap">
+          <i class="fas fa-spa"></i>
+        </div>
+        <h3>Stress &amp; Anxiety Management</h3>
+        <p>Learn coping skills for everyday life.</p>
+      </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <i class="fas fa-users"></i>
+        </div>
+        <h3>Better Relationships</h3>
+        <p>Strengthen connections and communication.</p>
+      </div>
+      <div class="card">
+        <div class="icon-wrap">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3>Personal Growth</h3>
+        <p>Boost self-confidence and unlock potential.</p>
+      </div>
+    </div>
+</section>
+<!-- How It Works Section -->
+  <section class="how-it-works">
+      <section class="content-section">
+            <h2>How it Works</h2>
+            <p>Booking a session with Techwell Therapy is quick and straightforward. We’ve designed the process to make sure you feel supported at every step — from your first click to your first conversation with a therapist.</p>
+      </section>
+ 
+        <div class="process-steps">
+            <!-- Step 1 -->
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <h3>Choose a Service</h3>
+                <p>Select the type of therapy or counselling that suits your needs.</p>
+            </div>
+            
+            <div class="step-connector">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Step 2 -->
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <h3>Book a Session</h3>
+                <p>Pick a convenient time through our easy online booking system.</p>
+            </div>
+            
+            <div class="step-connector">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Step 3 -->
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <h3>Confirm & Prepare</h3>
+                <p>Receive confirmation and session details via email or SMS.</p>
+            </div>
+            
+            <div class="step-connector">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Step 4 -->
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <h3>Meet Your Therapist</h3>
+                <p>Connect in person or virtually in a safe, confidential space.</p>
+            </div>
+            
+            <div class="step-connector">
+                <i class="fas fa-arrow-right"></i>
+            </div>
+            
+            <!-- Step 5 -->
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <h3>Begin Your Journey</h3>
+                <p>Start working toward healing, growth, and lasting wellness.</p>
+            </div>
+        </div>
+        
+        <div class="cta-container">
+            <a href="{% url 'therapy_hub:case_study' %}" class="cta-button">Discover Programs</a>
+        </div>
+  </section>
+  <section class="testimonials-section">
+  <section class="content-section">
+      <h2>Testimonials</h2>
+      <h6>Stories of healing, growth, and transformation</h6>
+      </section>
+
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client.jpg' %}" alt="person">
+    <div><p>“Techwell Therapy has been a safe space for me. My sessions with Erastus have helped me manage anxiety and rebuild my confidence.”</p>
+    <p><strong>Jane M.</strong> – Individual Therapy</p>
+    </div>
+  </div>
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client1.jpg' %}" alt="person">
+    <div><p>“I appreciate the therapist’s ability to combine compassion with practical strategies. Their approach fosters real progress and long-term personal growth.”</p>
+    <p><strong>Sarah T.</strong> – Couple's Therapy</p>
+    </div>
+  </div>
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client2.jpg' %}" alt="person">
+    <div><p>“Sessions are conducted with professionalism and care, creating a space where clients feel heard and respected. The guidance offered is both constructive and empowering.”</p>
+    <p><strong>Alex K.</strong> – Individual Therapy</p>
+    </div>
+  </div>
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client4.jpg' %}" alt="person">
+    <div><p>“The therapist demonstrates expertise and empathy in every session. Their support has a meaningful impact on personal well-being and resilience.”</p>
+    <p><strong>Brian L.</strong> – Individual Therapy</p>
+  </div>
+  </div>
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client3.jpg' %}" alt="person">
+    <p>“The therapist provides a supportive and professional environment that makes it easy to open up. Each session is focused, insightful, and tailored to individual needs.”</p>
+    <p><strong>Johnathan P.</strong> – Stress Therapy</p>
+  </div>
+
+  <div class="testimonials-card">
+    <img src="{% static 'images_therapy/client5.jpg' %}" alt="person">
+   <div><p>“The therapist combines expertise with genuine care, helping clients navigate challenges with confidence and clarity.”</p>
+    <p><strong>Melissa R.</strong> – Anxiety Therapy</p>
+    </div>
+  </div>
+</section>
+<section class="pricing-section">
+    <section class="content-section">
+            <h2>Our Prices</h2>
+            <p>Booking a session with Techwell Therapy is quick and straightforward. We’ve designed the process to make sure you feel supported at every step — from your first click to your first conversation with a therapist.</p>
+    </section>
+    <h4 class="pricing-title">One-Time Sessions</h4>
+    <p class="pricing-subtitle">Pay as you go, with flexible options</p>
+    <div class="pricing-container">
+      <div class="pricing-card">
+        <h3>Individual Counselling</h3>
+        <p class="price">Ksh 2,000</p>
+        <ul>
+          <li>1 x 60-minute session</li>
+          <li>Available in-person or online</li>
+          <li>Confidential and personalized support</li>
+        </ul>
+        <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+      </div>
+
+<!-- Couples Counselling -->
+    <div class="pricing-card">
+      <h3>Couples Counselling</h3>
+      <p class="price">Ksh 3,500</p>
+      <ul>
+        <li>1 x 60-minute session</li>
+        <li>Flexible scheduling</li>
+        <li>Focused relationship guidance</li>
+      </ul>
+      <br>
+      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+    </div>
+
+<!-- Corporate / Family Counselling -->
+    <div class="pricing-card">
+      <h3>Family Counselling</h3>
+      <p class="price">Ksh 4,500</p>
+      <ul>
+        <li>1 x 90-minute session</li>
+        <li>For families or small groups</li>
+        <li>Improved communication & conflict resolution</li>
+      </ul>
+      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+    </div>
+    </div>
+  <p class="note">💡 Free 15-min consultation available. Reduced rates for students or low-income clients.</p>
+</section>
+
+
+<!-- Subscription Plans -->
+<section class="pricing-section subscription-section">
+  <h4 class="pricing-title">Subscription Plans</h4>
+  <p class="pricing-subtitle">Affordable monthly options for ongoing support</p>
+
+  <div class="pricing-container">
+    
+    <!-- Basic Plan -->
+    <div class="pricing-card subscription">
+      <h3>Basic</h3>
+      <p class="price">Ksh. 7,000 <span>/ month</span></p>
+      <ul>
+        <li>3 x 60-minute session monthly</li>
+        <li>Email support</li>
+        <li>Confidential & professional care</li>
+      </ul>
+      <br>
+      <br>
+      <br>
+      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Basic</a>
+    </div>
+
+    <!-- Standard Plan -->
+    <div class="pricing-card subscription featured">
+      <h3>Standard</h3>
+      <p class="price">Ksh. 10,000 <span>/ month</span></p>
+      <ul>
+        <li>5 x 60-minute sessions monthly</li>
+        <li>Priority scheduling</li>
+        <li>Access to online resources</li>
+        <li>Email & chat support</li>
+      </ul>
+      <br>
+      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Standard</a>
+    </div>
+
+    <!-- Premium Plan -->
+    <div class="pricing-card subscription">
+      <h3>Premium</h3>
+      <p class="price">Ksh. 15,000 <span>/ month</span></p>
+      <ul>
+        <li>7 x 60-minute sessions monthly</li>
+        <li>Flexible scheduling</li>
+        <li>Dedicated counsellor</li>
+        <li>24/7 priority support</li>
+        <li>Free access to workshops</li>
+      </ul>
+      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Premium</a>
+    </div>
+
+  </div>
+
+  <p class="note">💡 Cancel anytime. Free 15-min consultation before you commit.</p>
+</section>
+     
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+<div class="faq-container">
+  <details>
+    <summary>What is counselling?</summary>
+    <p>
+      Counselling is a confidential, supportive process where a trained therapist
+      helps you explore your thoughts, feelings, and behaviors to better
+      understand yourself and work through challenges.
+    </p>
+  </details>
+
+  <details>
+    <summary>Who is counselling for?</summary>
+    <p>
+      Counselling is for anyone seeking support — whether you’re facing stress,
+      anxiety, relationship issues, trauma, or simply want personal growth and
+      clarity.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I know if I need counselling?</summary>
+    <p>
+      If you’re feeling overwhelmed, stuck, or emotionally drained — or just want
+      a safe space to talk — counselling can help. It’s okay to seek support even
+      if you’re unsure what’s “wrong.”
+    </p>
+  </details>
+
+  <details>
+    <summary>What issues can you help with?</summary>
+    <p>
+      We support clients dealing with anxiety, depression, self-esteem issues,
+      trauma, grief, relationship and family problems, life transitions, and
+      more.
+    </p>
+  </details>
+
+  <details>
+    <summary>Is counselling confidential?</summary>
+    <p>
+      Yes. Everything you share is kept confidential unless there’s a risk of
+      harm to you or others.
+    </p>
+  </details>
+
+  <details>
+    <summary>Do you offer online sessions?</summary>
+    <p>
+      Yes, we offer both in-person and secure online counselling sessions for
+      your convenience.
+    </p>
+  </details>
+
+  <details>
+    <summary>How do I book a session?</summary>
+    <p>
+      You can book via our website, phone, or contact form. We'll guide you
+      through the next steps.
+    </p>
+  </details>
+
+  <details>
+    <summary>What are your fees and payment options?</summary>
+    <p>
+      Session fees and payment options vary. We accept M-Pesa, PayPal, and bank
+      transfer. Sliding scale fees available on request.
+    </p>
+  </details>
+  </div>
+
+</section>
+<section class="cta-section">
+  <div class="cta-content">
+    <h2><i class="fas fa-heart"></i> Ready to start your healing journey?</h2>
+    <p>Take the first step toward clarity, peace, and growth. Book a session today.</p>
+    <a href="{% url 'therapy_hub:booking' %}" class="cta-btn">
+      <i class="fas fa-calendar-check"></i> Book a Session
+    </a>
+    <a href="{% url 'therapy_hub:contact' %}" class="cta-btn">
+      <i class="fas fa-envelope"></i> Contact Us
+    </a>
+  </div>
+</section>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const cards = document.querySelectorAll(".service-card");
+    let currentPage = 1;
+
+    const prevBtn = document.querySelector(".prev");
+    const nextBtn = document.querySelector(".next");
+    const pageInfo = document.querySelector(".page-info");
+
+    function getCardsPerPage() {
+      if (window.innerWidth <= 768) return 1;
+      if (window.innerWidth <= 1024) return 2;
+      return 3;
+    }
+
+    function showPage(page) {
+      const cardsPerPage = getCardsPerPage();
+      const totalPages = Math.ceil(cards.length / cardsPerPage);
+
+      cards.forEach((card, index) => {
+        card.style.display =
+          index >= (page - 1) * cardsPerPage && index < page * cardsPerPage
+            ? "flex"
+            : "none";
+      });
+
+      pageInfo.textContent = `Page ${page} of ${totalPages}`;
+      prevBtn.disabled = page === 1;
+      nextBtn.disabled = page === totalPages;
+    }
+
+    prevBtn.addEventListener("click", () => {
+      if (currentPage > 1) {
+        currentPage--;
+        showPage(currentPage);
+      }
+    });
+
+    nextBtn.addEventListener("click", () => {
+      if (currentPage < Math.ceil(cards.length / getCardsPerPage())) {
+        currentPage++;
+        showPage(currentPage);
+      }
+    });
+
+    // Re-render when window is resized
+    window.addEventListener("resize", () => {
+      currentPage = 1; // reset to first page on resize
+      showPage(currentPage);
+    });
+
+    // init
+    showPage(currentPage);
+  });
+</script>
+{% endblock %}

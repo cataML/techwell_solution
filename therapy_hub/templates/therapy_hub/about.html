@@ -1,0 +1,227 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | About us{% endblock %}
+
+{% block content %}
+ <section class="about-section">
+    <div class="hero-content">
+      <h1> About Tech Well Therapy</h1>
+      <p>At TechWell Therapy, we believe that mental health is the foundation of overall well-being. 
+        Our mission is to provide compassionate, professional, and accessible therapy services that 
+        empower individuals, couples, and organizations to thrive. Guided by care and expertise, 
+        we walk with you on the journey to healing, growth, and resilience.
+      </p>
+      <a href="{% url 'therapy_hub:services' %}" class="book-btn"> Discover Programs</a>
+    </div>
+  </section>
+  <section class="content-section">
+    <h2>Who We are</h2>
+    <p>
+      At Techwell Therapy, we believe mental health is the cornerstone of 
+      a fulfilling life. Our mission is to provide accessible, professional 
+      counselling and therapy services while equipping future mental 
+      health practitioners through certified courses and training
+    </p>
+    <p>Founded with a passion for healing, we create a compassionate 
+        environment where individuals, families, and communities can find 
+        support, guidance, and growth. From one-on-one therapy sessions 
+        to professional development programs, we are dedicated to 
+        empowering lives
+      </p> 
+  </section>
+ 
+ <section class="values-section">
+  <section class="content-section">
+    <h2>Our Mission & Vision</h2>
+    <p>
+       Our mission is to provide affordable, accessible, and professional therapy services that empower people to face life s challenges with confidence and hope
+    </p>
+  </section>
+       <div class="values-container">
+          <div class="values-card">
+              <h4>Mission</h4>
+                <hr>
+                <p >Our mission is to provide affordable, accessible, and professional therapy services that 
+                  empower people to face life s challenges with confidence and hope
+                </p>
+                <br>
+                <a href="{% url 'therapy_hub:booking' %}" class="book-btn">Book now</a> 
+          </div>
+          <div class="values-card">
+              <h4>Vision</h4>
+              <hr>
+                <p>Our vision is to create a community where mental health is prioritized, 
+                  stigma is eliminated, and everyone has access to the care they deserve
+                </p>
+                <br>
+                <br>
+                <a href="{% url 'therapy_hub:booking' %}" class="book-btn">Book now</a> 
+          </div>
+            <div class="values-card">
+              <h4>Values</h4>
+              <hr>
+                <p>At TechWell Therapy, our work is guided by values that ensure we provide the best 
+                  care possible
+                </p>
+                <br>
+                <br>
+                <br>
+                <a href="{% url 'therapy_hub:booking' %}" class="book-btn">Book now</a> 
+            </div>
+         </div>
+  </section>
+  <section class="stories-section">
+      <section class="content-section">
+        <h2>Our Story</h2>
+        <h6>A Journey of Care and Purpose.</h6>
+      </section>
+      <div class="our-story-section">
+         <p>
+            TechWell Therapy was founded by Erastus Ivelia and his wife, Catherine Ivelia, born from a shared commitment 
+            to mental wellness, compassion, and meaningful human connection.
+          </p>
+          <input type="checkbox" id="readMoreToggle">
+        <div class="read-more-content">
+          <p>
+            What started as a heartfelt vision—to create a safe and supportive environment where individuals can heal, grow, 
+            and rediscover themselves—has steadily evolved into a trusted and respected counseling practice.
+          </p>
+          <p>
+            Guided by strong values and a passion for service, TechWell Therapy continues to expand its impact. With a dedicated 
+            team of qualified and experienced counselors, we are honoured to support individuals, couples, families, and 
+            organizations with professionalism, empathy, and unwavering excellence.
+          </p>
+          <p>
+            Our mission remains clear: to walk with you through every step of your healing journey, empowering you to live a 
+            healthier and more fulfilling life.
+    </p>
+  </div>
+
+  <label for="readMoreToggle" class="read-more-btn"></label>
+</div>
+  </section>
+     
+  <section class="team-section">
+    <section class="content-section">
+      <h2> Meet Our Team</h2>
+      <p>
+         At Techwell Therapy, we believe healing begins with people who care. 
+         Our team of experienced counsellors and therapists is committed to guiding you with empathy,
+         professionalism, and proven expertise. Led by our founders, Erastus and Catherine Ivelia,
+         we work together to create a safe and supportive environment for individuals, couples, and organizations across Kenya
+      </p>
+  </section>
+    <div  class="team-container">
+      <div class="team-card">
+        <div class="card-image">
+          <img src="{% static 'images_therapy/Erastus.png' %}" alt="">
+        </div>
+        <div class="card-content">
+          <h5> Erastus Ivelia</h5>
+        <h4> Founder & Lead Counsellor</h4>
+        <p>
+           Specializes in individual and couples therapy with over 7 years of experience in guiding 
+           clients toward healing and personal growth.
+        </p>
+        </div>
+      </div>
+        <div class="team-card">
+          <div class="card-image">
+          <img src="{% static 'images_therapy/Catherine.png' %}" alt="">
+        </div>
+        <div class="card-content">
+           <h5>Catherine Ivelia</h5>
+          <h4>Co-Founder & Director</h4>
+          <p>
+            Passionate about empowering communities, Catherine oversees wellness programs and 
+            brings a holistic approach to mental health support.
+        </p>
+        </div>
+         
+      </div>
+        <div class="team-card">
+          <div class="card-image">
+            <img src="{% static 'images_therapy/grace_naomi.jpg' %}" alt="">
+          </div>
+        
+        <div class="card-content">
+          <h5>Grace Naomi</h5>
+        <h4>Senior Counsellor</h4>
+        <p>
+         Expert in stress management and workplace wellness, dedicated to helping clients build resilience.
+        </p>
+        </div>
+      </div>
+      </div>
+    </section>
+    <section class="book-section">
+      <div class="book-card" style="background-color: #4D7838;">
+        <h4 style="color: white;">Why Book With Us?</h4>
+        <ul>
+          <li>Confidential & Professional Counseling</li>
+          <li>Experienced Licensed Counselors</li>
+          <li>Flexible In Person & Virtual Sessions</li>
+          <li>Affordable & Transparent Pricing</li>
+        </ul>
+      </div>
+      <div class="book-card" style="background-color: #fff;">
+        <h4 style="color: #666;">What to Expect After Booking</h4>
+        <ul style="color: #666">
+          <li>You ll receive a confirmation email/SMS</li>
+          <li>A counselor will review your request</li>
+          <li>We ll contact you within 24 hours</li>
+          <li> Your journey to healing begins</li>
+        </ul>
+      </div>
+    </section>
+    <section class="contact-section">
+      <section class="content-section">
+        <h2>Get in Touch</h2>
+        <h6>We re here to listen and support you.</h6>
+        <p>Whether you re ready to book a session, have a question about our courses, or simply want to learn more, the Techwell Therapy team is here for you. </p>
+        <p>Reach out today, your journey to healing starts with a conversation</p>
+      </section> 
+
+   
+   <form method="POST" class="contact-form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.name.label_tag }}
+            {{ form.name }}
+            {% if form.name.errors %}
+                <small class="error-text">{{ form.name.errors.0 }}</small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.email.label_tag }}
+            {{ form.email }}
+            {% if form.email.errors %}
+                <small class="error-text">{{ form.email.errors.0 }}</small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.subject.label_tag }}
+            {{ form.subject }}
+            {% if form.subject.errors %}
+                <small class="error-text">{{ form.subject.errors.0 }}</small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.message.label_tag }}
+            {{ form.message }}
+            {% if form.message.errors %}
+                <small class="error-text">{{ form.message.errors.0 }}</small>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="book-btn">Send Message</button>
+    </form>
+
+</section> 
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+{% endblock %}

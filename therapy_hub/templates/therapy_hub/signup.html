@@ -1,0 +1,50 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Sign up{% endblock %}
+
+{% block content %}
+<div class="login-container">
+    <form method="post" action="{% url 'therapy_hub:signup' %}">
+        {% csrf_token %}
+        <h2>Sign Up</h2>
+
+        <label>Username:</label>
+        {{ form.username }}
+
+        <label>Email:</label>
+        {{ form.email }}
+
+        <label>Full Name:</label>
+        {{ form.full_name }}
+
+        <label>Phone Number:</label>
+        {{ form.phone_number }}
+        <div>
+            <label>Role:</label>
+            {{ form.role }}
+        </div><br>
+        <label>Password:</label>
+        {{ form.password }}
+
+        <label>Confirm Password:</label>
+        {{ form.confirm_password }}
+
+        <button type="submit">Sign Up</button>
+        <p>Already have an account? <a href="{% url 'therapy_hub:login' %}">Login</a></p>
+    </form>
+</div>
+{% if form.errors %}
+    <div class="form-errors">
+        <ul>
+            {% for field in form %}
+                {% for error in field.errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}
+{% endblock %}

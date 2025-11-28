@@ -1,0 +1,78 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Checkout{% endblock %}
+{% block content %}
+
+<div class="max-w-4xl mx-auto py-10 px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Choose Your Payment Method</h2>
+
+    <div class="grid md:grid-cols-3 gap-6">
+
+      <!-- PayPal -->
+      <div class="bg-white rounded-2xl shadow p-6 flex flex-col items-center text-center">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b7/PayPal_Logo_Icon_2014.svg" alt="Paypal" class="img-icon">
+        
+        <h3 class="text-lg font-semibold mb-2">Pay with PayPal</h3>
+        <p class="text-sm text-gray-500 mb-4">Secure online card & wallet payments.</p>
+        <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" class="w-full">
+          <input type="hidden" name="business" value="{{ paypal_receiver_email }}">
+          <input type="hidden" name="cmd" value="_xclick">
+          <input type="hidden" name="item_name" value="Counseling Session">
+          <input type="hidden" name="amount" value="50">
+          <input type="hidden" name="currency_code" value="USD">
+          <input type="hidden" name="return" value="http://localhost:8000/counseling/success/">
+          <input type="hidden" name="cancel_return" value="http://localhost:8000/counseling/cancel/">
+          <br>
+          <br>
+          <br>
+          <br>
+          <br>
+          <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-xl">
+            Pay with PayPal
+          </button>
+        </form>
+      </div>
+
+      <!-- M-Pesa -->
+      <div class="bg-white rounded-2xl shadow p-6 flex flex-col items-center text-center">
+        <img src="https://img.icons8.com/?size=512&id=kUwZnzomzbTj&format=png" alt="M-Pesa" class="img-icon">
+        <h3 class="text-lg font-semibold mb-2">Pay with M-Pesa</h3>
+        <p class="text-sm text-gray-500 mb-4">Instant mobile money payments in Kenya.</p>
+        <form action="{% url 'therapy_hub:mpesa_checkout' %}" method="post" class="w-full">
+          {% csrf_token %}
+          <input type="text" name="phone" placeholder="2547XXXXXXXX"
+                 class="w-full border rounded-lg px-3 py-2 mb-3 focus:outline-none focus:ring-2 focus:ring-green-500"
+                 required>
+                 <br>
+                 <br>
+                 <br>
+                 <br>
+          <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white py-2 px-4 rounded-xl">
+            Pay with M-Pesa
+          </button>
+        </form>
+      </div>
+
+      <!-- Bank Transfer -->
+      <div class="bg-white rounded-2xl shadow p-6 flex flex-col items-center text-center">
+        <img src="https://cdn-icons-png.flaticon.com/512/5949/5949991.png" alt="Bank Transfer" class="img-icon">
+        <h3 class="text-lg font-semibold mb-2">Bank Transfer</h3>
+        <p class="text-sm text-gray-500 mb-4">Send to our account, then upload proof.</p>
+        <ul class="text-sm text-gray-600 mb-4 text-left">
+          <li><strong>Account Name:</strong> Techwell Counseling</li>
+          <li><strong>Bank:</strong> XYZ Bank</li>
+          <li><strong>Account No:</strong> 123456789</li>
+          <li><strong>SWIFT:</strong> XYZKENYA</li>
+        </ul>
+        <form action="#" method="post" enctype="multipart/form-data" class="w-full">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button type="submit" class="w-full bg-gray-700 hover:bg-gray-800 text-white py-2 px-4 rounded-xl">
+            Upload Proof
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Events{% endblock %}
+{% block content %}
+<section class="events-hero">
+    <div class="events-hero-content">
+        <h1>TechWell Therapy Events</h1>
+        <p>Workshops, training sessions, healing programs, and community events designed to inspire wellness.</p>
+    </div>
+</section>
+
+<section class="events-section">
+    <h2 class="section-title">Upcoming Events</h2>
+
+    <div class="events-container">
+
+        <div class="event-card">
+            <img src="https://positive.b-cdn.net/wp-content/uploads/2022/02/Mindfulness-Workshop.jpeg" alt="Mindfulness Workshop">
+            <div class="event-content">
+                <h3>Mindfulness & Stress Relief Workshop</h3>
+                <p class="event-date">📅 December 12, 2025 • ⏰ 10:00 AM – 1:00 PM</p>
+                <p>
+                    Join our guided mindfulness session designed to help you reduce stress, improve focus, and enhance emotional balance.
+                </p>
+                <a href="{% url 'therapy_hub:contact' %}" class="event-btn">Register Now</a>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <img src="https://notts-talk.co.uk/wp-content/uploads/2023/03/img-banner-talking-therapies-9.jpg" alt="Couples Therapy Talk">
+            <div class="event-content">
+                <h3>Healthy Relationships Talk</h3>
+                <p class="event-date">📅 January 20, 2026 • ⏰ 2:00 PM – 4:00 PM</p>
+                <p>
+                    A powerful discussion on communication, trust, and building strong relationships for couples and families.
+                </p>
+                <br>
+                <a href="{% url 'therapy_hub:contact' %}" class="event-btn">Reserve a Seat</a>
+            </div>
+        </div>
+
+        <div class="event-card">
+            <img src="https://media.istockphoto.com/id/942858008/photo/saving-up-money.jpg?s=612x612&w=0&k=20&c=rjQ75Tw4w8M-PLhNM6KJk8SZuBKkF8pV5jpgW1iTh_4=" alt="Teen Wellness Program">
+            <div class="event-content">
+                <h3>Teen Mental Wellness Program</h3>
+                <p class="event-date">📅 February 10, 2026 • ⏰ 9:00 AM – 12:00 PM</p>
+                <p>
+                    A supportive program helping teens manage stress, build confidence, and understand emotional health.
+                </p>
+                <br>
+                <a href="{% url 'therapy_hub:contact' %}" class="event-btn">Join Program</a>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section class="past-events-section">
+    <h2 class="section-title">Past Events</h2>
+
+    <div class="past-events">
+        <p>✨ Emotional Healing Workshop – August 2025</p>
+        <p>✨ Mental Health Awareness Week – July 2025</p>
+        <p>✨ Family Counseling Seminar – April 2025</p>
+    </div>
+</section>
+{% endblock %}

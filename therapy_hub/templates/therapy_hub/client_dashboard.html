@@ -1,0 +1,71 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Dashboard{% endblock %}
+
+{% block content %}
+  <div class="client-dashboard">
+
+    <div class="dashboard-header">
+        <h2>Welcome, {{ request.user.first_name }}</h2>
+        <p>Your Personalized Wellness Dashboard</p>
+    </div>
+
+    <div class="dashboard-grid">
+
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-calendar-alt fa-4x"></i>
+            </div>
+            <h3>My Appointments</h3>
+            <p>View or book therapy sessions.</p>
+            <a href="{% url 'therapy_hub:appointments' %}" class="btn">View</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-file-invoice-dollar fa-4x"></i>
+            </div>
+            <h3>Payments</h3>
+            <p>Invoices, receipts, and subscriptions.</p>
+            <a href="{% url 'payments:dashboard' %}" class="btn">Open</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-user-circle fa-3x"></i>
+            </div>
+            <h3>My Profile</h3>
+            <p>Update your personal details.</p>
+            <a href="{% url 'therapy_hub:profile' %}" class="btn">Edit</a>
+        </div>
+
+         <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-history fa-3x"></i>
+            </div>
+            <h3>Session History</h3>
+            <p>Review past therapy sessions.</p>
+            <a href="{% url 'therapy_hub:session_history' %}" class="btn">View</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-users fa-3x"></i>
+            </div>
+            <h3>Events & Workshops</h3>
+            <p>Reserve a seat for upcoming events.</p>
+            <a href="{% url 'therapy_hub:events' %}" class="btn">Reserve</a>
+        </div>
+
+        <div class="card">
+            <div class="icon-container">
+                <i class="fas fa-headset fa-3x"></i>
+            </div>
+            <h3>Support</h3>
+            <p>Need help? Contact our team.</p>
+            <a href="{% url 'therapy_hub:contact' %}" class="btn">Contact</a>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Appointments{% endblock %}
+
+{% block content %}
+<div class="appointments-container">
+    
+    <h1 class="page-title">My Appointments</h1>
+
+    <!-- Upcoming Appointments -->
+    <section class="appointment-section">
+        <h2>Upcoming Sessions</h2>
+
+        {% if upcoming_appointments %}
+            <div class="appointment-list">
+                {% for item in upcoming_appointments %}
+                <div class="appointment-card">
+                    <div class="appointment-info">
+                        <h3>{{ item.session_type }}</h3>
+                        <p><strong>Date:</strong> {{ item.date }}</p>
+                        <p><strong>Time:</strong> {{ item.time }}</p>
+                        <p><strong>Counselor:</strong> {{ item.counselor }}</p>
+                    </div>
+                    <a href="#" class="btn-secondary">Join Session</a>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-message">You have no upcoming appointments.</p>
+        {% endif %}
+    </section>
+
+    <!-- Book New Appointment -->
+    <section class="appointment-section">
+        <h2>Book a New Appointment</h2>
+        <p>Choose a suitable date and time for your therapy session.</p>
+
+        <a href="{% url 'therapy_hub:booking' %}" class="btn-primary">Book Now</a>
+    </section>
+
+</div>
+{% endblock %}

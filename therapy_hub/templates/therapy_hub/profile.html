@@ -1,0 +1,89 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Profile{% endblock %}
+
+{% block content %}
+<div class="profile-container">
+
+    <h1 class="page-title">My Profile</h1>
+
+    <div class="profile-card">
+        <!-- Profile Photo -->
+        <div class="profile-avatar">
+            {% if user.profile.avatar %}
+                <img id="avatar-preview" src="{{ user.profile.avatar.url }}" alt="Profile Photo">
+            {% else %}
+                <i class="fas fa-user-circle fa-6x" id="avatar-placeholder"></i>
+            {% endif %}
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- Upload / Change Photo -->
+            <div class="form-group">
+                <label for="avatar">Change Profile Photo</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*" onchange="previewAvatar(event)">
+            </div>
+
+            <!-- Profile Info -->
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                <input type="text" id="first_name" name="first_name" value="{{ user.first_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                <input type="text" id="last_name" name="last_name" value="{{ user.last_name }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" value="{{ user.email }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="text" id="phone" name="phone" value="{{ user.profile.phone }}">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Change Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter new password">
+            </div>
+
+            <button type="submit" class="btn">Update Profile</button>
+        </form>
+    </div>
+</div>
+
+<script>
+function previewAvatar(event) {
+    const preview = document.getElementById('avatar-preview');
+    const placeholder = document.getElementById('avatar-placeholder');
+
+    if (event.target.files && event.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            if(preview){
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            } else {
+                const img = document.createElement('img');
+                img.id = 'avatar-preview';
+                img.src = e.target.result;
+                img.style.width = '120px';
+                img.style.height = '120px';
+                img.style.borderRadius = '50%';
+                img.style.objectFit = 'cover';
+                const avatarDiv = document.querySelector('.profile-avatar');
+                avatarDiv.innerHTML = '';
+                avatarDiv.appendChild(img);
+            }
+        }
+        reader.readAsDataURL(event.target.files[0]);
+        if (placeholder) placeholder.style.display = 'none';
+    }
+}
+</script>
+{% endblock %}

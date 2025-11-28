@@ -1,0 +1,116 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Booking Form{% endblock %}
+{% block content %}
+  <section class="booking-section">
+    <div class="hero-content">
+      <h1>Book Your Therapy Session Today</h1>
+      <p>Your healing journey begins with a single step.</p>
+      <a href="{% url 'therapy_hub:events' %}" class="book-btn">Discover Programmes</a>
+      <a href="{% url 'therapy_hub:dashboard' %}" class="book-btn">Go to Dashboard</a>
+    </div>
+  </section>
+  <section class="booked-section">
+   <div class="booked-container">
+  <form method="post" class="booking-form">
+    {% csrf_token %}
+    <img src="{% static 'images_therapy/logo.png' %}" alt="Logo">
+
+    <div class="mb-3">
+        {{ form.name.label_tag }}
+        {{ form.name }}
+        {% if form.name.errors %}
+            <small class="error-text">{{ form.name.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% if form.email.errors %}
+            <small class="error-text">{{ form.email.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+        {% if form.phone.errors %}
+            <small class="error-text">{{ form.phone.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.service.label_tag }}
+        <div class="select-wrapper">
+            {{ form.service }}
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        {% if form.service.errors %}
+            <small class="error-text">{{ form.service.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            {{ form.date.label_tag }}
+            {{ form.date }}
+            {% if form.date.errors %}
+                <small class="error-text">{{ form.date.errors.0 }}</small>
+            {% endif %}
+        </div>
+        <div class="col-md-6 mb-3">
+            {{ form.time.label_tag }}
+            {{ form.time }}
+            {% if form.time.errors %}
+                <small class="error-text">{{ form.time.errors.0 }}</small>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mb-3">
+        {{ form.session.label_tag }}
+        <div class="select-wrapper">
+            {{ form.session }}
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        {% if form.session.errors %}
+            <small class="error-text">{{ form.session.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="mb-3">
+        {{ form.notes.label_tag }}
+        {{ form.notes }}
+        {% if form.notes.errors %}
+            <small class="error-text">{{ form.notes.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="book-btn">Book Now</button>
+  </form>
+</div>
+   
+   
+  </section>
+  <section class="book-section">
+      <div class="book-card" style="background-color: #4D7838;">
+        <h4 style="color: white;">Why Book With Us?</h4>
+        <ul>
+          <li>Confidential & Professional Counseling</li>
+          <li>Experienced Licensed Counselors</li>
+          <li>Flexible In Person & Virtual Sessions</li>
+          <li>Affordable & Transparent Pricing</li>
+        </ul>
+      </div>
+      <div class="book-card" style="background-color: #fff;">
+        <h4 style="color: #666;">What to Expect After Booking</h4>
+        <ul style="color: #666">
+          <li>You ll receive a confirmation email/SMS</li>
+          <li>A counselor will review your request</li>
+          <li>We ll contact you within 24 hours</li>
+          <li> Your journey to healing begins</li>
+        </ul>
+      </div>
+    </section>
+{% endblock %}
