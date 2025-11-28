@@ -1,0 +1,17 @@
+{% extends "base_therapy.html" %}
+{% block title %}Techwell Therapy | Checkout{% endblock %}
+{% block content %}
+<div class="pay-wrapper">
+  <h2 class="title">Pay for {{ service_name }}</h2>
+  <p class="amount">Amount: KES {{ amount }}</p>
+
+  <form class="payment-form" method="post" novalidate action="{% url 'payments:checkout' %}">
+    {% csrf_token %}
+    <input type="hidden" name="record_id" value="{{ booking.id }}">
+    <input type="hidden" name="source" value="{{ source }}">
+    <input type="hidden" name="amount" value="{{ amount }}">
+    <input type="email" name="email" placeholder="Enter your email" required><br><br>
+    <button type="submit" class="btn">Pay Now</button>
+  </form>
+</div>
+{% endblock %}

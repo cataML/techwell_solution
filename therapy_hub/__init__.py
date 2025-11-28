@@ -1,0 +1,1 @@
+default_app_config = 'therapy_hub.apps.TherapyHubConfig'

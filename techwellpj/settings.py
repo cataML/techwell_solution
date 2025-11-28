@@ -11,9 +11,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, ".env"))
+
+PAYSTACK_SECRET_KEY = os.getenv("PAYSTACK_SECRET_KEY")
+PAYSTACK_PUBLIC_KEY = os.getenv("PAYSTACK_PUBLIC_KEY")
+PAYSTACK_INITIALIZE_URL = 'https://api.paystack.co/transaction/initialize'
+PAYSTACK_VERIFY_URL = 'https://api.paystack.co/transaction/verify/'
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,6 +48,7 @@ INSTALLED_APPS = [
     
     #Custom apps
     'therapy_hub.apps.TherapyHubConfig',
+    'payments.apps.PaymentsConfig',
 ]
 
 MIDDLEWARE = [
@@ -130,3 +139,23 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+SITE_CONFIG = {
+    "127.0.0.1:8000": {
+        "name": "Techwell Solution",
+        "mpesa_shortcode": "600000",
+        "mpesa_passkey": "YOUR_PASSKEY",
+        "callback_url": "http://127.0.0.1:8000/payments/callback/",
+        "callback_path": "/payments/callback/",
+        "callback_url": "http://127.0.0.1:8000/payments/verify/",
+        "redirect_after_payment": "/payments/verify/"
+    },
+    "localhost:8000": {
+        "name": "Techwell Solution",
+        "mpesa_shortcode": "600000",
+        "mpesa_passkey": "YOUR_PASSKEY",
+        "callback_url": "http://localhost:8000/payments/callback/",
+        "callback_path": "/payments/callback/",
+        "callback_url": "http://127.0.0.1:8000/payments/verify/"
+    }
+}

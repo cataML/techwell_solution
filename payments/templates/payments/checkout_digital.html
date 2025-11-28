@@ -1,0 +1,18 @@
+{% extends "base_digital.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<div class="payment-container">
+    <h2>Pay for {{ service_name }}</h2>
+    <p>Amount: KES {{ amount }}</p>
+
+    <form action="{% url 'payments:initialize_payment' %}" method="post">
+        {% csrf_token %}
+        
+        <input type="hidden" name="amount" value="{{ amount }}">
+        <input type="hidden" name="service" value="{{ service_name }}">
+        
+        <button type="submit">Pay Now</button>
+    </form>
+</div>
+
+{% endblock %}

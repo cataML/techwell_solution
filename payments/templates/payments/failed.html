@@ -1,0 +1,10 @@
+{% extends "base_therapy.html" %}
+{% load static %}
+{% block title %} TechWell Therapy |  Failed{% endblock %}
+{% block content %}
+ <h2>Payment Failed ❌</h2>
+  <p>Sorry, your transaction could not be completed. Please try again.</p>
+  <a href="{% url 'therapy_hub:index' %}">Back to Home</a>
+
+
+{% endblock %}

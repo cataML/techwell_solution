@@ -1,0 +1,17 @@
+{% extends base %}
+{% block title %}Payment Success{% endblock %}
+{% block content %}
+ <h2>Payment Successful 🎉</h2>
+
+  <p><strong>Email:</strong> {{ payment.email }}</p>
+  <p><strong>Service:</strong> {{ payment.service }}</p>
+  <p><strong>Amount Paid:</strong> KES {{ payment.amount }}</p>
+  <p><strong>Reference:</strong> {{ payment.reference }}</p>
+  <p><strong>Status:</strong> {{ payment.status }}</p>
+  <p><strong>Date:</strong> {{ payment.paid_at }}</p>
+
+  <br>
+  <a href="/">Go Back Home</a>
+
+
+{% endblock %}

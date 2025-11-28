@@ -1,0 +1,75 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Dashboard{% endblock %}
+
+{% block content %}
+<div class="payment-dashboard-container">
+
+    <h1 class="dashboard-title">My Payments</h1>
+
+    <!-- Summary Section -->
+    <section class="summary-cards">
+    <div class="summary-card">
+        <i class="fas fa-file-invoice-dollar fa-2x"></i>
+        <h3>Total Invoices</h3>
+        <p>{{ invoices|length }}</p>
+    </div>
+    <div class="summary-card">
+        <i class="fas fa-check-circle fa-2x"></i>
+        <h3>Paid</h3>
+        <p>{{ paid_invoices|length }}</p>
+    </div>
+    <div class="summary-card">
+        <i class="fas fa-exclamation-circle fa-2x"></i>
+        <h3>Pending</h3>
+        <p>{{ pending_invoices|length }}</p>
+    </div>
+    <div class="summary-card">
+        <i class="fas fa-credit-card fa-2x"></i>
+        <h3>Subscriptions</h3>
+        <p>{{ subscriptions|length }}</p>
+    </div>
+</section>
+
+<!-- Invoice Table -->
+<h2 style="text-align:center;">Invoice Details</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>User</th>
+            <th>Amount</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.id }}</td>
+            <td>{{ invoice.user.username }}</td>
+            <td>{{ invoice.amount }}</td>
+            <td>
+                {% if invoice.paid %}
+                    Paid
+                {% else %}
+                    Pending
+                {% endif %}
+            </td>
+            <td>
+                {% if not invoice.paid %}
+                <a class="button" href="{% url 'pay_invoice' invoice.id %}">Pay</a>
+                {% endif %}
+                <a class="button" href="{% url 'download_receipt' invoice.id %}">Download Receipt</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No invoices found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+{% endblock %}
