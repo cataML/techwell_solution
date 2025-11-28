@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     #Custom apps
     'therapy_hub.apps.TherapyHubConfig',
     'payments.apps.PaymentsConfig',
+    'prodev.apps.ProdevConfig',
+    'digital.apps.DigitalConfig',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 

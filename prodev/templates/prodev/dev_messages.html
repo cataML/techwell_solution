@@ -1,0 +1,32 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Messages{% endblock %}
+{%  block content %}
+
+   <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">DevPanel</h2>
+        <ul>
+            <li><a href="{% url 'prodev:overview' %}"><i class="fa fa-home"></i> Overview</a></li>
+            <li><a href="{% url 'prodev:dev_messages' %}"><i class="fa fa-comments"></i> Messages</a></li>
+            <li><a href="{% url 'prodev:analytics' %}"><i class="fa fa-chart-line"></i> Analytics</a></li>
+            <li><a href="{% url 'prodev:settings_page' %}"><i class="fa fa-cog"></i> Settings</a></li>
+        </ul>
+    </aside>
+<div class="messages-list">
+    {% for msg in messages %}
+    <div class="message">
+        <div class="sender-info">
+            <img src="https://via.placeholder.com/40" alt="Sender" class="avatar">
+            <div>
+                <h4>{{ msg.sender.username }}</h4>
+                <span class="timestamp">{{ msg.timestamp|date:"Y-m-d H:i" }}</span>
+            </div>
+        </div>
+        <p class="message-text">{{ msg.text }}</p>
+    </div>
+    {% empty %}
+    <p>No messages yet</p>
+    {% endfor %}
+</div>
+{% endblock %}

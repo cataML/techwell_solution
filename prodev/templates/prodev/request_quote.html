@@ -1,0 +1,23 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Home{% endblock %}
+{%  block content %}
+<section class="quote-page">
+  <div class="container">
+    <h1>Request a Quote</h1>
+    <p>Tell us more about your project, and we’ll provide an accurate quote.</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="POST" class="quote-form">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="submit-btn">Submit Request</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

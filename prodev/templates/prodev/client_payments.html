@@ -1,0 +1,46 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Payments{% endblock %}
+{%  block content %}
+<h2>My Payments</h2>
+<div class="invoices-list">
+    {% if invoices %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Invoice #</th>
+                    <th>Project</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for invoice in invoices %}
+                <tr>
+                    <td>{{ invoice.id }}</td>
+                    <td>{{ invoice.project.title }}</td>
+                    <td>${{ invoice.amount }}</td>
+                    <td>
+                        {% if invoice.paid %}
+                            Paid
+                        {% else %}
+                            Pending
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if not invoice.paid %}
+                            <a href="{% url 'prodev:pay_invoice' invoice.id %}">Pay Now</a>
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No invoices yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

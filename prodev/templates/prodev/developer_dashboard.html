@@ -1,0 +1,92 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Dashboard{% endblock %}
+{%  block content %}
+<div class="dashboard-container">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2 class="logo">DevPanel</h2>
+        <ul>
+            <li><a href="{% url 'prodev:overview' %}"><i class="fa fa-home"></i> <span>Overview</span></a></li>
+            <li><a href="{% url 'prodev:dev_messages' %}"><i class="fa fa-comments"></i><span>Messages</span></a></li>
+            <li><a href="{% url 'prodev:analytics' %}"><i class="fa fa-chart-line"></i><span>Analytics</span></a></li>
+            <li><a href="{% url 'prodev:settings_page' %}"><i class="fa fa-cog"></i><span>Settings</span></a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+        <header class="header">
+            <h1>Developer Dashboard</h1>
+            <div class="user-info">
+                    {% if request.user.usersettings.profile_picture %}
+                        <img src="{{ request.user.usersettings.profile_picture.url }}" alt="{{ request.user.username }}" class="avatar">
+                    {% else %}
+                        <i class="fa fa-user avatar"></i>
+                    {% endif %}
+                    <span>{{ request.user.username }}</span>
+            </div>
+        </header>
+
+        <!-- Cards Section -->
+        <section class="cards">
+    <div class="card">
+        <h3>Active Projects</h3>
+        <p>{{ total_projects }} Ongoing</p>
+    </div>
+
+    <div class="card">
+        <h3>Tasks Completed</h3>
+        <p>{{ tasks_completed }} Tasks</p>
+    </div>
+
+    <div class="card">
+        <h3>New Messages</h3>
+        <p>{{ new_messages }} Unread</p>
+    </div>
+
+    <div class="card">
+        <h3>Pending Reviews</h3>
+        <p>{{ pending_reviews }} Requests</p>
+    </div>
+</section>
+
+<!-- Two Column Layout -->
+<section class="two-columns">
+
+    <div class="column">
+        <h2>Recent Projects</h2>
+        <div class="project-list">
+            {% for project in recent_projects %}
+                <div class="project">
+                    <h4>{{ project.title }}</h4>
+                    <p>{{ project.tech_stack }} • {{ project.get_status_display }}</p>
+                </div>
+            {% empty %}
+                <p>No projects yet.</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="column">
+        <h2>Tasks</h2>
+        <ul class="tasks">
+            {% for task in tasks %}
+                <li>
+                    <input type="checkbox" {% if task.completed %}checked{% endif %}>
+                    {{ task.title }}
+                </li>
+            {% empty %}
+                <li>No tasks yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+</section>
+
+    </main>
+
+</div>
+{%  endblock %}

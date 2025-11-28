@@ -1,0 +1,78 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Contact us{% endblock %}
+{%  block content %}
+<section class="contact-section">
+    <div class="contact-info">
+        <h2>Get in Touch</h2>
+        <p>Have a project, idea, or need a consultation? Reach out and I’ll respond promptly.</p>
+        <div class="contact-box">
+        <div class="info-box">
+            <h4>Email</h4>
+            <p>catelilungo@gmail.com</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Phone</h4>
+            <p>+254 792 501 015 </p>
+        </div>
+
+        <div class="info-box">
+            <h4>Location</h4>
+            <p>Nairobi, Kenya</p>
+        </div>
+
+        <div class="info-box">
+            <h4>Office Hours</h4>
+            <p>Mon – Fri: 9:00 AM – 6:00 PM</p>
+        </div>
+        </div>
+    </div>
+    <div class="form-container">
+       
+     <form method="POST" class="contact-form">
+         <h2>Fill this form</h2>
+            {% csrf_token %}
+   
+            <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Your Name</label>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <small class="error-text">{{ form.name.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Your Email</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <small class="error-text">{{ form.email.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.subject.id_for_label }}">Subject</label>
+        {{ form.subject }}
+        {% if form.subject.errors %}
+            <small class="error-text">{{ form.subject.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.message.id_for_label }}">Message</label>
+        {{ form.message }}
+        {% if form.message.errors %}
+            <small class="error-text">{{ form.message.errors.0 }}</small>
+        {% endif %}
+    </div>
+
+            <button type="submit" class="btn">Send Message</button>
+      </form>
+    {% if messages %}
+        {% for message in messages %}
+            <p style="color: green;">{{ message }}</p>
+        {% endfor %}
+    {% endif %}
+  
+</section>
+{% endblock %}

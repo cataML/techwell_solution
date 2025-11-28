@@ -1,0 +1,62 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Overview{% endblock %}
+{%  block content %}
+   <!-- Sidebar -->
+<aside class="sidebar">
+    <h2 class="logo">DevPanel</h2>
+    <ul>
+            <li><a href="{% url 'prodev:overview' %}"><i class="fa fa-home"></i> Overview</a></li>
+            <li><a href="{% url 'prodev:dev_messages' %}"><i class="fa fa-comments"></i> Messages</a></li>
+            <li><a href="{% url 'prodev:analytics' %}"><i class="fa fa-chart-line"></i> Analytics</a></li>
+            <li><a href="{% url 'prodev:settings_page' %}"><i class="fa fa-cog"></i> Settings</a></li>
+    </ul>
+</aside>
+<section class="overview">
+<div class="summary-cards">
+    <div class="card">
+        <h3>Total Projects</h3>
+        <p>{{ total_projects }}</p>
+    </div>
+    <div class="card">
+        <h3>Active Tasks</h3>
+        <p>{{ active_tasks }}</p>
+    </div>
+    <div class="card">
+        <h3>Completed Tasks</h3>
+        <p>{{ completed_tasks }}</p>
+    </div>
+    <div class="card">
+        <h3>Team Members</h3>
+        <p>{{ team_members }}</p>
+    </div>
+</div>
+
+<div class="recent-projects">
+    <h3>Recent Projects</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Status</th>
+                <th>Deadline</th>
+                <th>Team</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for project in recent_projects %}
+            <tr>
+                <td>{{ project.name }}</td>
+                <td>{{ project.status }}</td>
+                <td>{{ project.deadline }}</td>
+                <td>{{ project.team_members }}</td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No projects found</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</section>
+
+{% endblock %}

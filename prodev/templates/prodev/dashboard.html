@@ -1,0 +1,35 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Dashboard{% endblock %}
+{%  block content %}
+<section class="dashboard">
+  <h2>Welcome, {{ request.user.first_name|default:request.user.username }}</h2>
+  <p>Your Quote Requests</p>
+
+  {% if quotes %}
+  <table class="dashboard-table">
+    <thead>
+      <tr>
+        <th>Service</th>
+        <th>Details</th>
+        <th>Status</th>
+        <th>Submitted</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for quote in quotes %}
+      <tr>
+        <td>{{ quote.get_service_display }}</td>
+        <td>{{ quote.details|truncatewords:10 }}</td>
+        <td><span class="status {{ quote.status|lower }}">{{ quote.status }}</span></td>
+        <td>{{ quote.submitted_at|date:"M d, Y" }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+    <p>You haven’t requested any quotes yet.</p>
+    <a href="{% url 'request_quote' %}" class="btn">Request a Quote</a>
+  {% endif %}
+</section>
+{% endblock %}

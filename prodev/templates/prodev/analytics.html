@@ -1,0 +1,56 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %}Prodev | Analytics{% endblock %}
+{%  block content %}
+   <!-- Sidebar -->
+<aside class="sidebar">
+    <h2 class="logo">DevPanel</h2>
+    <ul>
+        <li><a href="{% url 'prodev:overview' %}"><i class="fa fa-home"></i> Overview</a></li>
+        <li><a href="{% url 'prodev:dev_messages' %}"><i class="fa fa-comments"></i> Messages</a></li>
+        <li><a href="{% url 'prodev:analytics' %}"><i class="fa fa-chart-line"></i> Analytics</a></li>
+        <li><a href="{% url 'prodev:settings_page' %}"><i class="fa fa-cog"></i> Settings</a></li>
+    </ul>
+</aside>
+
+<div class="analytics-container">
+    <h1>Analytics Dashboard</h1>
+
+    <!-- Metrics Summary -->
+    <div class="metrics-cards">
+        <div class="card">
+            <h3>Total Projects</h3>
+            <p>{{ total_projects }}</p>
+        </div>
+        <div class="card">
+            <h3>Active Tasks</h3>
+            <p>{{ active_tasks }}</p>
+        </div>
+        <div class="card">
+            <h3>Completed Tasks</h3>
+            <p>{{ completed_tasks }}</p>
+        </div>
+        <div class="card">
+            <h3>Team Members</h3>
+            <p>{{ team_members }}</p>
+        </div>
+    </div>
+
+    <!-- Charts Section -->
+    <div class="charts-section">
+        <div class="chart-card">
+            <h3>Tasks Over Last 7 Days</h3>
+            <canvas id="tasksChart"></canvas>
+        </div>
+
+        <div class="chart-card">
+            <h3>Project Status</h3>
+            <canvas id="projectsChart"></canvas>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}
