@@ -150,8 +150,7 @@ SITE_CONFIG = {
         "mpesa_shortcode": "600000",
         "mpesa_passkey": "YOUR_PASSKEY",
         "callback_url": "http://127.0.0.1:8000/payments/callback/",
-        "callback_path": "/payments/callback/",
-        "callback_url": "http://127.0.0.1:8000/payments/verify/",
+        "verify_url": "http://127.0.0.1:8000/payments/verify/",
         "redirect_after_payment": "/payments/verify/"
     },
     "localhost:8000": {
@@ -159,7 +158,6 @@ SITE_CONFIG = {
         "mpesa_shortcode": "600000",
         "mpesa_passkey": "YOUR_PASSKEY",
         "callback_url": "http://localhost:8000/payments/callback/",
-        "callback_path": "/payments/callback/",
-        "callback_url": "http://127.0.0.1:8000/payments/verify/"
+        "verify_url": "http://localhost:8000/payments/verify/"
     }
 }

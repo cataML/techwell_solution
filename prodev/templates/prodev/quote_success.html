@@ -1,0 +1,12 @@
+{% extends "base_prodev.html" %}
+{% load static %}
+{% block title %} TechWell Code |  Success{% endblock %}
+{% block content %}
+    <div class="success-box">
+        <h1>🎉 Request successful!</h1>
+        <p>Thank you for yuor request.  
+            We’ve received your details and will send you a confirmation email shortly.
+        </p>
+        <a href="{% url 'prodev:index' %}">Return Home</a>
+    </div>
+{% endblock %}

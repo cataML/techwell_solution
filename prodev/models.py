@@ -14,27 +14,32 @@ def __str__(self):
     return f"{self.name} - {self.email}"
 
 class QuoteRequest(models.Model):
-    SERVICE_CHOICES = [
-        ('web_dev', 'Web Development'),
-        ('app_dev', 'App Development'),
-        ('data_analysis', 'Data Analysis'),
-        ('cloud_services', 'Cloud Services'),
-        ('cybersecurity', 'Cybersecurity'),
-        ('consultation', 'Consultation'),
-        ('other', 'Other'),
+    PLAN_CHOICES = [
+        ("basic", "Basic Plan"),
+        ("standard", "Standard Plan"),
+        ("premium", "Premium Plan"),
     ]
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    name = models.CharField(max_length=100)
+    full_name = models.CharField(max_length=150)
     email = models.EmailField()
-    phone = models.CharField(max_length=20, blank=True, null=True)
-    service = models.CharField(max_length=50, choices=SERVICE_CHOICES)
-    details = models.TextField()
-    status = models.CharField(max_length=30, default='Pending')  # 👈 new
-    submitted_at = models.DateTimeField(auto_now_add=True)
+    plan = models.CharField(max_length=20, choices=PLAN_CHOICES)
+    project_details = models.TextField()
 
+    user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ("pending", "Pending Review"),
+            ("reviewed", "Reviewed"),
+            ("responded", "Responded"),
+        ],
+        default="pending"
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
-        return f"{self.name} - {self.service}"
+        return f"{self.full_name} - {self.get_plan_display()}"
 
 class ProdevProfile(models.Model):
     ROLE_CHOICES = (

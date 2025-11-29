@@ -49,30 +49,10 @@ class SignUpForm(UserCreationForm):
             user.save()
 
         return user
-
 class QuoteRequestForm(forms.ModelForm):
     class Meta:
         model = QuoteRequest
-        fields = ['name', 'email', 'phone', 'service', 'details']
+        fields = ["full_name", "email", "plan", "project_details"]
         widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control', 
-                'placeholder': 'Your full name'
-            }),
-            'email': forms.EmailInput(attrs={
-                'class': 'form-control', 
-                'placeholder': 'Your email address'
-            }),
-            'phone': forms.TextInput(attrs={
-                'class': 'form-control', 
-                'placeholder': 'Your phone number (optional)'
-            }),
-            'service': forms.Select(attrs={
-                'class': 'form-control'
-            }),
-            'details': forms.Textarea(attrs={
-                'class': 'form-control', 
-                'placeholder': 'Describe your project or request...',
-                'rows': 5
-            }),
+            "plan": forms.HiddenInput()
         }

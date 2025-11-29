@@ -7,10 +7,9 @@ class Contact(admin.ModelAdmin):
     search_fields = ('name', 'email', 'subject', 'message')
     ordering = ('-created_at',)
 
+
 @admin.register(QuoteRequest)
 class QuoteRequestAdmin(admin.ModelAdmin):
-    list_display = ('name', 'email', 'service', 'status', 'submitted_at')
-    list_filter = ('service', 'status', 'submitted_at')
-    search_fields = ('name', 'email', 'details')
-    readonly_fields = ('submitted_at',)
-    ordering = ('-submitted_at',)
+    list_display = ("full_name", "email", "plan", "status", "created_at")
+    list_filter = ("plan", "status", "created_at")
+    search_fields = ("full_name", "email", "project_details")

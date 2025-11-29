@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
-import requests
+import requests, uuid
 from therapy_hub.models import Booking
 from prodev.models import QuoteRequest
 from digital.models import BookNow 
@@ -75,17 +75,17 @@ def verify_payment(request):
         return render(request, "payments/payment_failed.html",
                       {"error": "Verification failed."})
 
-    # ✔ Transaction successful?
+    # ------- SUCCESSFUL TRANSACTION --------
     if data.get('status') and data['data']['status'] == 'success':
 
         email = data['data']['customer']['email']
         amount = data['data']['amount'] // 100
         service_name = data['data']['metadata'].get('service_name', '').lower()
-        app_name = data['data']['metadata'].get('app', '').lower()  
+        app_name = data['data']['metadata'].get('app', '').lower()
 
         booking = None
 
-        # 1️⃣ THERAPY HUB (Booking model)
+        # 1️⃣ THERAPY HUB — Booking model
         if app_name == "therapy_hub":
             try:
                 booking = Booking.objects.filter(
@@ -102,24 +102,68 @@ def verify_payment(request):
             except Booking.DoesNotExist:
                 return render(request, "therapy/payment_failed.html",
                               {"error": "TherapyHub booking not found."})
-            
+
+        # 2️⃣ PRODEV — QuoteRequest model
+        elif app_name == "prodev":
+            try:
+                booking = QuoteRequest.objects.filter(
+                    email=email,
+                    plan__icontains=service_name  # use plan field
+                ).latest('created_at')
+
+                booking.status = "paid"
+                booking.save()
+
+                return render(request, "prodev/booking_success.html",
+                              {"booking": booking})
+
+            except QuoteRequest.DoesNotExist:
+                return render(request, "prodev/payment_failed.html",
+                              {"error": "Prodev booking not found."})
+
+        # 3️⃣ DIGITAL — BookNow model
+        elif app_name == "digital":
+            try:
+                booking = BookNow.objects.filter(
+                    email=email,
+                    service__icontains=service_name
+                ).latest('created_at')
+
+                booking.status = "paid"
+                booking.save()
+
+                return render(request, "digital/booking_success.html",
+                              {"booking": booking})
+
+            except BookNow.DoesNotExist:
+                return render(request, "digital/payment_failed.html",
+                              {"error": "Digital booking not found."})
+
+        # Unknown app
+        return render(request, "payments/payment_failed.html",
+                      {"error": "Unknown app or invalid metadata."})
+
+    # If transaction not successful
+    return render(request, "payments/payment_failed.html",
+                  {"error": "Payment not successful."})
+
 @csrf_exempt
 def payment_callback(request):
     """Universal Paystack webhook handler for TherapyHub, Digital, ProDev, etc."""
-    
-    if request.method != 'POST':
-        return redirect('digital:client')
+
+    if request.method != "POST":
+        return redirect("digital:client")
 
     # Load webhook payload
     try:
         payload = json.loads(request.body)
         reference = payload.get("reference")
         if not reference:
-            return redirect('digital:client')
+            return redirect("digital:client")
     except Exception:
-        return redirect('digital:client')
+        return redirect("digital:client")
 
-    # Verify the payment with Paystack
+    # Verify payment with Paystack
     headers = {"Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"}
     verify_url = f"https://api.paystack.co/transaction/verify/{reference}"
 
@@ -127,16 +171,16 @@ def payment_callback(request):
         resp = requests.get(verify_url, headers=headers)
         data = resp.json()
     except Exception:
-        return redirect('digital:dashboard')
+        return redirect("digital:dashboard")
 
-    # Payment was successful?
+    # ---------------------------- SUCCESSFUL PAYMENT ----------------------------
     if data.get("status") and data["data"]["status"] == "success":
 
         email = data["data"]["customer"]["email"]
-        service_name = data["data"]["metadata"].get("service_name", "")
-        app_name = data["data"]["metadata"].get("app", "").lower()  # 👈 Detect app
+        service_name = data["data"]["metadata"].get("service_name", "").lower()
+        app_name = data["data"]["metadata"].get("app", "").lower()
 
-        # 2️⃣ THERAPY HUB — Booking model
+        # 1️⃣ THERAPY HUB — Booking model
         if app_name == "therapy_hub":
             try:
                 booking = Booking.objects.filter(
@@ -147,18 +191,55 @@ def payment_callback(request):
                 booking.status = "paid"
                 booking.save()
 
-                return render(request, "therapy/payment_success.html", {"booking": booking})
+                return render(request, "therapy/payment_success.html",
+                              {"booking": booking})
 
             except Booking.DoesNotExist:
-                return render(request, "payments/payment_failed.html",
+                return render(request, "therapy/payment_failed.html",
                               {"error": "Therapy booking not found."})
 
+        # 2️⃣ PRODEV — QuoteRequest model
+        elif app_name == "prodev":
+            try:
+                booking = QuoteRequest.objects.filter(
+                    email=email,
+                    plan__icontains=service_name
+                ).latest("created_at")
+
+                booking.status = "paid"
+                booking.save()
+
+                return render(request, "prodev/booking_success.html",
+                              {"booking": booking})
+            except QuoteRequest.DoesNotExist:
+                # Optionally redirect to dashboard or show error
+                return redirect("prodev:dashboard")
+
+        # 3️⃣ DIGITAL — BookNow model
+        elif app_name == "digital":
+            try:
+                booking = BookNow.objects.filter(
+                    email=email,
+                    service__icontains=service_name
+                ).latest("created_at")
+
+                booking.status = "paid"
+                booking.save()
+
+                return render(request, "digital/booking_success.html",
+                              {"booking": booking})
+
+            except BookNow.DoesNotExist:
+                return redirect("digital:dashboard")
+
+        # If app name does not match any known platform
         return render(request, "payments/payment_failed.html",
                       {"error": "Unknown app in metadata."})
 
-   
+    # ---------------------------- FAILED PAYMENT ----------------------------
     return render(request, "payments/payment_failed.html",
                   {"error": "Payment not successful."})
+
 
 
 def checkout(request):
@@ -238,10 +319,26 @@ def checkout_therapy(request, pk):
     
     return render(request, 'payments/checkout_therapy.html', context)
 
-def checkout_prodev(request, pk):
-    quote_Request = get_object_or_404(QuoteRequest, id=pk)
-    context = {'quote_Request': quote_Request}
-    return render(request, 'payments/checkout_prodev.html', context)
+
+@login_required
+def checkout_prodev(request):
+    plan = request.GET.get("plan")  # basic, standard, premium
+
+    plans = {
+        "basic": {"name": "Basic Plan", "price": 50000},
+        "standard": {"name": "Standard Plan", "price": 100000},
+        "premium": {"name": "Premium Plan", "price": 150000},
+    }
+
+    if plan not in plans:
+        return redirect("/")  # if someone enters wrong plan
+
+    selected_plan = plans[plan]
+
+    return render(request, "payments/checkout.html", {
+        "plan": selected_plan,
+        "plan_key": plan,
+    })
 
 
 @login_required

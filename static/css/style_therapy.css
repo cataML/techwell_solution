@@ -1761,6 +1761,41 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 .success-container a:hover {
   background: #3c622e;
 }
+
+
+.payment-failed-container {
+    text-align: center;
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+
+.payment-failed-container h2 {
+    color: #d9534f;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.payment-failed-container p {
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+}
+
+.payment-failed-container a {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    background-color: #4D7838; 
+    padding: 12px 25px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.payment-failed-container a:hover {
+    background-color: #315E26;
+}
 /* ==============================
    BOOKING PAGE
    ============================== */

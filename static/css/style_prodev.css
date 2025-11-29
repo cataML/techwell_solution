@@ -1750,65 +1750,57 @@ details p {
         padding: 0.7rem;
     }
 }
-
-.quote-page {
-  padding: 80px 20px;
-  background: white;
-  text-align: center;
+/* ==============================
+    REQUEST QUOTE PAGE
+   ============================== */
+form {
+    max-width: 600px;      
+    margin: 40px auto;      
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.quote-page h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-  color: #6A8BE8;
+h2 {
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #6A8BE8;
 }
 
-.quote-page p {
-  color: #666;
-  margin-bottom: 30px;
+p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 20px;
 }
 
-.quote-form {
-  max-width: 600px;
-  margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-  text-align: left;
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #666;
 }
 
-.quote-form input,
-.quote-form select,
-.quote-form textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+input[type="text"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
 }
 
-.submit-btn, .quote-btn {
-  background-color: #6A8BE8;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+
+textarea {
+    resize: vertical;
 }
 
-.submit-btn:hover {
-  background-color: #3f68a5;
-}
 
-.alert {
-  background-color: white;
-  color: #155724;
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 6px;
-}
 
 /* ==============================
    DEASHBOARD DESIGN
@@ -2662,10 +2654,11 @@ button[type="submit"] {
     color: white;
     cursor: pointer;
     transition: background 0.2s;
+    width: 100%;
 }
 
 button[type="submit"]:hover {
-    background-color: #3c763d;
+    background-color: #3f68a5;
 }
 
 .profile-img {
