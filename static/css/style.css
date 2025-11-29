@@ -1,0 +1,252 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+        
+body {
+  font-family: 'Inria Serif', serif;
+  color: #5C635A;
+  background-color: #f9f9f9;
+}
+/* ======================
+   Landing Page
+   ====================== 
+Nav bar*/
+.menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  background-color: black;
+  position: relative;
+  justify-content: center;
+}
+
+.logo {
+  width: 120px;
+  margin-bottom: 0.5rem;
+}
+.menu-toggle {
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  color: white;
+  align-items: center;
+}
+
+.menu ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: none; 
+  flex-direction: column;
+  width: 100%;
+  align-items: self-start;
+ }
+
+.menu ul li {
+  margin-bottom: 1rem;
+}
+
+.menu ul li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+.menu ul li a:hover{
+  color: #3cff00;
+  font-weight: bolder;
+}
+.menu ul li a.active{
+  color: red;
+  text-decoration: underline;
+}
+
+/* Toggle menu open state */
+.menu.open ul {
+  display: flex;
+}
+@media (min-width: 992px) {
+  .menu {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
+
+  .menu ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    margin-bottom: 0;  
+    justify-content: center;
+  }
+
+  .menu ul li {
+    margin-bottom: 0;
+  
+  }
+  .menu ul li a{
+    text-align: end;
+  }
+}
+/*Body section*/
+.bg{
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.bg-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.bg-content {
+  z-index: 1;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(0, 0, 0, 0.4); 
+  border-radius: 10px;
+}
+.container {
+  text-align: center;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+      
+}
+.link-box {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  display: inline-block;
+  width: 500px;
+  align-self: center;
+}
+.container .link-box p{
+  font-size: 18px;
+}
+.container .link-box a{
+  color: white; 
+  font-weight: bold;
+  font-size: 18px;
+}
+.container .link-box a:hover{
+  background-color: red;
+}
+/*Footer section*/
+
+/* FOOTER SECTION*/
+.footer-section {
+  background-color:  white;
+  color: rgb(27, 14, 14);
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  }
+
+.footer-section .container {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  background-color: transparent !important;
+}
+
+.footer-top{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 0.5rem;
+  background-color: transparent !important;
+  flex-direction: column;
+}
+
+.custom-style1 p{
+  text-align: center;
+  margin-left: 0;
+   width: 100%;
+}
+.custom-style1 .nav-link{
+  color: #F28482;
+  text-decoration: none;
+  font-weight: bold;
+}
+.custom-style1 .nav-link:hover{
+  color: #3cff00;
+  text-decoration: underline;
+  transform: scale(1.1);
+}
+.footer-social {
+  flex: 1 1 40%;
+  display: flex;
+  gap: 1rem;
+  font-size: 1.5rem;
+  float: left;
+}
+.footer-social a {
+  color: rgb(46, 2, 241);
+  transition: transform 0.3s, color 0.3s;
+  align-items: center;
+}
+.footer-social a:hover {
+  color: #28a745;
+  transform: scale(1.1);
+}
+.footer-bottom {
+  border-top: 1px solid rgb(17, 7, 7);
+  width: 100%;
+  padding-top: 1rem;
+  text-align: center;
+  font-size: 0.9rem; 
+}
+.footer-bottom a {
+  color: #F28482;
+  text-decoration: none;
+  font-weight: bold;
+  margin-right: 30px;
+  text-align: center;  
+}
+
+.footer-bottom a:hover {
+  text-decoration: underline;
+  color: white;
+}
+@media (min-width: 992px) {
+  .footer-section .container {
+ width: 1200px;
+}
+.custom-style1 p{
+  text-align: start;
+}
+.b{
+  text-align: start;
+}
+.footer-top {
+  flex-direction: row;
+  text-align: center;
+  }
+
+  .footer-social {
+    justify-content: center;
+    align-items: center;
+  }
+}
