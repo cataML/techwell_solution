@@ -1,0 +1,21 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Booking{% endblock %}
+
+{% block content %}
+<div class="guest-card">
+    <h2>Continue to Booking</h2>
+    <p>Your selected service: {{ booking.service }}</p>
+    <p>Amount: KES {{ booking.amount }}</p>
+
+    <div class="actions">
+         <a href="{% url 'payments:checkout_digital' booking.pk %}" class="btn-secondary">
+            Continue as Guest
+        </a>
+        <a href="/digital/log_in/?next=/payments:checkout_digital/{{ booking.pk }}/" class="btn-primary">
+            Login
+        </a>
+
+    </div>
+</div>
+{% endblock %}

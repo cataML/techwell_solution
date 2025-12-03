@@ -3070,6 +3070,68 @@ footer {
 .text-center{ text-align: center; }
 
 /* ==============================
+   GUEST CARD
+   ============================== */
+.guest-card{
+  background-color: #ffffff;
+  width: 40%;
+  justify-self: center;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+.guest-card h2{
+  font-size: 2rem;
+  color: #2563EB;
+}
+.guest-card p{
+  line-height: 1.9;
+  font-size: 1.2rem;
+}
+.actions{
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    gap: 1.5rem;
+    padding: 0.5rem;
+}
+
+.actions .btn-primary,
+.actions .btn-secondary {
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+    height: 50px;          
+    padding: 0; 
+    width: 150px;  
+    border-radius: 10px;  
+    transition: 0.3s ease;       
+}
+.actions .btn-primary {
+    background-color: #2563EB;
+    color: white;
+    border: none;
+}
+.actions .btn-primary:hover {
+    background: #1E4ECF;
+}
+.actions .btn-secondary {
+    background-color: #fff;
+    color: #2563EB;
+    border: 2px solid #2563EB;
+}
+.actions .btn-secondary:hover {
+    background: #EBF2FF;
+    border-color: #1E4ECF;
+    color: #1E4ECF;
+}
+/* ==============================
   LOGIN/SIGNUP PAGES
    ============================== *
 /* Container for forms */

@@ -10,7 +10,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
-@login_required
 def initialize_payment(request):
     if request.method == 'POST':
         current_domain = request.get_host() 
@@ -56,7 +55,7 @@ def initialize_payment(request):
     return render(request, 'payments/checkout.html')
 
 
-@login_required
+
 def verify_payment(request):
     reference = request.GET.get('trxref') or request.GET.get('reference')
     if not reference:
@@ -149,12 +148,11 @@ def verify_payment(request):
 
 @csrf_exempt
 def payment_callback(request):
-    """Universal Paystack webhook handler for TherapyHub, Digital, ProDev, etc."""
 
     if request.method != "POST":
         return redirect("digital:client")
 
-    # Load webhook payload
+ 
     try:
         payload = json.loads(request.body)
         reference = payload.get("reference")
@@ -270,7 +268,7 @@ def checkout(request):
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
-@login_required
+
 def checkout_therapy(request, pk):
     booking = get_object_or_404(Booking, id=pk)
 
@@ -320,9 +318,8 @@ def checkout_therapy(request, pk):
     return render(request, 'payments/checkout_therapy.html', context)
 
 
-@login_required
-def checkout_prodev(request):
-    plan = request.GET.get("plan")  # basic, standard, premium
+def checkout_prodev(request, pk):
+    quote = get_object_or_404(QuoteRequest, pk=pk)
 
     plans = {
         "basic": {"name": "Basic Plan", "price": 50000},
@@ -330,18 +327,16 @@ def checkout_prodev(request):
         "premium": {"name": "Premium Plan", "price": 150000},
     }
 
-    if plan not in plans:
-        return redirect("/")  # if someone enters wrong plan
+    selected_plan = plans.get(quote.plan)
 
-    selected_plan = plans[plan]
-
-    return render(request, "payments/checkout.html", {
+    return render(request, "payments/checkout_prodev.html", {
         "plan": selected_plan,
-        "plan_key": plan,
+        "plan_key": quote.plan,
+        "quote": quote,
     })
 
 
-@login_required
+
 def checkout_digital(request, pk):
     book_now = get_object_or_404(BookNow, id=pk)
 
@@ -375,7 +370,9 @@ def checkout_digital(request, pk):
         'pdf_conversion': 100,
         'daily_pass': 300,
         'monthly subscription': 4500,
+        'computer_lessons': 3000,
         'other': 100,
+        
     }
 
     amount = SERVICE_PRICES.get(service_key, 0)

@@ -20,11 +20,10 @@ class QuoteRequest(models.Model):
         ("premium", "Premium Plan"),
     ]
 
-    full_name = models.CharField(max_length=150)
+    full_name = models.CharField(max_length=150, blank=True, null=True)
     email = models.EmailField()
-    plan = models.CharField(max_length=20, choices=PLAN_CHOICES)
-    project_details = models.TextField()
-
+    plan = models.CharField(max_length=20, choices=PLAN_CHOICES, null=True,blank=True)
+    project_details = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
     status = models.CharField(
@@ -36,7 +35,7 @@ class QuoteRequest(models.Model):
         ],
         default="pending"
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now=True)
     def __str__(self):
         return f"{self.full_name} - {self.get_plan_display()}"

@@ -355,7 +355,7 @@
               <li>✖ Web Performance Optimization</li>
               <li>✖ Mobile-First Design Approach</li>
             </ul>
-            <a href="" class="plan-btn">Buy Now</a>
+            <a href="{% url 'prodev:request_quote' %}?plan=basic" class="plan-btn">Buy Now</a>
         </div>
 
         <!-- STANDARD PLAN -->
@@ -375,7 +375,7 @@
               <li>✖ Mobile-First Design Approach</li>
             </ul>
 
-            <a href="{% url 'prodev:request_quote' %}" class="plan-btn">Buy Now</a>
+            <a href="{% url 'prodev:request_quote' %}?plan=standard" class="plan-btn">Buy Now</a>
         </div>
 
         <!-- PREMIUM PLAN -->
@@ -395,7 +395,7 @@
               <li>✔ Mobile-First Design Approach</li>
             </ul>
 
-            <a href="{% url 'prodev:request_quote' %}" class="plan-btn">Buy Now</a>
+            <a href="{% url 'prodev:request_quote' %}?plan=premium" class="plan-btn">Buy Now</a>
         </div>
 
     </div>

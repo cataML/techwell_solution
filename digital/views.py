@@ -101,24 +101,34 @@ def login_view(request):
     return render(request, "digital/log_in.html", {"form": form})
 
 
-@login_required(login_url='/digital/log_in/')
 def book_now(request):
     if request.method == 'POST':
         form = BookingNow(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
-            booking.client = request.user 
 
+            if request.user.is_authenticated:
+                booking.client = request.user
+            else:
+                booking.client = None  
+
+           
             service_name = booking.service.lower().replace(" ", "_").replace("/", "_")
-            booking.amount = SERVICE_PRICES.get(service_name, 100)  
+            booking.amount = SERVICE_PRICES.get(service_name, 100)
+
             booking.save()
 
-            return redirect('payments:checkout_digital', pk=booking.pk)
+    
+            return redirect('digital:guest', pk=booking.pk)
+
     else:
         form = BookingNow()
-    
+
     return render(request, 'digital/book_now.html', {'form': form})
 
+def choose_login_or_guest(request, pk):
+    booking = BookNow.objects.get(pk=pk)
+    return render(request, 'digital/guest.html', {'booking': booking})
 
 @login_required(login_url='/digital/log_in/')
 def confirm_booking(request, pk):

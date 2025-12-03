@@ -86,18 +86,17 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('prodev:login')
-
-@login_required(login_url='/prodev/login/')
+    
 def request_quote(request):
-    plan_key = request.GET.get("plan")  
+    plan_key = request.GET.get("plan", "basic")  
 
     if request.method == "POST":
         form = QuoteRequestForm(request.POST)
         if form.is_valid():
             quote = form.save(commit=False)
-            quote.user = request.user
+            quote.plan = plan_key  
             quote.save()
-            return redirect('prodev:quote_success')
+            return redirect('payments:checkout_prodev', pk=quote.pk)
     else:
         form = QuoteRequestForm(initial={"plan": plan_key})
 
@@ -106,9 +105,9 @@ def request_quote(request):
         "plan_key": plan_key,
     })
 
-@login_required(login_url='/prodev/login/')
+
 def quote_success(request):
-    return render(request, "prodev/quote_success.html", {"name": quote.full_name})
+    return render(request, "prodev/quote_success.html")
 
 @login_required(login_url='/prodev/login/')
 def dashboard(request):

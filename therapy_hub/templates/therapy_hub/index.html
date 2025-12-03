@@ -6,7 +6,7 @@
     <div class="hero-content">
       <h1>Your Journey to Mental Wellness Starts Here</h1>
       <p>At Techwell Therapy, we believe mental health is the foundation of a fulfilling life. Whether you are seeking personal counselling, family therapy, or professional training in mental wellness, our dedicated team is here to support and empower you.</p>
-      <a href="#" class="book-btn">Our Programmes</a>
+      <a href="{% url 'therapy_hub:services' %}" class="book-btn">Our Services</a>
     </div>
   </section>
   <!--About section-->
@@ -29,36 +29,36 @@
       <!-- Individual Therapy -->
         <div class="service-card">
           <div class="card-image">
-            <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Individual Therapy">
+            <img src="https://media.istockphoto.com/id/1401169994/photo/young-black-man-in-casualwear-sitting-on-couch-during-talk-with-psychoanalyst.webp?a=1&b=1&s=612x612&w=0&k=20&c=i3whWe-2aNzd8cEGe2dxbmr-XUyRV6m61fEXSyG6h4k=" alt="Individual Therapy">
           </div>
           <div class="card-content">
             <h3>Individual Therapy</h3>
               <p>Private one-on-one sessions in a safe, supportive space. Build resilience and discover healthy coping strategies tailored to your unique needs and circumstances.</p>
-              <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+              <a href="{% url 'therapy_hub:services' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
           </div>
         </div>
             
             <!-- Couples Therapy -->
             <div class="service-card">
                 <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1532634922-8fe0b757fb13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Couples Therapy">
+                    <img src="https://images.unsplash.com/photo-1685575002714-f5808258e06d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fENvdXBsZXMlMjBUaGVyYXB5JTIwYmxhY2t8ZW58MHx8MHx8fDA%3D" alt="Couples Therapy">
                 </div>
                 <div class="card-content">
                     <h3>Couples Therapy</h3>
                     <p>Guided sessions to strengthen relationships. Improve communication, resolve conflicts, and rebuild intimacy with professional guidance in a neutral space.</p>
-                    <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'therapy_hub:services' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
             <!-- Corporate Therapy -->
             <div class="service-card">
                 <div class="card-image">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Corporate Therapy">
+                    <img src="https://plus.unsplash.com/premium_photo-1707155465527-c5a2935b21cc?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q29ycG9yYXRlJTIwVGhlcmFweSUyMGJsYWNrfGVufDB8fDB8fHww" alt="Corporate Therapy">
                 </div>
                 <div class="card-content">
                     <h3>Corporate Therapy</h3>
                     <p>Workplace programs that boost employee wellbeing. Address stress, burnout, and team challenges to create a healthier, more productive work environment.</p>
-                    <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'therapy_hub:services' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
@@ -70,31 +70,31 @@
                 <div class="card-content">
                     <h3>Stress Therapy</h3>
                     <p>Learn practical techniques to handle daily stress. Regain balance and peace of mind through evidence-based approaches tailored to your lifestyle.</p>
-                    <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'therapy_hub:services' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
             <!-- Depression Therapy -->
             <div class="service-card">
                 <div class="card-image">
-                    <img src="{% static 'images_therapy/depression.jpg' %}" alt="Depression Therapy">
+                    <img src="https://plus.unsplash.com/premium_photo-1664643217174-cb845e94b5c5?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8RGVwcmVzc2lvbiUyMFRoZXJhcHklMjBibGFja3xlbnwwfHwwfHx8MA%3D%3D" alt="Depression Therapy">
                 </div>
                 <div class="card-content">
                     <h3>Depression Therapy</h3>
                     <p>Compassionate support for those facing depression. Find hope and healing through proven methods in a safe, non-judgmental environment.</p>
-                    <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <a href="https://images.unsplash.com/photo-1591634593881-d8b2d3488343?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTYwfHxzdHJlc3MlMjB0aGVyYXB5JTIwYWZyaWNhbiUyMGltYWdlfGVufDB8fDB8fHww" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
             <!-- Anxiety Therapy -->
             <div class="service-card">
                 <div class="card-image">
-                    <img src="{% static 'images_therapy/anxiety.jpg' %}" alt="Anxiety Therapy">
+                    <img src="https://plus.unsplash.com/premium_photo-1670828052629-583e1489fb90?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QW54aWV0eSUyMFRoZXJhcHklMjBibGFja3xlbnwwfHwwfHx8MA%3D%3D" alt="Anxiety Therapy">
                 </div>
                 <div class="card-content">
                     <h3>Anxiety Therapy</h3>
                     <p>Targeted sessions to manage worry and fear. Regain control and live with confidence through personalized strategies and professional support.</p>
-                    <a href="#" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
+                    <a href="{% url 'therapy_hub:services' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -352,46 +352,47 @@
       <h2>Testimonials</h2>
       <h6>Stories of healing, growth, and transformation</h6>
       </section>
-
+  <div class="testimonials-wrapper">
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client.jpg' %}" alt="person">
+    <img src="https://images.unsplash.com/photo-1713845784497-fe3d7ed176d8?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fG1pZGRsZSUyMGFnZWQlMjBibGFjayUyMGdpcmx8ZW58MHx8MHx8fDA%3D" alt="person">
     <div><p>“Techwell Therapy has been a safe space for me. My sessions with Erastus have helped me manage anxiety and rebuild my confidence.”</p>
     <p><strong>Jane M.</strong> – Individual Therapy</p>
     </div>
   </div>
 
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client1.jpg' %}" alt="person">
+    <img src="https://plus.unsplash.com/premium_photo-1694618624818-3fc850af3c5c?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjN8fGVhcmx5JTIwNTAncyUyMGJsYWNrJTIwJTIwd29tYW58ZW58MHx8MHx8fDA%3D" alt="person">
     <div><p>“I appreciate the therapist’s ability to combine compassion with practical strategies. Their approach fosters real progress and long-term personal growth.”</p>
     <p><strong>Sarah T.</strong> – Couple's Therapy</p>
     </div>
   </div>
 
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client2.jpg' %}" alt="person">
+    <img src="https://images.unsplash.com/photo-1740327823179-af68ca3d0290?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGVhcmx5JTIwNTAncyUyMGJsYWNrJTIwJTIwbWFufGVufDB8fDB8fHww" alt="person">
     <div><p>“Sessions are conducted with professionalism and care, creating a space where clients feel heard and respected. The guidance offered is both constructive and empowering.”</p>
     <p><strong>Alex K.</strong> – Individual Therapy</p>
     </div>
   </div>
 
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client4.jpg' %}" alt="person">
+    <img src="https://plus.unsplash.com/premium_photo-1710459650199-9e355d4e642a?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDR8fGVhcmx5JTIwNTAncyUyMGJsYWNrJTIwJTIwbWFufGVufDB8fDB8fHww" alt="person">
     <div><p>“The therapist demonstrates expertise and empathy in every session. Their support has a meaningful impact on personal well-being and resilience.”</p>
     <p><strong>Brian L.</strong> – Individual Therapy</p>
   </div>
   </div>
 
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client3.jpg' %}" alt="person">
+    <img src="https://plus.unsplash.com/premium_photo-1763335952150-76b08c9f5751?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8dGVlbmJveSUyMGFmcmljYW58ZW58MHx8MHx8fDA%3D" alt="person">
     <p>“The therapist provides a supportive and professional environment that makes it easy to open up. Each session is focused, insightful, and tailored to individual needs.”</p>
     <p><strong>Johnathan P.</strong> – Stress Therapy</p>
   </div>
 
   <div class="testimonials-card">
-    <img src="{% static 'images_therapy/client5.jpg' %}" alt="person">
+    <img src="https://images.unsplash.com/photo-1615453261261-77494754424e?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8YWZyaWNhbiUyMHlvdW5nJTIwbGFkeXxlbnwwfHwwfHx8MA%3D%3D" alt="person">
    <div><p>“The therapist combines expertise with genuine care, helping clients navigate challenges with confidence and clarity.”</p>
     <p><strong>Melissa R.</strong> – Anxiety Therapy</p>
     </div>
+  </div>
   </div>
 </section>
 <section class="faq-section">

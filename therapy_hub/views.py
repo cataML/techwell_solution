@@ -36,7 +36,7 @@ def contact_view(request, template_name="therapy_hub/contact.html"):
         form = ContactForm()
     return render(request, template_name, {'form': form})
 
-@login_required(login_url='/therapy_hub/login/')
+
 def booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
@@ -98,23 +98,18 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
 
-          
-            profile, created = Profile.objects.get_or_create(user=user)
+            # Ensure profile exists
+            Profile.objects.get_or_create(user=user)
 
-    
-            if profile.role == 'client':
-                return redirect('therapy_hub:client_dashboard')
-            elif profile.role == 'counsellor':
-                return redirect('therapy_hub:counsellor_dashboard')
+            # ALWAYS GO TO MAIN DASHBOARD
+            return redirect('therapy_hub:dashboard')
 
-            return redirect('dashboard') 
         else:
             messages.error(request, "Invalid username or password")
     else:
         form = AuthenticationForm()
 
     return render(request, "therapy_hub/login.html", {"form": form})
-
 
 def logout_view(request):
     logout(request)

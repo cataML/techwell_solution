@@ -9,10 +9,10 @@
 <p><strong>Selected Plan:</strong> {{ plan_key|title }} Plan</p>
 {% endif %}
 
-<form method="POST" action="{% url 'prodev:request_quote' %}">
+<form method="POST" action="{% url 'prodev:request_quote' %}?plan={{ plan_key }}">
   {% csrf_token %}
 
-  {{ form.plan }}  
+ <input type="hidden" name="plan" value="{{ plan_key }}">
 
   <label>Full Name</label>
   {{ form.full_name }}
@@ -25,5 +25,11 @@
 
   <button type="submit">Submit Request</button>
 </form>
+
+{% if form.errors %}
+  <div class="errors">
+    {{ form.errors }}
+  </div>
+{% endif %}
 
 {% endblock %}

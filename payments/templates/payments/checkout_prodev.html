@@ -1,10 +1,10 @@
-{% extends base %}
+{% extends 'base_prodev.html' %}
 {% block title %}Checkout{% endblock %}
 {% block content %}
 <h2>{{ plan.name }}</h2>
 <p>Price: Ksh {{ plan.price }}</p>
 
-<form method="POST" action="{% url 'payments:paystack_pay' %}">
+<form method="POST" action="{% url 'payments:checkout' %}">
   {% csrf_token %}
   <input type="hidden" name="plan" value="{{ plan_key }}">
   <button type="submit" class="btn">Pay Now</button>

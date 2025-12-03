@@ -408,6 +408,7 @@ footer {
     animation: fade 8s infinite;
     transition: opacity 0.6s ease-in-out;
     color: #6A8BE8;
+    text-align: left;
   }
 
   .titles h2:nth-child(1) { animation-delay: 0s; }
@@ -425,6 +426,7 @@ footer {
   line-height: 1.6;
   margin-bottom: 20px;
   color: #666;
+  text-align: left;
 }
 
 .social-links {
@@ -472,7 +474,7 @@ footer {
 .photo{
   height: 500px;
   background-color: white;
-  box-shadow: 5px 10px 15px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -574,7 +576,7 @@ footer {
   gap: 60px;
   background: white;
   flex-direction: row;
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
 
 .profile-container {
@@ -1178,7 +1180,7 @@ footer {
     padding: 60px 40px;
     background: white;
     text-align: center;
-    margin-top: 6rem;
+    margin-top: 4rem;
 }
 
 .pricing-title {
@@ -1276,6 +1278,8 @@ span{
     text-decoration: none;
     font-weight: 600;
     transition: 0.3s;
+    width: 40%;
+    justify-self: center;
 }
 
 .featured .plan-btn{
@@ -1306,7 +1310,7 @@ span{
 .blog-section {
   padding: 80px 0;
   background: white;
-  margin-top: 6rem;
+  margin-top: 4rem;
 }
 
 .blog-section h2 {
@@ -1434,7 +1438,8 @@ span{
   max-width: 700px;
   margin: 0 auto;
   padding: 1rem;
-  margin-top: 6rem;
+  margin-top: 4rem;
+  margin-bottom: 4rem;
 }
 
 .faq-container h4 {
@@ -1936,191 +1941,6 @@ textarea {
   .dashboard-table td:last-child {
     border-bottom: none;
   }
-}
-
-/* ==============================
-    CLIENT DASHBOARD PAGE
-   ==============================*/
-.client-section{
-  display: flex;
-
-}
-.sidebar {
-    width: 180px;
-    background: #6A8BE8;
-    color: white;
-    height: 35vh;
-    padding: 20px;
-    position: fixed;
-    z-index: 1;
-}
-
-.sidebar h2 {
-    text-align: center;
-    margin-left: 0;
-}
-
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin-left: 20%;
-}
-
-.sidebar ul li {
-    margin: 20px 0;
-}
-
-.sidebar ul li a {
-    color: white;
-    text-decoration: none;
-}
-.sidebar ul li a:hover {
-    color: #3f68a5;
-}
-.sidebar ul li a.active{
-  color: #666;
-}
-.sidebar ul li a i {
-    font-size: 20px;
-    margin: 0 10px;
-}
-
-.main-content {
-    flex: 1;
-    padding: 30px;
-    background: white;
-    margin-left: 15%;
-}
-
-header h1 {
-    margin: 0 0 20px 0;
-}
-
-.stats {
-    display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
-}
-
-.card {
-    background: white;
-    padding: 20px;
-    flex: 1;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-.content .activity-card {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-.projects{
-  margin-left: 40%;
-}
-.project-card {
-    background: white;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 12px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-.project-card h3 {
-    margin-bottom: 8px;
-}
-
-.project-card .pay-btn {
-    display: inline-block;
-    padding: 10px 18px;
-    background: #6A8BE8;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-}
-
-.project-card .pay-btn:hover {
-    background: #3f68a5;
-}
-
-.paid {
-    color: green;
-    font-weight: bold;
-}
-/* ==============================
-   RESPONSIVE STYLES
-   ==============================*/
-@media (max-width: 1024px) {
-    body {
-        flex-direction: column;
-    }
-
-    .stats {
-        flex-direction: column;
-    }
-}
-@media (max-width: 768px){
-    .sidebar {
-        width: 70px;
-        padding: 20px 10px;
-    }
-
-    .sidebar .logo {
-        display: none;
-    }
-
-    .sidebar ul li a span {
-        display: none;  
-    }
-
-    .sidebar ul li a {
-        justify-content: center; 
-    }
-
-    .sidebar ul li a i {
-        font-size: 24px;
-    }
-}
-
-/* ==============================
-   CLIENT MESSAGE PAGE
-   ==============================*/
-.messages-list .message-card {
-    background: white;
-    padding: 15px;
-    border-radius: 6px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    margin-bottom: 10px;
-    margin-left: 5%;
-}
-
-.messages-list .message-card.unread {
-    border-left: 4px solid #004466;
-}
-/* ==============================
-   CLIENT PAYMENTS PAGE
-   ==============================*/
-.invoices-list table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-.invoices-list th, .invoices-list td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-}
-
-.invoices-list th {
-    background-color: white;
-    text-align: left;
-}
-
-.invoices-list a {
-    color: #6A8BE8;
-    text-decoration: none;
-    font-weight: bold;
 }
 /* ==============================
     DEV DASHBOARD PAGE

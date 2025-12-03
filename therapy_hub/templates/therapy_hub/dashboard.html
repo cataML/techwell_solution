@@ -1,10 +1,10 @@
 {% extends "base_therapy.html" %}
 {% load static %}
-{% block title %} TechWell Therapy |  Booking Form{% endblock %}
+{% block title %} TechWell Therapy |  Dashboard{% endblock %}
 {% block content %}
 <div class="dashboard-container">
-    {% if request.user.profile.role == 'client' %}
-    <!-- Client Dashboard Card -->
+
+    {% if request.user.therapy_profile.role == 'client' %}
     <div class="card">
         <i class="fa fa-user"></i>
         <h3>Client Dashboard</h3>
@@ -13,8 +13,7 @@
     </div>
     {% endif %}
 
-    {% if request.user.role == 'counsellor' %}
-    <!-- Counsellor Dashboard Card -->
+    {% if request.user.therapy_profile.role == 'counsellor' %}
     <div class="card">
         <i class="fa fa-user-md"></i>
         <h3>Counsellor Dashboard</h3>
@@ -22,16 +21,9 @@
         <a href="{% url 'therapy_hub:counsellor_dashboard' %}">Enter</a>
     </div>
     {% endif %}
+
     <p>Username: {{ request.user.username }}</p>
-<p>Role: 
-    {% if request.user.role %}
-        {{ request.user.role }}
-    {% elif request.user.profile.role %}
-        {{ request.user.profile.role }}
-    {% else %}
-        Role not set
-    {% endif %}
-</p>
+    <p>Role: {{ request.user.therapy_profile.role }}</p>
 </div>
 
 {% endblock %}

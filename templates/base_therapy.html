@@ -59,14 +59,16 @@
     <!-- Right Links + Book Button -->
     <div class="nav-right">
         <ul class="nav-links">
-            <li><a href="{% url 'therapy_hub:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>            <li><a href="{% url 'therapy_hub:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+            <li><a href="{% url 'therapy_hub:events' %}" class="{% if request.resolver_match.url_name == 'events' %}active{% endif %}">Events</a></li>            
+            <li><a href="{% url 'therapy_hub:contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+            <li><a href="{% url 'therapy_hub:dashboard' %}" class="{% if request.resolver_match.url_name == 'dashboard' %}active{% endif %}">Dashboard</a></li>
         </ul>
-        <a href="{% url 'therapy_hub:booking' %}" class="book-btn">Book Appointment</a>
+        <a href="{% url 'therapy_hub:booking' %}" class="book-btn">Book Now</a>
     </div>
       {% if request.user.is_authenticated %}
-        <a href="{% url 'therapy_hub:logout' %}" class="login-btn">Logout</a>
+        <a href="{% url 'therapy_hub:logout' %}" class="book-btn">Logout</a>
     {% else %}
-        <a href="{% url 'therapy_hub:login' %}" class="login-btn">Login</a>
+        <a href="{% url 'therapy_hub:login' %}" class="book-btn">Login</a>
     {% endif %} 
 </div>
 

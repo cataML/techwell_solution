@@ -56,3 +56,11 @@ class QuoteRequestForm(forms.ModelForm):
         widgets = {
             "plan": forms.HiddenInput()
         }
+        labels = {
+        "full_name": "Your Full Name",
+        "email": "Email Address",
+        "project_details": "Tell us about your project",
+    }
+        help_texts = {
+            "project_details": "Provide as much detail as possible so we can prepare an accurate quote.",
+    }

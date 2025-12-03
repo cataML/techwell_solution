@@ -71,6 +71,7 @@
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+    padding-right: 50px;
 }
 .nav-logo img {
     height: 140px;
@@ -128,13 +129,16 @@
     background-color: #4D7838;
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 8px 18px;
     border-radius: 4px;
     font-family: 'Inria Serif', serif;
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.3s;
     margin-left: 15px;
+    width: 130px;
+    text-align: center;
+    
 }
 .book-btn:hover {
   background-color: #3c622e;
@@ -464,7 +468,7 @@ footer {
   padding: 80px 5%;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 8rem;
+  margin-top: 0;
 }
 
 .content-section h2 {
@@ -481,7 +485,7 @@ footer {
   display: inline-block;
   text-transform: uppercase;
   color: #666;
-  margin-top: 8rem;
+  margin-top: 4rem;
 }
 
 .about .container .section-about-title::before {
@@ -499,6 +503,7 @@ footer {
 .services-intro {
   text-align: center;
   margin-bottom: 60px;
+  margin-top: 4rem;
 }
 
 .services-grid {
@@ -641,7 +646,7 @@ footer {
   width:100%;
   justify-self: center;
   justify-content: space-between;
-  margin-top: 8rem;
+  margin-top: 4rem;
 }
 
 .tag-container {
@@ -910,7 +915,6 @@ footer {
 /* Our team section */
 .team-section{ 
   padding: 1rem; 
-  margin-top: 4rem; 
 }
 .team-container {
   display: flex;
@@ -953,88 +957,53 @@ footer {
 .team-card:hover .card-image img { transform: scale(1.05); }
 
 /* Testimonials section */
-.testimonials-section{ 
-  padding: 0; 
-  width: 100%; 
-  margin: 0 auto; 
-  text-align: center; 
-  background: #fff; 
-  justify-content: center; 
-  align-items: center; 
-  text-align: center; 
-  color: white; 
-  height: 400px; 
-  margin-top: 10rem; 
-} 
-.testimonials-section .content-section{
-  margin-top: 0;
+.testimonials-section {
+  width: 100%;
+  overflow: hidden;
+  background: #fff;
+  padding: 2rem 0;
+  margin-top: 4rem;
 }
-.testimonials-section { 
-  position: relative; 
-  height: 55vh; 
-  overflow: hidden; 
-  text-align: center; 
-  align-items: center; 
-  justify-self: center; 
-} 
-
-.testimonials-section h6{ 
-  color: #666; 
-} 
-.testimonials-card { 
-  position: absolute; 
-  top: 60%; 
-  left: 50%; 
-  transform: translate(-50%, -50%); 
-  opacity: 0; 
-  animation: fadeCycle 36s infinite; 
-  background: #fff; 
-  padding: 1rem; 
-  border-radius: 12px; 
-  width: 50%; 
-  text-align: center; 
-  display: flex; 
-  flex-direction: column; 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); 
-  margin: 0 auto; 
-  justify-self: center; 
-  justify-content: space-between; 
-  height: 200px; 
-  align-items: center; 
-} /* Animation keyframes */ 
-@keyframes fadeCycle { 
-  0% { opacity: 0; } 
-  5% { opacity: 1; } 
-  25% { opacity: 1; } 
-  30% { opacity: 0; } 
-  100% { opacity: 0; } 
+.testimonials-section h6{
+  text-align: center;
 }
-.testimonials-card:nth-of-type(1) { animation-delay: 0s; } 
-.testimonials-card:nth-of-type(2) { animation-delay: 6s; } 
-.testimonials-card:nth-of-type(3) { animation-delay: 12s; } 
-.testimonials-card:nth-of-type(4) { animation-delay: 18s; } 
-.testimonials-card:nth-of-type(5) { animation-delay: 24s; } 
-.testimonials-card:nth-of-type(6) { animation-delay: 30s; } 
+.testimonials-wrapper {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: slideLeft 25s linear infinite;
+}
 
-.testimonials-card img { 
-  width: 80px; 
-  height: 80px; 
-  border-radius: 50%; 
-  margin-bottom: 0; 
-  left: 50%; 
+.testimonials-card {
+  background: #fff;
+  padding: 1.5rem;
+  width: 320px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
 
-} .testimonials-card p{ 
-  margin-top: 0; 
-  color: #666; 
-  margin-left: 0.5rem; 
-} 
+.testimonials-card img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  justify-self: center;
+}
 
+.testimonials-card p {
+  color: #666;
+}
+@keyframes slideLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 /* FAQ section */
 .faq-section { 
   width: 70%; 
   padding: 0.5rem; 
   margin: 0 auto; 
-  margin-top: 8rem; 
+  margin-top: 4rem; 
 } 
 
 .faq-section h2, .contact-section h2{ 
@@ -1261,7 +1230,7 @@ details[open] summary {
 /* ==============================
   ABOUT US PAGE
    ============================== */
-/* About us page*/
+/* Hero section*/
 .about-section {
   height: 80vh;
   background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.18)),
@@ -1272,11 +1241,11 @@ details[open] summary {
   text-align: center;
   color: #fff;
 }
-
+/* Mission section*/
 .values-section {
   background: #fff;
-  text-align: center;
-  margin-top: 8rem;
+  text-align: start;
+  margin-top: 4rem;
 }
 
 .values-section h2 {
@@ -1291,7 +1260,7 @@ details[open] summary {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.5rem;
 }
 
 .values-card {
@@ -1321,11 +1290,12 @@ details[open] summary {
   color: #555;
   line-height: 1.7;
 }
+/* Our story section*/
 .stories-section {
   background: #fff;
   padding: 2rem;
   max-width: 1000px;
-  margin-top: 8rem; 
+  margin-top: 4rem; 
   margin: auto 40px;
   font-size: 1rem;
   line-height: 1.9;
@@ -1918,7 +1888,12 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
     top: 50%;
 }
 }
-
+/* ==============================
+   GUEST CARD
+   ============================== */
+.guest-card{
+  background-color: RED;
+}
 /* ==============================
    CASE STUDY PAGE
    ============================== */
@@ -1930,14 +1905,14 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
+  color: #fff;
 }
 .studies-section{
   align-items: center;
-  background-color: white;
+  background-color: #fff;
   padding: 0.25rem;
   width: 100%;
-  margin-top: 8rem;
+  margin-top: 4rem;
 }
 .studies-container{
   display: grid;
@@ -1948,7 +1923,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 }
 
 .studies-card{
-    background: white;
+    background: #fff;
     border-radius: 10px;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -2035,7 +2010,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   border: none;
   border-radius: 6px;
   background: #4D7838;
-  color: white;
+  color: #fff;
   font-size: 14px;
   cursor: pointer;
 }
@@ -2046,8 +2021,8 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 }
 .case-studies {
   max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1rem;
+  margin: 1rem auto;
+  padding: 0.5rem;
 }
 
 .case-card {
@@ -2071,18 +2046,18 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 }
 
 .challenge h4 {
-  color: #d9534f; /* red tone */
+  color: #d9534f; 
 }
 
 .solution h4 {
-  color: #5cb85c; /* green tone */
+  color: #5cb85c; 
 }
 
 .impact-section {
   text-align: center;
   padding: 2rem 1rem;
   background: white;
-  margin-top: 8rem;
+  margin-top: 4rem;
 }
 
 .impact-stats {

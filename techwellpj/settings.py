@@ -151,7 +151,8 @@ SITE_CONFIG = {
         "mpesa_passkey": "YOUR_PASSKEY",
         "callback_url": "http://127.0.0.1:8000/payments/callback/",
         "verify_url": "http://127.0.0.1:8000/payments/verify/",
-        "redirect_after_payment": "/payments/verify/"
+        "redirect_after_payment": "/payments/verify/",
+        "callback_path": "/payments/callback/",
     },
     "localhost:8000": {
         "name": "Techwell Solution",
