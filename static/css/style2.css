@@ -1,0 +1,511 @@
+/*** ------------------------------------------ Landing Page Styling Starts here ---------------------------------------- ***/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background: #f5f5f5;
+    color: #333;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: #fff;
+    padding: 18px 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: 0.3s ease;
+}
+
+.navbar .container {
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #071C4D;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #071C4D;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #00A19D;
+}
+
+.btn-nav {
+    background: #00A19D;
+    color: #fff !important;
+    padding: 10px 22px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+.btn-nav:hover {
+    background: #008680;
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background: #071C4D;
+    border-radius: 2px;
+}
+
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    top: 0; left: 0;
+    z-index: 1;
+    filter: brightness(0.65);
+}
+
+.hero-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0; left: 0;
+    background: linear-gradient(135deg, rgba(7,28,77,0.8), rgba(0,161,157,0.55));
+    z-index: 2;
+}
+
+.floating-shapes .shape {
+    position: absolute;
+    z-index: 3;
+    opacity: 0.2;
+    animation: float 12s infinite ease-in-out;
+}
+
+.shape.circle { width: 80px; height: 80px; background: #00A19D; border-radius: 50%; top: 20%; left: 10%; }
+.shape.triangle { width: 0; height: 0; border-left: 40px solid transparent; border-right: 40px solid transparent; border-bottom: 70px solid #071C4D; top: 40%; right: 15%; }
+.shape.hex { width: 60px; height: 60px; background: #0A5EB0; clip-path: polygon(25% 6%, 75% 6%, 100% 50%, 75% 94%, 25% 94%, 0% 50%); bottom: 15%; left: 30%; }
+
+@keyframes float {
+    0%,100% { transform: translateY(0px);}
+    50% { transform: translateY(15px);}
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 4;
+    text-align: center;
+    max-width: 1000px;
+    padding: 0 20px;
+    color: #fff;
+}
+
+.hero-content h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+/* Hero CTA Cards */
+.hero-cards {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap;
+    margin-top: 40px;
+}
+
+/* Each Card */
+.hero-card {
+    display: block;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    padding: 32px 28px;
+    border-radius: 16px;
+    flex: 1;
+    max-width: 320px;
+    text-align: left;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.15);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, border 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.hero-card:hover {
+    transform: translateY(-12px);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.25);
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+.hero-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    font-weight: 600;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.hero-card p {
+    font-size: 1rem;
+    color: #f0f0f0;
+    line-height: 1.6;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .hero-cards {
+        flex-wrap: wrap;
+    }
+    .hero-card {
+        max-width: 45%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .hero-card {
+        max-width: 90%;
+    }
+}
+
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 992px) {
+    .hero-cards { flex-direction: column; align-items: center; }
+    .hero-card { max-width: 80%; }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 { font-size: 2.4rem; }
+    .hero-content p { font-size: 1rem; }
+    .hero-card { padding: 20px; }
+    .hamburger { display: flex; }
+    .nav-links { display: none; }
+}
+
+
+/* ================= OUR ECOSYSTEM ================= */
+.ecosystem {
+    padding: 100px 20px;
+    background: #ffffff; 
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #071C4D;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 1.2rem;
+    color: #555555;
+    max-width: 750px;
+    margin: 0 auto 50px auto;
+    line-height: 1.6;
+}
+
+.ecosystem-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.eco-card {
+    background: #f9f9f9;
+    border-radius: 16px;
+    padding: 36px 28px;
+    flex: 1;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid #e0e0e0;
+    transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, border 0.3s ease;
+    text-align: center;
+}
+
+.eco-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    background: #ffffff;
+    border: 1px solid #cfd8dc;
+}
+
+.eco-icon i {
+    font-size: 3rem;
+    color: #00A19D; 
+    margin-bottom: 20px;
+}
+
+.eco-card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 12px;
+    color: #071C4D;
+    font-weight: 600;
+}
+
+.eco-card p {
+    font-size: 1rem;
+    color: #555555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.eco-btn {
+    display: inline-block;
+    padding: 12px 26px;
+    border-radius: 8px;
+    background: #00A19D;
+    color: #ffffff;
+    font-weight: 500;
+    text-decoration: none;
+    margin-top: auto; 
+    transition: 0.3s ease;
+}
+
+.eco-btn:hover {
+    background: #008680;
+}
+
+@media (max-width: 1024px) {
+    .ecosystem-grid {
+        gap: 25px;
+    }
+    .eco-card {
+        max-width: 45%;
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ecosystem-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    .eco-card {
+        max-width: 90%;
+    }
+}
+
+
+.why-choose {
+    padding: 100px 20px;
+    background: #f7f9fc;
+}
+
+.why-choose .container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Titles */
+.section-title {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: #071C4D;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.section-subtitle {
+    font-size: 1.15rem;
+    color: #5c6c7c;
+    max-width: 700px;
+    margin: 0 auto 60px;
+    line-height: 1.6;
+    border-left: 4px solid #00A19D;
+    padding-left: 12px;
+}
+
+/* List layout */
+.choose-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 45px 40px;
+}
+
+/* Items */
+.choose-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 20px 15px;
+    border-left: 2px solid #e1e8ed;
+    transition: all 0.35s ease;
+}
+
+.choose-item i {
+    font-size: 2rem;
+    color: #00A19D;
+    margin-top: 4px;
+}
+
+.choose-item h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #0A214A;
+    margin-bottom: 6px;
+}
+
+.choose-item p {
+    color: #596A79;
+    font-size: 0.97rem;
+    line-height: 1.55;
+}
+
+.choose-item:hover {
+    border-left: 2px solid #00A19D;
+    background: #ffffff;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.06);
+    transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+    .choose-item {
+        flex-direction: column;
+        border-left: none;
+        border-top: 2px solid #e1e8ed;
+        padding-top: 25px;
+    }
+}
+
+
+.differentiation {
+    padding: 120px 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f4f7fb 100%);
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    position: relative;
+}
+
+.differentiation::after {
+    content: "";
+    position: absolute;
+    top: 50px;
+    right: 10%;
+    width: 230px;
+    height: 230px;
+    background: rgba(0,161,157,0.08);
+    border-radius: 50%;
+    filter: blur(50px);
+}
+
+.differentiation::before {
+    content: "";
+    position: absolute;
+    bottom: 30px;
+    left: 12%;
+    width: 150px;
+    height: 150px;
+    background: rgba(7,28,77,0.05);
+    border-radius: 50%;
+    filter: blur(40px);
+}
+
+.differentiation .container {
+    max-width: 1000px;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* Heading */
+.diff-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #071C4D;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+/* Separator line */
+.diff-line {
+    width: 70px;
+    height: 3px;
+    margin: 0 auto 35px auto;
+    background: #00A19D;
+}
+
+/* Body text */
+.diff-text {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #4A5568;
+    max-width: 850px;
+    margin: auto;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .diff-title {
+        font-size: 2rem;
+    }
+    .diff-text {
+        font-size: 1rem;
+    }
+    .differentiation::after,
+    .differentiation::before {
+        display: none; 
+    }
+}
+
+
+/*** ------------------------------------------ Landing Page Styling Ends here ---------------------------------------- ***/
