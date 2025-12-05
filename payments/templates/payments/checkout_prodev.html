@@ -5,8 +5,10 @@
 <p>Price: Ksh {{ plan.price }}</p>
 
 <form method="POST" action="{% url 'payments:checkout' %}">
-  {% csrf_token %}
-  <input type="hidden" name="plan" value="{{ plan_key }}">
-  <button type="submit" class="btn">Pay Now</button>
+    {% csrf_token %}
+    <input type="hidden" name="amount" value="{{ plan.price }}">
+    <input type="hidden" name="email" value="{{ quote.email }}">
+    <input type="hidden" name="service_name" value="{{ plan.name }}">
+    <button type="submit" class="btn">Pay Now</button>
 </form>
 {% endblock %}
