@@ -18,7 +18,12 @@ def initialize_payment(request):
         if not config:
             return JsonResponse({'error': 'Unknown site'}, status=400)
 
-        email = request.user.email
+        if request.user.is_authenticated:
+            email = request.user.email
+        else:
+            email = request.POST.get('email')  
+            if not email:
+                return JsonResponse({'error': 'Email is required for guests'}, status=400)
 
         try:
             amount = int(request.POST.get('amount')) * 100 
@@ -139,29 +144,30 @@ def verify_payment(request):
                               {"error": "Digital booking not found."})
 
         # Unknown app
-        return render(request, "payments/payment_failed.html",
-                      {"error": "Unknown app or invalid metadata."})
+        return HttpResponse("Unknown app in metadata.", status=400)
 
     # If transaction not successful
-    return render(request, "payments/payment_failed.html",
-                  {"error": "Payment not successful."})
+    return HttpResponse("Payment not successful.", status=400)
 
 @csrf_exempt
 def payment_callback(request):
 
-    if request.method != "POST":
-        return redirect("digital:client")
-
- 
-    try:
-        payload = json.loads(request.body)
-        reference = payload.get("reference")
+    if request.method == "GET":
+        reference = request.GET.get("reference")
         if not reference:
             return redirect("digital:client")
-    except Exception:
+    
+    # 2️⃣ Handle Paystack POST webhook
+    elif request.method == "POST":
+        try:
+            payload = json.loads(request.body)
+            reference = payload.get("reference")
+        except Exception:
+            return redirect("digital:client")
+    else:
         return redirect("digital:client")
 
-    # Verify payment with Paystack
+    # 3️⃣ Verify with Paystack
     headers = {"Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}"}
     verify_url = f"https://api.paystack.co/transaction/verify/{reference}"
 
@@ -169,15 +175,14 @@ def payment_callback(request):
         resp = requests.get(verify_url, headers=headers)
         data = resp.json()
     except Exception:
-        return redirect("digital:dashboard")
+        return redirect("digital:client")
 
-    # ---------------------------- SUCCESSFUL PAYMENT ----------------------------
+    # 4️⃣ SUCCESS
     if data.get("status") and data["data"]["status"] == "success":
 
         email = data["data"]["customer"]["email"]
         service_name = data["data"]["metadata"].get("service_name", "").lower()
         app_name = data["data"]["metadata"].get("app", "").lower()
-
         # 1️⃣ THERAPY HUB — Booking model
         if app_name == "therapy_hub":
             try:
@@ -210,7 +215,7 @@ def payment_callback(request):
                 return render(request, "prodev/booking_success.html",
                               {"booking": booking})
             except QuoteRequest.DoesNotExist:
-                # Optionally redirect to dashboard or show error
+                
                 return redirect("prodev:dashboard")
 
         # 3️⃣ DIGITAL — BookNow model
@@ -228,15 +233,13 @@ def payment_callback(request):
                               {"booking": booking})
 
             except BookNow.DoesNotExist:
-                return redirect("digital:dashboard")
+                return redirect("digital:index")
 
         # If app name does not match any known platform
-        return render(request, "payments/payment_failed.html",
-                      {"error": "Unknown app in metadata."})
+        return HttpResponse("Unknown app in metadata.", status=400)
 
     # ---------------------------- FAILED PAYMENT ----------------------------
-    return render(request, "payments/payment_failed.html",
-                  {"error": "Payment not successful."})
+    return HttpResponse("Payment not successful.", status=400)
 
 
 
@@ -260,7 +263,7 @@ def checkout(request):
 
         response = requests.post(settings.PAYSTACK_INITIALIZE_URL, json=data, headers=headers)
         res_data = response.json()
-        print("PAYSTACK RESPONSE:", res_data)  # 👈 see details in console
+        print("PAYSTACK RESPONSE:", res_data)  
 
         if res_data.get("status"):
             return redirect(res_data["data"]["authorization_url"])
@@ -329,12 +332,44 @@ def checkout_prodev(request, pk):
 
     selected_plan = plans.get(quote.plan)
 
+    if not selected_plan:
+        return JsonResponse({"error": "Invalid plan"}, status=400)
+
+    if request.method == "POST":
+        amount = selected_plan["price"] * 100   #
+        email = quote.email                     
+        service_name = selected_plan["name"]
+
+        headers = {
+            "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
+            "Content-Type": "application/json",
+        }
+
+        data = {
+            "email": email,
+            "amount": amount,
+            "metadata": {
+                "service": service_name,
+                "quote_id": quote.pk,
+                "plan": quote.plan,
+            },
+            "callback_url": request.build_absolute_uri('/payments/verify/'),
+        }
+
+        response = requests.post(settings.PAYSTACK_INITIALIZE_URL, json=data, headers=headers)
+        res_data = response.json()
+        print("PAYSTACK RESPONSE:", res_data)
+
+        if res_data.get("status"):
+            return redirect(res_data["data"]["authorization_url"])
+
+        return JsonResponse(res_data, status=400)
+
     return render(request, "payments/checkout_prodev.html", {
         "plan": selected_plan,
         "plan_key": quote.plan,
         "quote": quote,
     })
-
 
 
 def checkout_digital(request, pk):

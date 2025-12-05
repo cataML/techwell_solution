@@ -350,6 +350,25 @@ footer {
 /* ==============================
     HOME PAGE
    ==============================*/
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+/* Optional directional slides */
+.animate-on-scroll.slide-left {
+  transform: translateX(-50px);
+}
+.animate-on-scroll.slide-right {
+  transform: translateX(50px);
+}
+
+/* When element is visible */
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateX(0) translateY(0);
+}
 /* ================= HERO SECTION================= */
 .intro {
   display: flex;
@@ -358,15 +377,17 @@ footer {
   padding: 80px 5%;
   background: white;
   gap: 50px;
+  text-align: left;
 }
 
-.intro-content {
+.intro-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   max-width: 1200px;
   width: 100%;
-  gap: 40px;
+  gap: 20px;
+  flex-direction: column;
 }
 
 
@@ -374,12 +395,13 @@ footer {
   flex: 1;
 }
 
-.intro h6 {
+.intro-item h6 {
   font-size: 16px;
   color: #6A8BE8;
   margin-bottom: 10px;
   text-transform: uppercase;
   letter-spacing: 1px;
+  text-align: left;
 }
 
 .intro h1 {
@@ -388,6 +410,7 @@ footer {
   margin-bottom: 15px;
   line-height: 1.2;
   color: #666;
+  text-align: left;
 }
 .titles {
   position: relative;
@@ -427,29 +450,48 @@ footer {
   margin-bottom: 20px;
   color: #666;
   text-align: left;
+  margin-left: 0;
+  
+
 }
 
 .social-links {
   display: flex;
   gap: 15px;
-  margin-top: 10px;
+  margin: 10px 0 20px;
 }
 
 .social-links a {
   font-size: 18px;
   color: white;
   transition: color 0.3s;
+  opacity: 0;
+  transform: translateY(20px); 
+  animation: socialSlide 0.5s forwards;
 }
 
 .social-links a:hover {
   color: #3f68a5;
 }
 
+.social-links a:nth-child(1) { animation-delay: 2s; }
+.social-links a:nth-child(2) { animation-delay: 2.2s; }
+.social-links a:nth-child(3) { animation-delay: 2.4s; }
+.social-links a:nth-child(4) { animation-delay: 2.6s; }
 
+@keyframes socialSlide {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.more-info{
+  align-self: flex-start;
+}
 .more-info ul {
   display: flex;
   gap: 30px;
-  margin-top: 25px;
+  margin-top: 50px;
   padding: 0;
   list-style: none;
 }
@@ -497,6 +539,38 @@ footer {
   }
 } 
 
+.intro-item {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideIn 0.6s forwards;
+}
+
+.intro-item:nth-child(1) {
+  animation-delay: 0.3s;
+}
+
+.intro-item:nth-child(2) {
+  animation-delay: 0.6s;
+}
+
+.intro-item:nth-child(3) {
+  animation-delay: 0.9s;
+}
+
+.intro-item:nth-child(4) {
+  animation-delay: 1.2s;
+}
+
+.intro-item:nth-child(5) {
+  animation-delay: 1.5s;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 /* =============================
    RESPONSIVE (MOBILE)
    ============================= */
@@ -586,6 +660,24 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  
+}
+.about .container {
+  max-width: 600px;
+  opacity: 0;
+  transform: translateX(-50px);
+  animation: slideFromLeft 0.8s forwards;
+  animation-delay: 0.3s;
+}
+
+.profile-container {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .about-photo {
@@ -689,7 +781,48 @@ footer {
 .cv-download .btn:hover {
   background: #3f68a5;
 }
+@keyframes slideFromLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 
+@keyframes slideFromRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.strengths li,
+.cv-download .btn {
+  opacity: 0;
+  transform: translateX(-30px);
+  animation: slideItem 0.6s forwards;
+}
+.strengths li:nth-child(1) {
+  animation-delay: 1s;
+}
+.strengths li:nth-child(2) {
+  animation-delay: 1.2s;
+}
+.strengths li:nth-child(3) {
+  animation-delay: 1.4s;
+}
+.strengths li:nth-child(4) {
+  animation-delay: 1.6s;
+}
+.cv-download .btn {
+  animation-delay: 1.8s;
+}
+
+@keyframes slideItem {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 /* ============================
    RESPONSIVE STYLES
    ============================ */
@@ -804,7 +937,30 @@ footer {
   transform: translateY(-8px);
   box-shadow: 0px 6px 20px rgba(0,0,0,0.12);
 }
+.service-card {
+  opacity: 0;
+  transform: translateY(-50px);
+  animation: dropIn 1.5s forwards; 
+}
 
+@keyframes dropIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-list .service-card:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+.service-list .service-card:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+.service-list .service-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
 .service-card img {
   width: 100%;
   height: 200px;
@@ -905,6 +1061,21 @@ footer {
   border-radius: 10px;
   overflow: hidden;
   margin-top: 8px;
+  animation: fillBar 1.5s forwards;
+}
+
+.progress-bar:nth-child(1) { animation-delay: 0.2s; }
+.progress-bar:nth-child(2) { animation-delay: 0.4s; }
+.progress-bar:nth-child(3) { animation-delay: 0.6s; }
+.progress-bar:nth-child(4) { animation-delay: 0.8s; }
+.progress-bar:nth-child(5) { animation-delay: 1s; }
+.progress-bar:nth-child(6) { animation-delay: 1.2s; }
+.progress-bar:nth-child(7) { animation-delay: 1.4s; }
+.progress-bar:nth-child(8) { animation-delay: 1.6s; }
+
+@keyframes fillBar {
+  from { width: 0; }
+  to { width: var(--progress-width); } 
 }
 
 .progress-bar {
@@ -1008,10 +1179,21 @@ footer {
   padding-bottom: 20px;
   position: relative;
   transition: transform 0.3s ease;
+  transform: translateX(100px); 
+  animation: slideIn 1s forwards;
 }
-
+.projects-grid .project-card:nth-child(1) { animation-delay: 0.2s; }
+.projects-grid .project-card:nth-child(2) { animation-delay: 0.6s; }
+.projects-grid .project-card:nth-child(3) { animation-delay: 1s; }
 .project-card:hover {
   transform: translateY(-8px);
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateX(0); /* final position */
+  }
 }
 
 .project-card img {
@@ -1181,8 +1363,24 @@ footer {
     background: white;
     text-align: center;
     margin-top: 4rem;
+    opacity: 0;             
+    transform: translateY(250px); 
+    animation: moveUp 1.8s forwards;
 }
-
+.pricing-grid .plan-card:nth-child(1) { animation-delay: 0.2s; }
+.pricing-grid .plan-card:nth-child(2) { animation-delay: 0.4s; }
+.pricing-grid .plan-card:nth-child(3) { animation-delay: 0.6s; }
+.section-anchor {
+  opacity: 0;
+  transform: translateY(50px);
+  animation: moveUp 1s forwards;
+}
+@keyframes moveUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 .pricing-title {
     font-size: 2rem;
     font-weight: bold;
@@ -1345,8 +1543,24 @@ span{
   border: 1px solid #e8e8e8;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   cursor: default;
+  opacity: 0;               /* start invisible */
+  transform: translateX(100px); /* start off to the right */
+  animation: slideInRight 0.8s forwards;
 }
+.blog-grid .blog-card:nth-child(1) { animation-delay: 0.2s; }
+.blog-grid .blog-card:nth-child(2) { animation-delay: 0.4s; }
+.blog-grid .blog-card:nth-child(3) { animation-delay: 0.6s; }
+.blog-grid .blog-card:nth-child(4) { animation-delay: 0.8s; }
+.blog-grid .blog-card:nth-child(5) { animation-delay: 1s; }
+.blog-grid .blog-card:nth-child(6) { animation-delay: 1.2s; }
 
+/* Keyframes for sliding in from right */
+@keyframes slideInRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .blog-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
@@ -1410,6 +1624,7 @@ span{
     background: #ccc;
     cursor: not-allowed;
   }
+  
 /* ================================
    RESPONSIVE DESIGN
 ================================ */

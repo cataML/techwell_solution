@@ -3,90 +3,86 @@
 {% block title %}Prodev | Home{% endblock %}
 {%  block content %}
   <section class="intro">
-    <div class="intro-content">       
-      <div>
-        <h6>WELCOME TO MY WORLD</h6>
-        <h1>Hi, I'm Catherine Mung'ohe</h1>
-        <div class="titles">
-          <h2 >Full-stack Developer</h2>
-          <h2>Cloud Practitioner</h2>
-        </div>
-        <p>Full-stack Developer skilled in HTML, CSS, Bootstrap, Tailwind CSS, and Django — creating responsive, user-friendly web interfaces.
-          <br>
-          Delivering solutions in software engineering and cloud computing.
-        </p>
-        <div>
-          <h6>Find me with:</h6>
-        <div class="social-links">
-            <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://x.com" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://GitHub.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-        </div>
-         </div>
-
-         <div class="more-info">
-            <ul>
-              <li>
-                  <i class="fa-solid fa-bolt"></i>
-                  <p>4+ Years
-                    <br>
-                  Experience
-                </p>
-              </li>
-              <li>
-                <i class="fa-solid fa-project-diagram"></i>
-                  <p>6+ Projects
-                  <br>
-                  Completed
-                </p>               
-              </li>
-              <li>
-                <i class="fa-solid fa-headset"></i>
-                  <p>Online 24/7
-                  <br>
-                  Support
-                </p>
-              </li>
-            </ul>
-      </div> 
+  <div class="intro-content">       
+    <div class="intro-item animate-on-scroll">
+      <h6>WELCOME TO MY WORLD</h6>
+    </div>
+    <div class="intro-item animate-on-scroll">
+      <h1>Hi, I'm Catherine Mung'ohe</h1>
+    </div>
+    <div class="intro-item titles animate-on-scroll">
+      <h2>Full-stack Developer</h2>
+      <h2>Cloud Practitioner</h2>
+    </div>
+    <div class="intro-item animate-on-scroll">
+      <p>
+        Full-stack Developer skilled in HTML, CSS, Bootstrap, Tailwind CSS, and Django — creating responsive, user-friendly web interfaces.
+        <br>
+        Delivering solutions in software engineering and cloud computing.
+      </p>
+    </div>
+    <div class="intro-item animate-on-scroll">
+      <h6>Find me with:</h6>
+      <div class="social-links">
+        <a href="https://facebook.com" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://x.com" target="_blank" title="X"><i class="fab fa-x-twitter"></i></a>
+        <a href="https://GitHub.com" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+        <a href="https://linkedin.com" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
       </div>
-        <div class="photo">
-          <img src="{% static 'images_prodev/kathey.png' %}" alt="Catherine  Photo">
-        </div>
-      </div>  
-    </section>
-  
-  <section id="about" class="about">
-    <div class="profile-container">
-  <img src="{% static 'images_prodev/kathey.png' %}" alt="Profile" class="about-photo">
-
-  <div class="rotating-circle">
-    <span class="center-number">4</span>
-    <svg viewBox="0 0 200 200" class="rotating-text">
-      <path id="circlePath" 
-            d="M 100, 100
-               m -75, 0
-               a 75,75 0 1,1 150,0
-               a 75,75 0 1,1 -150,0" 
-            fill="none" />
-      <text font-size="20" font-weight="bold" fill="#333">
-        <textPath xlink:href="#circlePath" startOffset="0%">
-          YEARS OF BEST AND SUCCESSFUL WORKING EXPERIENCE
-        </textPath>
-      </text>
-    </svg>
+    </div>
+    <div class="more-info animate-on-scroll">
+      <ul>
+        <li>
+          <i class="fa-solid fa-bolt"></i>
+          <p>4+ Years<br>Experience</p>
+        </li>
+        <li>
+          <i class="fa-solid fa-project-diagram"></i>
+          <p>6+ Projects<br>Completed</p>
+        </li>
+        <li>
+          <i class="fa-solid fa-headset"></i>
+          <p>Online 24/7<br>Support</p>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
-  <div class="container">
+  <div class="photo animate-on-scroll">
+    <img src="{% static 'images_prodev/kathey.png' %}" alt="Catherine Photo">
+  </div>
+</section>
+
+<section id="about" class="about section-anchor">
+  <div class="profile-container animate-on-scroll">
+    <img src="{% static 'images_prodev/kathey.png' %}" alt="Profile" class="about-photo animate-on-scroll">
+
+    <div class="rotating-circle animate-on-scroll">
+      <span class="center-number">4</span>
+      <svg viewBox="0 0 200 200" class="rotating-text">
+        <path id="circlePath" 
+              d="M 100, 100
+                 m -75, 0
+                 a 75,75 0 1,1 150,0
+                 a 75,75 0 1,1 -150,0" 
+              fill="none" />
+        <text font-size="20" font-weight="bold" fill="#333">
+          <textPath xlink:href="#circlePath" startOffset="0%">
+            YEARS OF BEST AND SUCCESSFUL WORKING EXPERIENCE
+          </textPath>
+        </text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="container animate-on-scroll">
     <h2>About Me</h2>
     <p class="summary">
       I am a Software Engineer with 4 years of experience in Software Engineering and Cloud Computing (AWS, Azure). 
-      My background spans  software development, cloud computing, project management, 
+      My background spans software development, cloud computing, project management, 
       and I have delivered impactful solutions that drive business growth and efficiency.
     </p>
 
-    <div class="strengths">
+    <div class="strengths animate-on-scroll">
       <h3>Core Strengths & Values</h3>
       <ul>
         <li>✔ Reliability – delivering projects on time and with precision.</li>
@@ -96,24 +92,21 @@
       </ul>
     </div>
 
-
-    <div class="cv-download">
+    <div class="cv-download animate-on-scroll">
       <a href="{% static 'documents/cv.pdf' %}" download class="btn">Download CV</a>
     </div>
   </div>
-  
 </section>
 
 <section id="services" class="services section-anchor">
   <div class="container">
-    <h2>Services</h2>
-    <p>Delivering technology-driven solutions to help businesses grow and scale.</p>
+    <h2 class="animate-on-scroll">Services</h2>
+    <p class="animate-on-scroll">Delivering technology-driven solutions to help businesses grow and scale.</p>
 
     <div class="service-list">
-      <!-- Software Development -->
-      <div class="service-card">
+      <div class="service-card animate-on-scroll">
         <img src="https://blog.planview.com/wp-content/uploads/2020/01/Top-6-Software-Development-Methodologies.jpg" alt=" Software Development">
-        <h3> Software Development</h3>
+        <h3>Software Development</h3>
         <p>
           I design and build robust, scalable applications tailored to client needs. 
           From responsive websites to enterprise-grade systems, I ensure solutions are 
@@ -126,8 +119,7 @@
         </ul>
       </div>
 
-      <!-- Data Analysis -->
-      <div class="service-card">
+      <div class="service-card animate-on-scroll">
         <img src="https://www.herzing.edu/sites/default/files/styles/fp_960_480/public/2021-03/Is%20Data%20Analytics%20Right%20for%20Me.jpg.webp?itok=XGcrEhsW" alt="Data Analysis">
         <h3>Data Analysis</h3>
         <p>
@@ -141,8 +133,7 @@
         </ul>
       </div>
 
-      <!-- Cloud Solutions -->
-      <div class="service-card">
+      <div class="service-card animate-on-scroll">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqwUkUeGooPoKZvLCCvNdnqGC__WMjii7EQA&s" alt="Cloud Solutions">
         <h3>Cloud Solutions</h3>
         <p>
@@ -159,82 +150,88 @@
     </div>
   </div>
 </section>
-<div  id="tech-stach" class="about-card">
+<!-- Tech Stack -->
+<div id="tech-stach" class="about-card animate-on-scroll">
   <h2>💻 Tech Stack & Tools</h2>
 
-  <div class="skill">
-    <span><h6><strong>Backend:</strong> Django, Python, RESTful APIs</h6>
-    <h6>90%</h6>
-  </span>
+  <div class="skill animate-on-scroll">
+    <span>
+      <h6><strong>Backend:</strong> Django, Python, RESTful APIs</h6>
+      <h6>90%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
   </div>
 
-  <div class="skill">
-    <span><h6><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Tailwind CSS</h6>
+  <div class="skill animate-on-scroll">
+    <span>
+      <h6><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Tailwind CSS</h6>
       <h6>85%</h6>
     </span>
     <div class="progress"><div class="progress-bar" style="width: 85%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
-      
       <h6><strong>Database:</strong> PostgreSQL, MySQL</h6>
-    <h6>80%</h6></span>
+      <h6>80%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 80%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
       <h6><strong>Version Control:</strong> Git & GitHub</h6>
-    <h6>95%</h6></span>
+      <h6>95%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 95%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
       <h6><strong>Payment Integration:</strong> Stripe, M-Pesa</h6>
-    <h6>75%</h6></span>
+      <h6>75%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 75%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
       <h6><strong>Deployment:</strong> AWS EC2, S3, PythonAnywhere, Render</h6>
-    <h6>88%</h6></span>
+      <h6>88%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 88%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
       <h6><strong>Cloud Knowledge:</strong> AWS EC2, S3, RDS, Route 53, IAM</h6>
-      <h6>80%</h6></span>
-    <div class="progress"><div class="progress-bar" style="width: 80%;">80%</div></div>
+      <h6>80%</h6>
+    </span>
+    <div class="progress"><div class="progress-bar" style="width: 80%;"></div></div>
   </div>
 
-  <div class="skill">
+  <div class="skill animate-on-scroll">
     <span>
       <h6><strong>Workflow:</strong> VS Code, GitHub Projects, Postman, Linux Terminal</h6>
-    <h6>90%</h6></span>
+      <h6>90%</h6>
+    </span>
     <div class="progress"><div class="progress-bar" style="width: 90%;"></div></div>
   </div>
 
-  <a href="{% url 'prodev:request_quote' %}" class="quote-btn">Request a Quote</a>
+  <a href="{% url 'prodev:request_quote' %}" class="quote-btn animate-on-scroll">Request a Quote</a>
 </div>
-</section>
 
-
+<!-- Portfolio / Projects -->
 <section id="portfolio" class="portfolio section-anchor">
-  <div class="container">
+  <div class="container animate-on-scroll">
     <h2>Portfolio / Projects</h2>
     <p>A selection of my work showcasing software development, cloud, data, and cybersecurity expertise.</p>
 
     <div class="projects-grid">
-
-      <!-- Project 1 -->
-      <div class="project-card">
+      <!-- Project Cards -->
+      <div class="project-card animate-on-scroll">
         <img src="{% static 'images_prodev/EPR.png' %}" alt="EPR">
-        <h3>Employment Performance System</h3><br>
+        <h3>Employment Performance System</h3>
         <div class="project-details">
           <p class="description">Designed and developed a web-based Employee Performance System that tracks, evaluates, and manages employee performance metrics in real time.</p>
           <p><strong>Tools Used:</strong> Django, PostgreSQL, AWS EC2, S3</p>
@@ -243,316 +240,216 @@
         </div>
         <button class="see-more">See More</button>
       </div>
-      <!-- Project 2 -->
-      <div class="project-card">
-        <img src="https://images.surferseo.art/307368b5-782c-4d65-941a-1203d999aa71.png" alt="Data Analytics ">
-        <h3>Interactive Data Analytics Dashboard</h3><br>
-      <div class="project-details">
-        <p class="description">Built an interactive dashboard to visualize business performance metrics and customer insights.</p>
-        <br>
-        <br>
-        <br>
-        <p><strong>Tools Used:</strong> Python, Power BI, SQL</p><br>
-        <p><strong>Outcome:</strong> Enabled stakeholders to make data-driven decisions, reducing reporting time from days to hours.</p>
-        <br>
-        <a href="#" class="btn">GitHub</a>
-      </div>
+
+      <div class="project-card animate-on-scroll">
+        <img src="https://images.surferseo.art/307368b5-782c-4d65-941a-1203d999aa71.png" alt="Data Analytics">
+        <h3>Interactive Data Analytics Dashboard</h3>
+        <div class="project-details">
+          <p class="description">Built an interactive dashboard to visualize business performance metrics and customer insights.</p>
+          <p><strong>Tools Used:</strong> Python, Power BI, SQL</p>
+          <p><strong>Outcome:</strong> Enabled stakeholders to make data-driven decisions, reducing reporting time from days to hours.</p>
+          <a href="#" class="btn">GitHub</a>
+        </div>
         <button class="see-more">See More</button>
       </div>
 
-      <!-- Project 3 -->
-      <div class="project-card">
+      <div class="project-card animate-on-scroll">
         <img src="{% static 'images_prodev/therapy.jpg' %}" alt="Counselling">
-        <h3>Interactive Counselling Website System</h3><br>
+        <h3>Interactive Counselling Website System</h3>
         <div class="project-details">
           <p class="description">Developed a secure and user-friendly counselling website featuring online booking, client dashboards, and encrypted communication for therapy sessions.</p>
           <p><strong>Tools Used:</strong> Django, HTML, CSS, Azure</p>
-          <br>
-          <br>
           <p><strong>Outcome:</strong> Improved client engagement and session bookings by 40%, while ensuring secure payments and data confidentiality.</p>
           <a href="#" class="btn">GitHub</a>
-      </div>
-      <button class="see-more">See More</button>
+        </div>
+        <button class="see-more">See More</button>
       </div>
     </div>
   </div>
 </section>
 
-
-<section id="testimonials" class="section-anchor">
-<div class="testimonials "><h2>What Clients Say</h2>
-  <div class="testimonial-wrapper">
-    <div class="testimonial-track">
-      <div class="testimonial-card">
-        <p>"Catherine is an exceptional developer who delivers high-quality work on time!"</p>
-        <h4>- John Doe, Project Manager</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"Her problem-solving skills are unmatched. She turned our idea into a fully functional product."</p>
-        <h4>- Sarah K., Startup Founder</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"Working with Catherine was an absolute pleasure. Great communication and results."</p>
-        <h4>- Mark L., Business Owner</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"She understood our needs quickly and built exactly what we wanted."</p>
-        <br>
-        <h4>- Emily R., CEO</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"Professional, creative, and always ahead of deadlines. Highly recommended!"</p>
-        <h4>- Alex P., Tech Lead</h4>
-      </div>
-      <!-- Duplicate for smooth infinite loop -->
-      <div class="testimonial-card">
-        <p>"Catherine is an exceptional developer who delivers high-quality work on time!"</p>
-        <h4>- John Doe, Project Manager</h4>
-      </div>
-      <div class="testimonial-card">
-        <p>"Her problem-solving skills are unmatched. She turned our idea into a fully functional product."</p>
-        <h4>- Sarah K., Startup Founder</h4>
-      </div>
-       <div class="testimonial-card">
-        <p class="quote">“Working with [Your Name] was a seamless experience. Their expertise in software development and cloud solutions helped us modernize our systems efficiently.”</p>
-        <h4>— Jane Mwangi, Project Manager</h4>
-      </div>
-
-      <div class="testimonial-card">
-        <p class="quote">“An excellent problem-solver with great attention to detail. [Your Name] delivered a data analytics dashboard that transformed how we make business decisions.”</p>
-        <h4>— David Kamau, Business Analyst</h4>
-        
-      </div>
-
-      <div class="testimonial-card">
-        <p class="quote">“Professional, reliable, and highly skilled. [Your Name] guided our team in adopting cloud best practices and improving cybersecurity posture.”</p>
-        <h4>— Susan Otieno, IT Director</h4>
-    
-      </div>
-    </div>
-  </div>
-</div>
-</section>
-
-<section class="pricing-section">
-    <h2 class="pricing-title">Our Pricing</h2>
-
-    <div class="pricing-grid">
-
-        <!-- BASIC PLAN -->
-        <div class="plan-card">
-            <h3 class="plan-name">BASIC PLAN</h3>
-            <p class="plan-price">Ksh. 50,000 <span>Per Month</span></p>
-
-            <ul class="plan-features">
-              <li>✔ Responsive Web Design</li>
-              <li>✔ UI/UX Design & Prototyping</li>
-              <li>✔ Frontend Development</li>
-              <li>✔ Backend Development</li>
-              <li>✔ Custom WordPress Theme Development</li>
-              <li>✖ E-commerce Solutions</li>
-              <li>✖ Cross-Browser Compatibility</li>
-              <li>✖ Web Performance Optimization</li>
-              <li>✖ Mobile-First Design Approach</li>
-            </ul>
-            <a href="{% url 'prodev:request_quote' %}?plan=basic" class="plan-btn">Buy Now</a>
-        </div>
-
-        <!-- STANDARD PLAN -->
-        <div class="plan-card featured">
-            <h3 class="plan-name">STANDARD PLAN</h3>
-            <p class="plan-price">Ksh. 100,000 <span>Per Month</span></p>
-
-             <ul class="plan-features">
-              <li>✔ Responsive Web Design</li>
-              <li>✔ UI/UX Design & Prototyping</li>
-              <li>✔ Frontend Development</li>
-              <li>✔ Backend Development</li>
-              <li>✔ Custom WordPress Theme Development</li>
-              <li>✔ E-commerce Solutions</li>
-              <li>✔ Cross-Browser Compatibility</li>
-              <li>✖ Web Performance Optimization</li>
-              <li>✖ Mobile-First Design Approach</li>
-            </ul>
-
-            <a href="{% url 'prodev:request_quote' %}?plan=standard" class="plan-btn">Buy Now</a>
-        </div>
-
-        <!-- PREMIUM PLAN -->
-        <div class="plan-card">
-            <h3 class="plan-name">PREMIUM PLAN</h3>
-            <p class="plan-price">Ksh. 150,000 <span>Per Month</span></p>
-
-            <ul class="plan-features">
-              <li>✔ Responsive Web Design</li>
-              <li>✔ UI/UX Design & Prototyping</li>
-              <li>✔ Frontend Development</li>
-              <li>✔ Backend Development</li>
-              <li>✔ Custom WordPress Theme Development</li>
-              <li>✔ E-commerce Solutions</li>
-              <li>✔ Cross-Browser Compatibility</li>
-              <li>✔ Web Performance Optimization</li>
-              <li>✔ Mobile-First Design Approach</li>
-            </ul>
-
-            <a href="{% url 'prodev:request_quote' %}?plan=premium" class="plan-btn">Buy Now</a>
-        </div>
-
-    </div>
-</section>
+<!-- Blog / Insights -->
 <section id="blog" class="blog-section section-anchor">
-  <div class="container">
+  <div class="container animate-on-scroll">
     <h2>Blog / Insights</h2>
     <h6>Sharing knowledge, industry insights, and thought leadership.</h6>
 
     <div class="blog-grid">
-
-      <!-- Blog Item 1 -->
-      <article class="blog-card page-1">
+      <article class="blog-card page-1 animate-on-scroll">
         <h3>Embracing Cloud Computing for Business Growth</h3>
         <p class="excerpt">How AWS and Azure help businesses scale operations while cutting costs.</p>
         <p class="full hidden">
           Cloud computing enables companies to innovate faster, reduce downtime, and optimize costs.
-          By using services like AWS EC2, S3, and Azure App Services, organizations gain flexibility
-          and resilience, ensuring their systems can handle growth without heavy upfront investment.
         </p>
-        <br>
         <button class="read-more">Read More</button>
       </article>
 
-      <!-- Blog Item 2 -->
-      <article class="blog-card page-1">
+      <article class="blog-card page-1 animate-on-scroll">
         <h3>Data-Driven Decision Making in the Digital Era</h3>
         <p class="excerpt">Turning raw data into meaningful, data-driven insights that support smarter business strategies.</p>
         <p class="full hidden">
-          Businesses today thrive on data. Through tools like Power BI, SQL, and Python analytics,
-          organizations can transform numbers into actionable insights. This helps leaders identify
-          trends, reduce inefficiencies, and make evidence-based decisions rather than relying on
-          assumptions.
+          Businesses today thrive on data. Through tools like Power BI, SQL, and Python analytics, organizations can transform numbers into actionable insights.
         </p>
-        <br>
         <button class="read-more">Read More</button>
       </article>
 
-      <!-- Blog Item 3 -->
-      <article class="blog-card page-1">
+      <article class="blog-card page-1 animate-on-scroll">
         <h3>Cybersecurity Best Practices for SMEs</h3>
         <p class="excerpt">Practical steps small businesses can take to protect themselves from digital threats.</p>
         <p class="full hidden">
-          SMEs often overlook cybersecurity, making them prime targets for attacks. Simple measures
-          like enforcing strong passwords, multi-factor authentication, regular backups, and phishing
-          awareness training can drastically reduce risks. Cybersecurity isn’t just for big
-          corporations—it’s essential for everyone.
+          SMEs often overlook cybersecurity, making them prime targets for attacks.
         </p>
-        <br>
         <button class="read-more">Read More</button>
       </article>
 
-      <!-- Blog Item 4 -->
-      <article class="blog-card page-2">
+      <!-- Page 2 blogs -->
+      <article class="blog-card page-2 animate-on-scroll">
         <h3>The Future of Software Engineering</h3>
         <p class="excerpt">Key trends shaping how developers build and deliver solutions.</p>
         <p class="full hidden">
-          The software industry is evolving rapidly with cloud-native development, DevOps,
-          AI-assisted coding, and low-code platforms. The future of engineering will focus on
-          automation, microservices, and agile development cycles—empowering developers to deliver
-          high-quality solutions faster and more securely.
+          Cloud-native development, DevOps, AI-assisted coding, and low-code platforms.
         </p>
         <button class="read-more">Read More</button>
       </article>
 
-      <!-- Blog Item 5 -->
-      <article class="blog-card page-2">
+      <article class="blog-card page-2 animate-on-scroll">
         <h3>Leveraging Artificial Intelligence in Business</h3>
         <p class="excerpt">How AI is transforming industries through automation and smart decision-making.</p>
         <p class="full hidden">
-          From chatbots and predictive analytics to recommendation engines, AI is revolutionizing the
-          way businesses operate. Small businesses can adopt AI tools for customer service, fraud
-          detection, and marketing personalization—gaining competitive advantages once reserved for
-          large corporations.
+          AI tools for customer service, fraud detection, and marketing personalization.
         </p>
-        <br>
         <button class="read-more">Read More</button>
       </article>
 
-      <!-- Blog Item 6 -->
-      <article class="blog-card page-2">
+      <article class="blog-card page-2 animate-on-scroll">
         <h3>Building Scalable Web Applications</h3>
         <p class="excerpt">Best practices for creating web apps that grow with user demand.</p>
         <p class="full hidden">
-          Scalability ensures a web app performs well under increasing traffic. By using Django,
-          React, and cloud infrastructure, developers can build applications that adapt to user
-          growth. Key strategies include modular design, caching, database optimization, and
-          deploying on cloud platforms like AWS or Azure.
+          Scalability ensures a web app performs well under increasing traffic.
         </p>
         <button class="read-more">Read More</button>
       </article>
     </div>
+  </div>
+  <!-- Pagination Controls --> 
+   <div class="pagination"> 
+    <button id="prevBtn" disabled>Prev</button>
+    <span id="pageIndicator">Page 1 of 2</span> 
+    <button id="nextBtn">Next</button> </div> 
+  </div>
+</section>
 
-    <!-- Pagination Controls -->
-    <div class="pagination">
-      <button id="prevBtn" disabled>Prev</button>
-      <span id="pageIndicator">Page 1 of 2</span>
-      <button id="nextBtn">Next</button>
+<!-- Pricing Section -->
+<section class="pricing-section">
+  <h2 class="pricing-title animate-on-scroll">Our Pricing</h2>
+  <div class="pricing-grid">
+    <div class="plan-card animate-on-scroll">
+      <h3 class="plan-name">BASIC PLAN</h3>
+      <p class="plan-price">Ksh. 50,000 <span>Per Month</span></p>
+      <ul class="plan-features">
+        <li>✔ Responsive Web Design</li>
+        <li>✔ UI/UX Design & Prototyping</li>
+        <li>✔ Frontend Development</li>
+        <li>✔ Backend Development</li>
+        <li>✔ Custom WordPress Theme Development</li>
+        <li>✖ E-commerce Solutions</li>
+        <li>✖ Cross-Browser Compatibility</li>
+        <li>✖ Web Performance Optimization</li>
+        <li>✖ Mobile-First Design Approach</li>
+      </ul>
+      <a href="{% url 'prodev:request_quote' %}?plan=basic" class="plan-btn">Buy Now</a>
+    </div>
+
+    <div class="plan-card featured animate-on-scroll">
+      <h3 class="plan-name">STANDARD PLAN</h3>
+      <p class="plan-price">Ksh. 100,000 <span>Per Month</span></p>
+      <ul class="plan-features">
+        <li>✔ Responsive Web Design</li>
+        <li>✔ UI/UX Design & Prototyping</li>
+        <li>✔ Frontend Development</li>
+        <li>✔ Backend Development</li>
+        <li>✔ Custom WordPress Theme Development</li>
+        <li>✔ E-commerce Solutions</li>
+        <li>✔ Cross-Browser Compatibility</li>
+        <li>✖ Web Performance Optimization</li>
+        <li>✖ Mobile-First Design Approach</li>
+      </ul>
+      <a href="{% url 'prodev:request_quote' %}?plan=standard" class="plan-btn">Buy Now</a>
+    </div>
+
+    <div class="plan-card animate-on-scroll">
+      <h3 class="plan-name">PREMIUM PLAN</h3>
+      <p class="plan-price">Ksh. 150,000 <span>Per Month</span></p>
+      <ul class="plan-features">
+        <li>✔ Responsive Web Design</li>
+        <li>✔ UI/UX Design & Prototyping</li>
+        <li>✔ Frontend Development</li>
+        <li>✔ Backend Development</li>
+        <li>✔ Custom WordPress Theme Development</li>
+        <li>✔ E-commerce Solutions</li>
+        <li>✔ Cross-Browser Compatibility</li>
+        <li>✔ Web Performance Optimization</li>
+        <li>✔ Mobile-First Design Approach</li>
+      </ul>
+      <a href="{% url 'prodev:request_quote' %}?plan=premium" class="plan-btn">Buy Now</a>
     </div>
   </div>
 </section>
 
-  <section id="faq" class="faq-container section-anchor">
-  <h4>Frequently Asked Questions</h4>
+<!-- FAQ Section -->
+<section id="faq" class="faq-container section-anchor">
+  <h4 class="animate-on-scroll">Frequently Asked Questions</h4>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>1. What services do you offer?</summary>
     <p>We offer web development, software engineering, and counselling services tailored to client needs.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>2. How can I book a consultation?</summary>
     <p>You can book a consultation through our contact form or by emailing us directly.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>3. Do you offer payment plans?</summary>
     <p>Yes, we offer flexible payment options via M-Pesa, PayPal, and bank transfer.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>4. What technologies do you use?</summary>
     <p>We use HTML, CSS, JavaScript, Django, React, and other modern tools to build high-quality solutions.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>5. Can you help with website maintenance?</summary>
     <p>Absolutely. We offer ongoing support, updates, and security checks for your website.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>6. How long does a project take?</summary>
     <p>Project timelines vary depending on complexity, but we aim to deliver within agreed deadlines.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>7. Is my data secure with you?</summary>
     <p>Yes. We follow strict privacy policies and use secure systems to protect your data.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>8. Do you work with international clients?</summary>
     <p>Yes, we work with clients worldwide using remote collaboration tools.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>9. Can I request custom features?</summary>
     <p>Yes. We customize every project to match your exact needs and preferences.</p>
   </details>
 
-  <details>
+  <details class="animate-on-scroll">
     <summary>10. How do I get started?</summary>
     <p>Simply reach out through our website or contact us directly to discuss your project.</p>
   </details>
-  </div>
-  </section>
-
+</section>
 
 
   
@@ -678,6 +575,30 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const observerOptions = { threshold: 0.2 }; // 20% visible triggers animation
+
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+
+        // Optional: stagger children (for lists or social links)
+        if (entry.target.children.length > 0) {
+          Array.from(entry.target.children).forEach((child, i) => {
+            child.style.transitionDelay = `${i * 0.2}s`;
+          });
+        }
+
+        observer.unobserve(entry.target); // Animate once
+      }
+    });
+  }, observerOptions);
+
+  document.querySelectorAll(".animate-on-scroll").forEach(el => observer.observe(el));
 });
 </script>
 

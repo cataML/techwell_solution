@@ -10,9 +10,12 @@
         
         <input type="hidden" name="amount" value="{{ amount }}">
         <input type="hidden" name="service" value="{{ service_name }}">
+        {% if not request.user.is_authenticated %}
+            <label>Email</label>
+            <input type="email" name="email" required>
+        {% endif %}
         
         <button type="submit">Pay Now</button>
     </form>
 </div>
-
 {% endblock %}
