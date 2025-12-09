@@ -1,5 +1,5 @@
 from django import forms
-from .models import ContactMessage, BookNow, DigitalProfile
+from .models import ContactMessage, BookNow, DigitalProfile,  ClientProfile
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import  UserCreationForm
 
@@ -85,3 +85,13 @@ class SignUpForm(UserCreationForm):
             )
         return user
 
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
+
+class ClientProfileForm(forms.ModelForm):
+    class Meta:
+        model = ClientProfile
+        fields = ['phone', 'bio', 'profile_picture']

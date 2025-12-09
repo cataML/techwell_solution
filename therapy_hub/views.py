@@ -98,10 +98,8 @@ def login_view(request):
             user = form.get_user()
             login(request, user)
 
-            # Ensure profile exists
             Profile.objects.get_or_create(user=user)
 
-            # ALWAYS GO TO MAIN DASHBOARD
             return redirect('therapy_hub:dashboard')
 
         else:

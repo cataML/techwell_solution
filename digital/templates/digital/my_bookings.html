@@ -1,0 +1,63 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Bookings{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+    <!-- Sidebar -->
+    <div >
+        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
+        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
+        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
+        <a href="{% url 'digital:payments' %}" class="nav-link active">Payments</a>
+        <a href="{% url 'digital:messages' %}" class="nav-link active">Messages</a>
+        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
+    </div>
+</aside>
+<main class="main">
+    <div class="container">
+    <h1>My Bookings</h1>
+    {% if bookings %}
+    <table>
+        <thead>
+            <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Workstation</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for booking in bookings %}
+            <tr>
+                <td>#{{ booking.id }}</td>
+                <td>{{ booking.date }}</td>
+                <td>{{ booking.start_time }} - {{ booking.end_time }}</td>
+                <td>{{ booking.workstation }}</td>
+                <td>
+                    <span class="status {{ booking.status }}">
+                        {{ booking.get_status_display }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>You have no bookings yet.</p>
+    {% endif %}
+</div>
+<td>
+    <span class="status {{ booking.status }}">
+        {{ booking.get_status_display }}
+    </span>
+    {% if booking.status == 'pending' %}
+        <form method="POST" action="{% url 'cancel_booking' booking.id %}" style="display:inline;">
+            {% csrf_token %}
+            
+        </form>
+    {% endif %}
+</td>
+</main>
+{% endblock %}

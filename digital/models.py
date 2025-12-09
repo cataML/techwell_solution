@@ -47,7 +47,7 @@ class BookNow(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.name} - {self.service} on {self.datetime}"
+        return f"Booking by {self.user.username} on {self.date} from {self.start_time} to {self.end_time}"
     
 
 class DigitalProfile(models.Model):
@@ -172,3 +172,57 @@ class StaffMessage(models.Model):
 
     def __str__(self):
         return f"Message to {self.staff.username}"
+    
+class ClientProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(max_length=20, blank=True, null=True)
+    bio = models.TextField(blank=True, null=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username
+    
+class Booking(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    workstation = models.CharField(max_length=50)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+
+    def __str__(self):
+        return f"Booking #{self.id} - {self.user.username}"
+
+class ClientPayment(models.Model):
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+    ]
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    date = models.DateTimeField(auto_now_add=True)
+    method = models.CharField(max_length=50)  # e.g., Cash, Card, Mpesa
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
+    booking = models.ForeignKey('Booking', on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f"Payment #{self.id} - {self.user.username}"
+
+class ClientMessage(models.Model):
+    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
+    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
+    subject = models.CharField(max_length=200)
+    content = models.TextField()
+    date_sent = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Message from {self.sender.username} to {self.receiver.username}"

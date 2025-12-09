@@ -1,0 +1,29 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Dashboard{% endblock %}
+{% block content %}
+<div class="dashboard-container">
+
+    {% if request.user.digital_profile.role == 'client' %}
+    <div class="card">
+        <i class="fa fa-user"></i>
+        <h3>Client Dashboard</h3>
+        <p>View your sessions, payments, and messages.</p>
+        <a href="{% url 'digital:client' %}">Enter</a>
+    </div>
+    {% endif %}
+
+    {% if request.user.digital_profile.role == 'staff' %}
+    <div class="card">
+        <i class="fa fa-user-md"></i>
+        <h3>Staff Dashboard</h3>
+        <p>Manage your clients, schedule, and session notes.</p>
+        <a href="{% url 'digital:staff_dashboard' %}">Enter</a>
+    </div>
+    {% endif %}
+
+    <p>Username: {{ request.user.username }}</p>
+    <p>Role: {{ request.user.digital_profile.role }}</p>
+</div>
+
+{% endblock %}

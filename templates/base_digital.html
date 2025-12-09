@@ -53,6 +53,7 @@
         <li><a href="{% url 'digital:service' %}" class="{% if request.resolver_match.url_name == 'service' %}active{% endif %}">Services</a></li>
         <li><a href="{% url 'digital:blog' %}" class="{% if request.resolver_match.url_name == 'blog' %}active{% endif %}">Blog</a></li>
         <li><a href="{% url 'digital:contact_us' %}" class="{% if request.resolver_match.url_name == 'contact_us' %}active{% endif %}">Contact</a></li>
+        <li><a href="{% url 'digital:dashboard' %}" class="{% if request.resolver_match.url_name == 'dasboard' %}active{% endif %}">Dashboard</a></li>
     </ul>
 
     <div class="nav-buttons">

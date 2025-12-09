@@ -1,0 +1,56 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Payments{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+    <!-- Sidebar -->
+    <div >
+        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
+        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
+        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
+        <a href="{% url 'digital:payments' %}" class="nav-link active">Payments</a>
+        <a href="{% url 'digital:messages' %}" class="nav-link active">Messages</a>
+        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
+    </div>
+</aside>
+
+    <!-- Main content -->
+  <main class="main">
+    <div class="container">
+    <h1>My Payments</h1>
+    {% if payments %}
+    <table>
+        <thead>
+            <tr>
+                <th>Payment ID</th>
+                <th>Booking ID</th>
+                <th>Amount</th>
+                <th>Date</th>
+                <th>Method</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+            <tr>
+                <td>#{{ payment.id }}</td>
+                <td>{% if payment.booking %}#{{ payment.booking.id }}{% else %}-{% endif %}</td>
+                <td>${{ payment.amount }}</td>
+                <td>{{ payment.date|date:"Y-m-d H:i" }}</td>
+                <td>{{ payment.method }}</td>
+                <td>
+                    <span class="status {{ payment.status }}">
+                        {{ payment.get_status_display }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No payments found.</p>
+    {% endif %}
+</div>
+  </main>
+  {% endblock %}

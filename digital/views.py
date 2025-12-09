@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from .forms import ContactUs, BookingNow, SignUpForm
+from .forms import ContactUs, BookingNow, SignUpForm, UserForm, ClientProfileForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.utils import timezone
 from .decorators import role_required
-from .models import DigitalProfile, BookNow, Appointment, Task, Payment, Message, StaffMessage
+from .models import DigitalProfile, BookNow, Appointment, Task, Payment, Message, StaffMessage, ClientProfile, Booking, ClientPayment, ClientMessage
 from django.db import models
 
 
@@ -82,17 +82,10 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-
-          
-            profile, created = DigitalProfile.objects.get_or_create(user=user)
-
+            
+            DigitalProfile.objects.get_or_create(user=user)
     
-            if profile.role == 'client':
-                return redirect('digital:client')
-            elif profile.role == 'staff':
-                return redirect('digital:staff_dashboard')
-
-            return redirect('dashboard') 
+            return redirect('digital:dashboard') 
         else:
             messages.error(request, "Invalid username or password")
     else:
@@ -100,6 +93,9 @@ def login_view(request):
 
     return render(request, "digital/log_in.html", {"form": form})
 
+def log_out(request):
+    logout(request)
+    return redirect('digital:log_in')
 
 def book_now(request):
     if request.method == 'POST':
@@ -140,6 +136,10 @@ def confirm_booking(request, pk):
         return redirect('digital:client')  
 
     return render(request, 'digital/confirm_booking.html', {"booking": booking})
+
+@login_required(login_url='/digital/log_in/')
+def dashboard(request):
+    return render(request, 'digital/dashboard.html')
 
 @login_required(login_url='/digital/log_in/')
 def client(request):
@@ -213,25 +213,57 @@ def terms_conditions(request):
 def our_story(request):
     return render(request, 'digital/our_story.html')
 
+
+
+
 @login_required(login_url='/digital/log_in/')
-def profile_view(request):
-    profile, created = Profile.objects.get_or_create(user=request.user)
+def update_profile(request):
+    # Ensure a ClientProfile exists for this user
+    profile, created = ClientProfile.objects.get_or_create(user=request.user)
 
-    if request.method == "POST":
-        form = ProfileForm(request.POST, instance=profile, user=request.user)
-        if form.is_valid():
-            form.save(user=request.user)
-            return redirect("profile")  
+    # instantiate forms
+    if request.method == 'POST':
+        user_form = UserForm(request.POST, instance=request.user)
+        profile_form = ClientProfileForm(request.POST, request.FILES, instance=profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(request, "Profile updated successfully.")
+            return redirect('digital:client_profile')  # change to your desired name
     else:
-        form = ProfileForm(instance=profile, user=request.user)
+        user_form = UserForm(instance=request.user)
+        profile_form = ClientProfileForm(instance=profile)
 
-    return render(request, "digital/profile.html", {
-        "form": form,
-        "profile": profile
+    return render(request, 'digital/update_profile.html', {
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'profile': profile,
     })
+@login_required(login_url='/digital/log_in/')
+def my_bookings(request):
+    bookings = Booking.objects.filter(user=request.user).order_by('-date', 'start_time')
+    return render(request, 'digital/my_bookings.html', {'bookings': bookings})
 
-def log_out(request):
-    logout(request)
-    return redirect('digital:log_in')
+@login_required(login_url='/digital/log_in/')
+def cancel_booking(request, booking_id):
+    booking = get_object_or_404(Booking, id=booking_id, user=request.user)
 
+    if booking.status == 'pending':
+        booking.status = 'cancelled'
+        booking.save()
+        messages.success(request, f'Booking #{booking.id} has been cancelled.')
+    else:
+        messages.error(request, f'Booking #{booking.id} cannot be cancelled.')
 
+    return redirect('my_bookings')
+
+@login_required(login_url='/digital/log_in/')
+def payments(request):
+    payments = ClientPayment.objects.filter(user=request.user).order_by('-date')
+    return render(request, 'digital/payments.html', {'payments': payments})
+
+@login_required(login_url='/digital/log_in/')
+def messages(request):
+    user_messages = Message.objects.filter(recipient=request.user).order_by('-created_at')
+    return render(request, 'digital/messages.html', {'messages': user_messages})

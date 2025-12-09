@@ -1,0 +1,30 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Profile{% endblock %}
+
+{% block content %}
+<aside class="sidebar">
+    <!-- Sidebar -->
+      <div >
+        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
+        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
+        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
+        <a href="#" class="nav-link active">Payments</a>
+        <a href="#" class="nav-link active">Messages</a>
+        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
+      </div>
+</aside>
+<main class="main">
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <h3>Account Information</h3>
+    {{ user_form.as_p }}
+
+    <h3>Profile Information</h3>
+    {{ profile_form.as_p }}
+
+    <button type="submit">Update Profile</button>
+</form>
+</main>
+{% endblock %}
