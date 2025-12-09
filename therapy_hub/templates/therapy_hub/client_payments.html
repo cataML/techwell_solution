@@ -1,0 +1,23 @@
+{% extends 'base_therapy.html' %}
+{% load static %}
+{% block title %}Techwell Therapy | Dashboard{% endblock %}
+
+{% block content %}
+<h2>Your Payments</h2>
+
+<a href="{% url 'make_payment' %}" class="btn">Make Payment</a>
+
+<h3>Payment History</h3>
+<div class="card-list">
+    {% for payment in payments %}
+        <div class="card">
+            <p>Amount: KES {{ payment.amount }}</p>
+            <p>Method: {{ payment.method }}</p>
+            <p>Reference: {{ payment.reference }}</p>
+            <p>Date: {{ payment.paid_at }}</p>
+        </div>
+    {% empty %}
+        <p>You have not made any payments yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

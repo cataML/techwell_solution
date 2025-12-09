@@ -18,6 +18,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('client_dashboard/', views.client_dashboard, name='client_dashboard'),
+    path("client/", views.client_payments, name="client_payments"),
     path('counsellor_dashboard/', views.counsellor_dashboard, name='counsellor_dashboard'),
     path('earnings-report/', views.earnings_report, name='earnings_report'),
     path("appointments/", views.appointments, name="appointments"),
