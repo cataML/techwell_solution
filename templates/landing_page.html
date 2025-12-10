@@ -10,19 +10,50 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-yH04GwGnGGLO/38/uwsafJdK9z1bk1m0l75tXYn0B3Z2XxOYUQy0I+7PZUBPZb9R6g1X4RFGzqW7hK2d1+ZQ2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+<style>
 
+</style>
 </head>
 <body>
 
     <!-- ================= NAVBAR ================= -->
     <nav class="navbar">
         <div class="container">
-            <div class="logo">Tech Welll Solutions</div>
+            <div class="logo">TechWell Solutions</div>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#" class="btn-nav">Contact Us</a></li>
+                <li class="dropdown">
+                <a href="#">Home ▾</a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url 'therapy_hub:index' %}">Techwell Therapy</a></li>
+                    <li><a href="{% url 'digital:index' %}">Techwell CyberCafe</a></li>
+                    <li><a href="{% url 'prodev:index' %}">Techwell Code</a></li>
+                </ul>
+            </li>
+                <li class="dropdown">
+                    <a href="#">Services ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'therapy_hub:index' %}">Counselling Services</a></li>
+                        <li><a href="{% url 'digital:index' %}">Digital/Cyber Services</a></li>
+                        <li><a href="{% url 'prodev:index' %}">Tech Services</a></li>
+                    </ul>
+
+                </li>
+                <li class="dropdown">
+                    <a href="#">About ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'therapy_hub:about' %}">Techwell Therapy</a></li>
+                        <li><a href="{% url 'digital:about_us' %}">Techwell CyberCafe</a></li>
+                        <li><a href="{% url 'prodev:index' %}">Techwell Code</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="btn-nav">Contact Us ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url 'therapy_hub:contact' %}">Techwell Therapy</a></li>
+                        <li><a href="{% url 'digital:contact_us' %}">Techwell CyberCafe</a></li>
+                        <li><a href="{% url 'prodev:contact' %}">Techwell Code</a></li>
+                    </ul>
+                </li>
             </ul>
             <div class="hamburger">
                 <span></span>
@@ -182,5 +213,32 @@
 
 
     <script src="script.js"></script>
+<script>
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+});
+
+// Clickable dropdowns
+const dropdowns = document.querySelectorAll('.dropdown > a');
+
+dropdowns.forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // stop the link from navigating
+
+        const parent = this.parentElement;
+
+        // Close other dropdowns
+        document.querySelectorAll('.dropdown').forEach(d => {
+            if (d !== parent) d.classList.remove('open');
+        });
+
+        // Toggle current dropdown
+        parent.classList.toggle('open');
+    });
+});
+</script>
 </body>
 </html>

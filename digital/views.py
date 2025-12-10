@@ -162,7 +162,7 @@ def staff_dashboard(request):
     appointments = Appointment.objects.filter(date__gte=today).order_by('date', 'time')[:6]
     tasks = Task.objects.filter(done=False).order_by('deadline')[:6]
     payments = Payment.objects.all()[:6]
-    messages = Message.objects.filter(recipient=user).order_by('-created_at')[:6]
+    user_messages = Message.objects.filter(recipient=user).order_by('-created_at')[:6]
 
     context = {
         'staff_name': user.get_full_name() or user.username,
@@ -173,7 +173,7 @@ def staff_dashboard(request):
         'appointments': appointments,
         'tasks': tasks,
         'payments': payments,
-        'messages': messages,
+        'messages': user_messages,
     }
     return render(request, 'digital/staff_dashboard.html', context)
 
@@ -201,8 +201,8 @@ def staff_payments(request):
 
 @login_required(login_url='/digital/log_in/')
 def staff_messages(request):
-    messages = StaffMessage.objects.filter(staff=request.user).order_by('-date_sent')
-    return render(request, 'digital/staff_messages.html', {'messages': messages})
+    staff_messages = StaffMessage.objects.filter(staff=request.user).order_by('-date_sent')
+    return render(request, 'digital/staff_messages.html', {'messages': staff_messages})
 
 def privacy_policy(request):
     return render(request, 'digital/privacy_policy.html')
@@ -264,6 +264,6 @@ def payments(request):
     return render(request, 'digital/payments.html', {'payments': payments})
 
 @login_required(login_url='/digital/log_in/')
-def messages(request):
+def user_messages_view(request):
     user_messages = Message.objects.filter(recipient=request.user).order_by('-created_at')
     return render(request, 'digital/messages.html', {'messages': user_messages})
