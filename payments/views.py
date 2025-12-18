@@ -1,5 +1,5 @@
+import json
 from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 import requests, uuid
@@ -8,30 +8,33 @@ from prodev.models import QuoteRequest
 from digital.models import BookNow 
 from django.views.decorators.csrf import csrf_exempt
 
-
 # Create your views here.
 def initialize_payment(request):
-    if request.method == 'POST':
-        current_domain = request.get_host() 
+    if request.method == "POST":
+        # Get current site config
+        current_domain = request.get_host()
         config = settings.SITE_CONFIG.get(current_domain)
-
         if not config:
             return JsonResponse({'error': 'Unknown site'}, status=400)
 
+        # Get email from user (logged-in or guest)
         if request.user.is_authenticated:
             email = request.user.email
         else:
-            email = request.POST.get('email')  
+            email = request.POST.get("email")
             if not email:
                 return JsonResponse({'error': 'Email is required for guests'}, status=400)
 
+        # Get amount
         try:
-            amount = int(request.POST.get('amount')) * 100 
+            amount = int(request.POST.get("amount")) * 100  # Paystack expects kobo
         except (TypeError, ValueError):
             return JsonResponse({'error': 'Invalid amount'}, status=400)
 
+        # Callback URL after payment
         callback_url = request.build_absolute_uri(config['callback_path'])
 
+        # Paystack initialization request
         headers = {
             "Authorization": f"Bearer {settings.PAYSTACK_SECRET_KEY}",
             "Content-Type": "application/json",
@@ -42,22 +45,31 @@ def initialize_payment(request):
             "amount": amount,
             "callback_url": callback_url,
             "metadata": {
-                "site_name": config['name']
+                "site_name": config['name'],
+                "app": request.POST.get("app", "unknown"),  # optional
+                "service_name": request.POST.get("service_name", "General Payment")
             }
+            # Do NOT include "phone" here — Paystack will prompt user for phone
         }
 
         try:
-            response = requests.post(settings.PAYSTACK_INITIALIZE_URL, json=data, headers=headers)
+            response = requests.post(
+                settings.PAYSTACK_INITIALIZE_URL,
+                json=data,
+                headers=headers
+            )
             res_data = response.json()
         except Exception as e:
             return JsonResponse({'error': f'Payment request failed: {str(e)}'}, status=500)
 
-        if res_data.get('status'):
-            return redirect(res_data['data']['authorization_url'])
+        if res_data.get("status"):
+            # Redirect user to Paystack payment page (checkout modal)
+            return redirect(res_data["data"]["authorization_url"])
         else:
-            return JsonResponse({'error': res_data.get('message', 'Payment initialization failed')}, status=400)
+            return JsonResponse({'error': res_data.get("message", "Payment initialization failed")}, status=400)
 
-    return render(request, 'payments/checkout.html')
+    # If GET request, render checkout form
+    return render(request, "payments/checkout.html")
 
 
 

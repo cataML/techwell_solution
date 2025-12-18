@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User, AbstractUser
+from django.conf import settings
+from django.contrib.auth.models import AbstractUser
 
 class Contact(models.Model):
     name = models.CharField(max_length=100)
@@ -71,18 +72,19 @@ class Profile(models.Model):
         ('counsellor', 'Counsellor'),
         ('client', 'Client'),
     )
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="therapy_profile")
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="therapy_profile")
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='client')
     full_name = models.CharField(max_length=255, blank=True, null=True)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
 
+    
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
 class Session(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sessions')
-    counselor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='counselor_sessions')
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sessions')
+    counselor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='counselor_sessions')
     date = models.DateTimeField()
     notes = models.TextField(blank=True, null=True)
     duration_minutes = models.PositiveIntegerField(default=60)
@@ -91,7 +93,6 @@ class Session(models.Model):
         choices=[('completed', 'Completed'), ('upcoming', 'Upcoming')],
         default='upcoming'
     )
-
     def __str__(self):
         return f"Session {self.id} with {self.client.username} on {self.date.strftime('%Y-%m-%d')}"
     
@@ -118,13 +119,13 @@ class User(AbstractUser):
         verbose_name='user permissions',
     )
 
-
-class Payment(models.Model):
-    client = models.ForeignKey(User, on_delete=models.CASCADE) 
+class Payments(models.Model):
+    booking = models.ForeignKey(Booking, on_delete=models.CASCADE, null=True, blank=True, related_name="payments")
+    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    method = models.CharField(max_length=50)  
+    method = models.CharField(max_length=50)
     reference = models.CharField(max_length=255)
     paid_at = models.DateTimeField(auto_now_add=True)
-
+    
     def __str__(self):
         return f"Payment {self.reference}"

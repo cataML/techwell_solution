@@ -1,11 +1,9 @@
 {% extends 'base_therapy.html' %}
 {% load static %}
-{% block title %}Techwell Therapy | Dashboard{% endblock %}
+{% block title %}Techwell Therapy | Payments{% endblock %}
 
 {% block content %}
 <h2>Your Payments</h2>
-
-<a href="{% url 'make_payment' %}" class="btn">Make Payment</a>
 
 <h3>Payment History</h3>
 <div class="card-list">
@@ -15,9 +13,30 @@
             <p>Method: {{ payment.method }}</p>
             <p>Reference: {{ payment.reference }}</p>
             <p>Date: {{ payment.paid_at }}</p>
+
+            {% if payment.booking %}
+                <a href="{% url 'payments:checkout_therapy' payment.booking.id %}" class="btn">
+                    View Booking
+                </a>
+            {% endif %}
         </div>
     {% empty %}
         <p>You have not made any payments yet.</p>
     {% endfor %}
 </div>
+{% for payment in payments %}
+<tr>
+    <td>{{ payment.reference }}</td>
+    <td>{{ payment.amount }}</td>
+    <td>
+        {% if payment.booking %}
+            <a href="{% url 'payments:checkout_therapy' payment.booking.id %}" class="btn">
+                Make Payment
+            </a>
+        {% else %}
+            <span class="text-muted">No booking linked</span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
 {% endblock %}

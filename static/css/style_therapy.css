@@ -125,7 +125,7 @@
   text-decoration: underline;
   color: #4D7838;
 }
-.book-btn {
+.book-button {
     background-color: #4D7838;
     color: white;
     border: none;
@@ -140,21 +140,8 @@
     text-align: center;
     
 }
-.book-btn:hover {
+.book-button:hover {
   background-color: #3c622e;
-}
-
-.login-btn {
-    padding: 0.5rem 1rem;
-    background-color: #4D7838;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-left: 10px;
-}
-
-.login-btn:hover {
-    background-color: #3c622e;
 }
 /* Mobile menu */
 .menu-toggle {
@@ -442,9 +429,9 @@ footer {
    ============================== */
   /* Hero section */
 .hero {
+  position: relative;
   height: 80vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.158), rgba(0, 0, 0, 0.178)), 
-              url('../images_therapy/hero1.jpeg') no-repeat center center/cover;
+  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -452,15 +439,53 @@ footer {
   color: white;
 }
 
+/* Background div */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 100%;             
+  width: 100%;
+  height: 100%;
+  background: url('../images_therapy/hero1.jpeg') center center/cover no-repeat;
+  z-index: -1;
+  animation: slideIn 1.5s ease forwards;
+}
+
+/* Overlay for darkening */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 0;
+}
+
+/* Animation */
+@keyframes slideIn {
+  0% {
+    left: 100%;    /* off-screen right */
+  }
+  100% {
+    left: 0;      /* fully visible */
+  }
+}
+
+.hero-content > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 0.8s ease forwards;
+}
 .hero-content h1 {
   font-size: 3rem;
   margin-bottom: 20px;
+  animation-delay: 1.5s;
 }
 
 .hero-content p {
   font-size: 1.2rem;
   max-width: 700px;
   margin: 0 auto 30px;
+  animation-delay: 2s;
 }
 
   /* Content section */
@@ -478,7 +503,15 @@ footer {
   font-size: 2rem;
   font-weight: bold;
 }
-
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.hero-content .book-btn {
+  animation-delay: 2.5s;
+}
   /* About section */
 .about .container .section-about-title {
   position: relative;
@@ -814,6 +847,7 @@ footer {
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
+    width: 150px;
     transition: all 0.3s ease;
     box-shadow: 0 5px 15px rgba(77, 120, 56, 0.2);
 }
@@ -922,23 +956,22 @@ footer {
   justify-content: center;
 }
 .team-card {
-   background: white; 
-   border-radius: 10px; 
-   overflow: hidden; 
-   transition: all 0.3s ease; 
-   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
-   height: 450px; 
-   display: flex; 
-   flex-direction: column; 
-   padding: 1rem; 
-   width: 100%; 
+  background: white; 
+  border-radius: 10px; 
+  overflow: hidden; 
+  transition: all 0.3s ease; 
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05); 
+  height: 450px; 
+  display: flex; 
+  flex-direction: column; 
+  width: 100%; 
   flex: 1 1 250px;
   max-width: 300px;
   margin: 0.5rem; 
   } 
 .team-card h4{
   color: black; 
-    font-weight: bold; 
+  font-weight: bold; 
   } 
 .team-card h5{ 
   color: #4D7838; 
@@ -954,8 +987,22 @@ footer {
   object-fit: cover; 
   transition: transform 0.5s ease; 
   border-radius: 10px; } 
-.team-card:hover .card-image img { transform: scale(1.05); }
 
+.team-card .card-image{
+  height: 200px;
+  width: 100%;
+  overflow: hidden;
+}
+.team-card .card-image img { 
+  transition: transform 0.5s ease;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.team-card:hover .card-image img {
+  transform: scale(1.05);
+}
 /* Testimonials section */
 .testimonials-section {
   width: 100%;
@@ -1232,14 +1279,44 @@ details[open] summary {
    ============================== */
 /* Hero section*/
 .about-section {
-  height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.18)),
-              url("../images_therapy/hero.jpg") no-repeat center/cover;
+  height: 80vh;;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: #fff;
+}
+
+
+/* Background div */
+.about-bg {
+  position: absolute;
+  top: 0;
+  left: 100%;             
+  width: 100%;
+  height: 100%;
+  background: url('../images_therapy/hero.jpg') center center/cover no-repeat;
+  z-index: -1;
+  animation: slideIn 1.5s ease forwards;
+}
+
+/* Overlay for darkening */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.2);
+  z-index: 0;
+}
+
+/* Animation */
+@keyframes slideIn {
+  0% {
+    left: 100%;   
+  }
+  100% {
+    left: 0;      
+  }
 }
 /* Mission section*/
 .values-section {
@@ -1427,14 +1504,22 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 /* Hero section*/
 .service-section{
   height: 60vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.158), rgba(0, 0, 0, 0.178)), url("../images_therapy/service-hero.jpg") no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: white;
 }
-
+.service-bg {
+  position: absolute;
+  top: 0;
+  left: 100%;             
+  width: 100%;
+  height: 100%;
+  background: url("https://plus.unsplash.com/premium_photo-1664378802354-7ec2fece08c2?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Y291bnNlbGxpbmclMjBzZXNzaW9ufGVufDB8fDB8fHww") center center/cover no-repeat;
+  z-index: -1;
+  animation: slideIn 1.5s ease forwards;
+}
 .benefits{
   max-width: 1200px;
   margin: 3rem auto;
@@ -1637,6 +1722,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
     font-size: 0.95rem;
     margin-bottom: 10px;
     color: #666;
+    text-align: start;
 }
 
 .reach-container .footer-social {
@@ -1900,12 +1986,21 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 /* Hero section*/
 .case-section {
   height: 80vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.158), rgba(0, 0, 0, 0.178)), url('../images_therapy/hero1.jpeg') no-repeat center center/cover;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   color: #fff;
+}
+.case-bg {
+  position: absolute;
+  top: 0;
+  left: 100%;             
+  width: 100%;
+  height: 100%;
+  background: url('../images_therapy/hero1.jpeg') center center/cover no-repeat;
+  z-index: -1;
+  animation: slideIn 1.5s ease forwards;
 }
 .studies-section{
   align-items: center;
@@ -2080,8 +2175,8 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   margin-bottom: 0.5rem;
 }
 .cta-section {
-  background: #4D7838;
-  color: white;
+  background: #fff;
+  color: #666;
   text-align: center;
   padding: 3rem 1rem;
   border-radius: 12px;
@@ -2108,15 +2203,13 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   font-weight: bold;
   text-decoration: none;
   transition: 0.3s ease;
-}
-
-.cta-btn {
-  background: white;
-  color: #4D7838;
+  background: #4D7838;
+  color: #fff;
+  width: 180px;
 }
 
 .cta-btn:hover {
-  background: #f1f5f9;
+  background: #3A5C2A;
 }
 /* ==============================
    RESPONSIVE STYLES
@@ -2128,9 +2221,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 .card-content {
     padding: 15px;
 }
-
 }
-
 @media (max-width: 768px) {
   .case-section {
     height: 70vh;
@@ -2286,10 +2377,11 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 .past-events-section {
   padding: 40px 5%;
   background: #fff;
+  justify-self: center;
 }
 
 .past-events p {
-  text-align: center;
+  text-align: start;
   color: #444;
   margin: 8px 0;
   font-size: 1rem;
@@ -2534,8 +2626,12 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 header{
     margin: 2rem;
     text-align: center;
-    background-color: #4D7838;
+    color: #333;
+    width: 100%;
    }
+header h1{
+  color: #333;
+}
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -3397,6 +3493,98 @@ input:focus {
     }
 }
 
+/* ==============================
+    PAYMENT PAGE
+ ============================== */
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.8rem;
+    color: #555;
+}
+
+.card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1rem;
+}
+
+.card {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 1rem 1.2rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: calc(33.33% - 1rem); /* 3 cards per row with gap */
+    box-sizing: border-box;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.card p {
+    margin: 0.4rem 0;
+    color: #333;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+/* Table styling for payment list */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+}
+
+table td, table th {
+    border: 1px solid #ddd;
+    padding: 0.8rem;
+}
+
+table th {
+    background-color: #f2f2f2;
+    text-align: left;
+}
+
+/* ==============================
+    RESPONSIVE STYLES
+ ============================== */
+@media (max-width: 1024px) {
+    .card {
+        width: calc(50% - 1rem); /* 2 cards per row */
+    }
+}
+
+@media (max-width: 768px) {
+    .card-list {
+        flex-direction: column;
+    }
+
+    .card {
+        width: 100%;
+    }
+}
 /* ==============================
    PRIVACY POLICY PAGE
    ==============================*/

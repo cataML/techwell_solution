@@ -24,17 +24,25 @@ def success_contact(request):
     return render(request, 'prodev/success_contact.html')
     
 def request_quote(request):
-    plan_key = request.GET.get("plan", "basic")  
+    plan_key = request.GET.get("plan")  
+    form = QuoteRequestForm(initial={"plan": plan_key} if plan_key else None)
 
     if request.method == "POST":
         form = QuoteRequestForm(request.POST)
         if form.is_valid():
             quote = form.save(commit=False)
-            quote.plan = plan_key  
+            
+            # Ensure plan is set from POST data
+            plan_selected = request.POST.get("plan")
+            if not plan_selected:
+                form.add_error('plan', 'Please select a valid plan.')
+                return render(request, "prodev/request_quote.html", {"form": form, "plan_key": plan_key})
+            
+            quote.plan = plan_selected
             quote.save()
             return redirect('payments:checkout_prodev', pk=quote.pk)
     else:
-        form = QuoteRequestForm(initial={"plan": plan_key})
+        form = QuoteRequestForm(initial={"plan": plan_key} if plan_key else None)
 
     return render(request, "prodev/request_quote.html", {
         "form": form,

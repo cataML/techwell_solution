@@ -12,24 +12,54 @@
 <form method="POST" action="{% url 'prodev:request_quote' %}?plan={{ plan_key }}">
   {% csrf_token %}
 
- <input type="hidden" name="plan" value="{{ plan_key }}">
+<div class="mb-3">
+        {{ form.full_name.label_tag }}
+        {{ form.full_name }}
+        {% if form.full_name.errors %}
+            <small class="error-text">{{ form.full_name.errors.0 }}</small>
+        {% endif %}
+    </div>
+ <div class="mb-3">
 
-  <label>Full Name</label>
-  {{ form.full_name }}
+</div>
+<div class="mb-3">
+    {{ form.email.label_tag }}
+    {{ form.email }}
+    {% if form.email.errors %}
+        <small class="error-text">{{ form.email.errors.0 }}</small>
+    {% endif %}
+</div>
 
-  <label>Email Address</label>
-  {{ form.email }}
+  <div class="mb-3">
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+        {% if form.phone.errors %}
+            <small class="error-text">{{ form.phone.errors.0 }}</small>
+        {% endif %}
+    </div>
+  
+    <div class="mb-3">
+        {{ form.plan.label_tag }}
+        <div class="select-wrapper">
+            {{ form.plan }}
+             <i class="fas fa-chevron-down"></i>
+        </div>
+        {% if form.plan.errors %}
+            <small class="error-text">{{ form.plan.errors.0 }}</small>
+        {% endif %}
+    </div>
 
-  <label>Project Details</label>
-  {{ form.project_details }}
+<div class="mb-3">
+        {{ form.project_details.label_tag }}
+        {{ form.project_details }}
+        {% if form.project_details.errors %}
+            <small class="error-text">{{ form.project_details.errors.0 }}</small>
+        {% endif %}
+    </div>
 
   <button type="submit">Submit Request</button>
 </form>
 
-{% if form.errors %}
-  <div class="errors">
-    {{ form.errors }}
-  </div>
-{% endif %}
+
 
 {% endblock %}

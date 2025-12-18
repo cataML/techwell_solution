@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm, BookingForm, SignUpForm
 from django.contrib.auth import login, logout
-from .models import Profile, Booking, Session, Payment 
+from .models import Profile, Booking, Session, Payments 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -179,7 +179,8 @@ def session_history(request):
 
 @login_required(login_url='/therapy_hub/login/')
 def client_payments(request):
-    payments = Payment.objects.filter(client=request.user).order_by('-paid_at')
+    payments = Payments.objects.filter(client=request.user).order_by('-paid_at')
+    
 
     return render(request, "therapy_hub/client_payments.html", {
         "payments": payments

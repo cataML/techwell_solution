@@ -22,7 +22,8 @@ class QuoteRequest(models.Model):
 
     full_name = models.CharField(max_length=150, blank=True, null=True)
     email = models.EmailField()
-    plan = models.CharField(max_length=20, choices=PLAN_CHOICES, null=True,blank=True)
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    plan = models.CharField(max_length=20, choices=PLAN_CHOICES, null=True, blank=True)
     project_details = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
 
