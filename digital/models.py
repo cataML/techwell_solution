@@ -44,6 +44,7 @@ class BookNow(models.Model):
     contact = models.CharField(max_length=200) 
     service = models.CharField(max_length=50, choices=SERVICE_CHOICES)
     notes = models.TextField()
+    amount = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

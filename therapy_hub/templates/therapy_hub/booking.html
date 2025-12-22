@@ -3,13 +3,14 @@
 {% block title %} TechWell Therapy |  Booking Form{% endblock %}
 {% block content %}
   <section class="booking-section">
-    <div class="hero-content">
-      <h1>Book Your Therapy Session Today</h1>
-      <p>Your healing journey begins with a single step.</p>
-      <a href="{% url 'therapy_hub:events' %}" class="book-btn">Discover Programmes</a>
-      <a href="{% url 'therapy_hub:dashboard' %}" class="book-btn">Go to Dashboard</a>
-    </div>
-  </section>
+
+    {% if plan_key %}
+        <div class="selected-plan">
+            <p><strong>Selected Plan:</strong> {{ plan_key|title }}</p>
+            <p><strong>Amount:</strong> KES {{ amount }}</p>
+        </div>
+    {% endif %}
+</section>
   <section class="booked-section">
    <div class="booked-container">
   <form method="post" class="booking-form">

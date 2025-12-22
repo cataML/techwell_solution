@@ -15,12 +15,12 @@ def __str__(self):
 class Booking(models.Model):
 
     SERVICE_CHOICES = [
-        ('individual therapy', 'Individual Therapy'),
-        ('couples therapy', 'Couples Therapy'),
-        ('corporate therapy', 'Corporate Therapy'),
-        ('basic plan', 'Basic Plan'),
-        ('standard plan', 'Standard Plan'),
-        ('premium plan', 'Premium Plan')
+        ('individual_therapy', 'Individual Therapy'),
+        ('couples_therapy', 'Couples Therapy'),
+        ('corporate_therapy', 'Corporate Therapy'),
+        ('basic_plan', 'Basic Plan'),
+        ('standard_plan', 'Standard Plan'),
+        ('premium_plan', 'Premium Plan')
     ]
 
     SESSION_CHOICES = [

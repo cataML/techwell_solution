@@ -5,7 +5,6 @@ from .models import Profile, Booking, Session, Payments
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect
 from django.urls import reverse
 from urllib.parse import urlencode
 from django.db.models import Sum
@@ -38,21 +37,52 @@ def contact_view(request, template_name="therapy_hub/contact.html"):
 
 
 def booking(request):
+    selected_service = request.GET.get('service')
+
+    PLAN_PRICES = {
+        'individual_therapy': 2000,
+        'couples_therapy': 3500,
+        'corporate_therapy': 2500,
+        'basic_plan': 7000,
+        'standard_plan': 10000,
+        'premium_plan': 15000,
+    }
+
+    def normalize_service(service):
+        return (
+            service.strip()
+            .lower()
+            .replace(" ", "_")
+            .replace("/", "")
+        )
+
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
             booking = form.save(commit=False)
+
+            # 🔑 Normalize service ONCE
+            normalized_service = normalize_service(booking.service)
+            booking.service = normalized_service
+
+            # 🔑 Set price ONCE
+            booking.price = PLAN_PRICES.get(normalized_service, 0)
+
             booking.status = "pending"
             booking.save()
-           
-            base_url = reverse('payments:checkout_therapy', kwargs={'pk': booking.id})
-            query_string = urlencode({'source': 'therapy_hub'})
-            url = f"{base_url}?{query_string}"
-            return HttpResponseRedirect(url)
-    else:
-        form = BookingForm()
-    return render(request, 'therapy_hub/booking.html', {'form': form})
 
+            return redirect('payments:checkout_therapy', pk=booking.id)
+
+    else:
+        form = BookingForm(initial={'service': selected_service})
+
+    amount = PLAN_PRICES.get(selected_service, 0)
+
+    return render(request, 'therapy_hub/booking.html', {
+        'form': form,
+        'plan_key': selected_service,
+        'amount': amount,
+    })
 def case_study(request):
     return render(request, 'therapy_hub/case_study.html')
 

@@ -2,11 +2,12 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
-import requests, uuid
+import requests
 from therapy_hub.models import Booking
 from prodev.models import QuoteRequest
 from digital.models import BookNow 
 from django.views.decorators.csrf import csrf_exempt
+from decimal import Decimal
 
 # Create your views here.
 def initialize_payment(request):
@@ -259,7 +260,8 @@ def checkout(request):
     if request.method == "POST":
         print("DEBUG: PAYSTACK_SECRET_KEY =", settings.PAYSTACK_SECRET_KEY)
         email = request.POST.get("email")
-        amount = int(request.POST.get("amount")) * 100
+        amount_kes = Decimal(request.POST.get("amount"))
+        amount_kobo = int(amount_kes * 100)
         service_name = request.POST.get("service_name", "General Payment")
 
         headers = {
@@ -268,7 +270,7 @@ def checkout(request):
         }
         data = {
             "email": email,
-            "amount": amount,
+            "amount": amount_kobo,
             "metadata": {"service": service_name},
             "callback_url": request.build_absolute_uri('/payments/verify/'),
         }
@@ -287,49 +289,13 @@ def checkout(request):
 def checkout_therapy(request, pk):
     booking = get_object_or_404(Booking, id=pk)
 
-    service_key = (
-    booking.service.lower()
-    .replace(" ", "_")
-    .replace("/", "")
-    .replace("__", "_")
-    .strip()
-    )
-
-    conversion_map = {
-        "individual_therapy": "individual",
-        "couples_therapy": "couples",
-        "corporate_therapy": "corporate",
-        "basic_plan": "basic",
-        "standard_plan": "standard",
-        "premium_plan": "premium",
-    }
-    
-    service_key = conversion_map.get(service_key, service_key)
-
-
-    SERVICE_PRICES = {
-        'individual': 2000,
-        'couples': 3500,
-        'corporate': 2500,
-    }
-
-    SUBSCRIPTION_PRICES = {
-        "basic": 7000,
-        "standard": 10000,
-        "premium": 15000,
-    }
-
-    ALL_PRICES = {**SERVICE_PRICES, **SUBSCRIPTION_PRICES}
-
-    amount = ALL_PRICES.get(service_key, 0)
-    
     context = {
         'booking': booking,
-        'amount': amount,
-        'service_name': booking.service,
+        'amount': booking.price,  # 🔑 SINGLE SOURCE OF TRUTH
+        'service_name': booking.service.replace("_", " ").title(),
         'source': 'therapy_hub',
     }
-    
+
     return render(request, 'payments/checkout_therapy.html', context)
 
 
@@ -385,50 +351,13 @@ def checkout_prodev(request, pk):
 
 
 def checkout_digital(request, pk):
-    book_now = get_object_or_404(BookNow, id=pk)
-
-    service_key = (
-        book_now.service.lower()
-        .replace(" ", "_")
-        .replace("/", "")
-        .replace("__", "_")
-        .strip()
-    )
-
-    conversion_map = {
-        "tsc_services": "tsc",
-        "sha_nssf_services": "sha_nssf",
-        "data_entry": "data_entry",
-        "pdf_conversion": "pdf_conversion",
-        "computer_lessons": "computer_lessons",
-        "typng": "typing", 
-        "daily pass": "daily pass",
-        "monthly subscription": "monthly subscription",
-    }
-
-    service_key = conversion_map.get(service_key, service_key)
-
-    SERVICE_PRICES = {
-        'government': 200,
-        'tsc': 250,
-        'sha_nssf': 300,
-        'data_entry': 150,
-        'typing': 1,
-        'pdf_conversion': 100,
-        'daily_pass': 300,
-        'monthly subscription': 4500,
-        'computer_lessons': 3000,
-        'other': 100,
-        
-    }
-
-    amount = SERVICE_PRICES.get(service_key, 0)
+    booking = get_object_or_404(BookNow, id=pk)
 
     context = {
-        'booking': book_now,
-        'amount': amount,
-        'service_name': book_now.service,
+        'booking': booking,
+        'amount': booking.amount,   # ✅ FROM DATABASE
+        'service_name': booking.service,
         'source': 'digital',
     }
 
-    return render(request, 'payments/checkout_digital.html', context)     
+    return render(request, 'payments/checkout_digital.html', context)

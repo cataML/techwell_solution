@@ -189,7 +189,7 @@
         </div>
         
         <div class="cta-container">
-            <a href="#" class="cta-button">Discover Programs</a>
+            <a href="{% url 'therapy_hub:case_study' %}" class="cta-button">Discover Programs</a>
         </div>
   </section>
   <section class="pricing-section">
@@ -208,7 +208,7 @@
           <li>Available in-person or online</li>
           <li>Confidential and personalized support</li>
         </ul>
-        <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+        <a href="{% url 'therapy_hub:booking' %}?service=individual_therapy" class="price-btn">Book Individual Therapy</a>
       </div>
 
 <!-- Couples Counselling -->
@@ -221,7 +221,7 @@
         <li>Focused relationship guidance</li>
       </ul>
       <br>
-      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+      <a href="{% url 'therapy_hub:booking' %}?service=couples_therapy" class="price-btn">Choose Couples Therapy</a>
     </div>
 
 <!-- Corporate / Family Counselling -->
@@ -233,7 +233,7 @@
         <li>For families or small groups</li>
         <li>Improved communication & conflict resolution</li>
       </ul>
-      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Book Now</a>
+      <a href="{% url 'therapy_hub:booking' %}?service=corporate_therapy" class="price-btn">Choose Corporate Therapy</a>
     </div>
     </div>
   <p class="note">💡 Free 15-min consultation available. Reduced rates for students or low-income clients.</p>
@@ -259,7 +259,7 @@
       <br>
       <br>
       <br>
-      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Basic</a>
+      <a href="{% url 'therapy_hub:booking' %}?service=basic_plan" class="price-btn">Choose Basic Plan</a>
     </div>
 
     <!-- Standard Plan -->
@@ -273,7 +273,7 @@
         <li>Email & chat support</li>
       </ul>
       <br>
-      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Standard</a>
+      <a href="{% url 'therapy_hub:booking' %}?service=standard_plan" class="price-btn">Choose Standard Plan</a>
     </div>
 
     <!-- Premium Plan -->
@@ -287,7 +287,7 @@
         <li>24/7 priority support</li>
         <li>Free access to workshops</li>
       </ul>
-      <a href="{% url 'therapy_hub:booking' %}" class="price-btn">Choose Premium</a>
+      <a href="{% url 'therapy_hub:booking' %}?service=premium_plan" class="price-btn">Choose Premium Plan</a>
     </div>
 
   </div>

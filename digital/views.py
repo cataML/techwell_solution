@@ -16,9 +16,12 @@ SERVICE_PRICES = {
     'government': 200,
     'tsc': 250,
     'sha_nssf': 300,
-    'data_entry': 150,
+    'data_entry': 500,
     'typing': 20,
     'pdf_conversion': 100,
+    'daily_pass': 300,
+    'monthly_subscription': 4500,
+    'computer_lessons': 3000,
     'other': 100,
 }
 
@@ -77,21 +80,30 @@ def signup_view(request):
     return render(request, "digital/sign_up.html", {'form': form})
 
 def login_view(request):
+    next_url = request.GET.get('next') or request.POST.get('next')
+
     if request.method == "POST":
         form = AuthenticationForm(request, data=request.POST)
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            
+
             DigitalProfile.objects.get_or_create(user=user)
-    
-            return redirect('digital:dashboard') 
+
+            # 🔑 KEY LINE
+            if next_url:
+                return redirect(next_url)
+
+            return redirect('digital:dashboard')
         else:
             messages.error(request, "Invalid username or password")
     else:
         form = AuthenticationForm()
 
-    return render(request, "digital/log_in.html", {"form": form})
+    return render(request, "digital/log_in.html", {
+        "form": form,
+        "next": next_url
+    })
 
 def log_out(request):
     logout(request)
@@ -103,18 +115,20 @@ def book_now(request):
         if form.is_valid():
             booking = form.save(commit=False)
 
-            if request.user.is_authenticated:
-                booking.client = request.user
-            else:
-                booking.client = None  
+            booking.client = request.user if request.user.is_authenticated else None
 
-           
-            service_name = booking.service.lower().replace(" ", "_").replace("/", "_")
-            booking.amount = SERVICE_PRICES.get(service_name, 100)
+            service_key = (
+                booking.service.lower()
+                .replace(" ", "_")
+                .replace("/", "_")
+            )
+
+            booking.amount = SERVICE_PRICES.get(
+                service_key,
+                SERVICE_PRICES['other']
+            )
 
             booking.save()
-
-    
             return redirect('digital:guest', pk=booking.pk)
 
     else:

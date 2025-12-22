@@ -474,6 +474,8 @@ footer {
   opacity: 0;
   transform: translateY(20px);
   animation: fadeUp 0.8s ease forwards;
+  z-index: 2;
+  position: relative; 
 }
 .hero-content h1 {
   font-size: 3rem;
@@ -511,6 +513,7 @@ footer {
 }
 .hero-content .book-btn {
   animation-delay: 2.5s;
+
 }
   /* About section */
 .about .container .section-about-title {
@@ -1538,24 +1541,30 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   margin-bottom: 2rem;
 }
 
-.grid{
+.benefits-grid{
   display: grid;
   gap: 1.5rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
-.card{
+.benefits-card{
   background:white;
   border-radius: 10px;
   padding:1.5rem 1rem;
-  box-shadow:var(--shadow);
+  box-shadow:0 8px 20px rgba(0, 0, 0, 0.07);;
   transition:transform .2s ease, box-shadow .2s ease;
-  border-radius: 10px;
+  border: 1px solid rgba(77, 120, 56, 0.1);
 }
-.card:hover{
+.benefits-card:hover{
   transform:translateY(-6px);
   box-shadow:0 12px 30px rgba(0,0,0,0.08);
 }
+ 
 
+.step-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    border-color: rgba(77, 120, 56, 0.3);
+}
 
 .icon-wrap{
   width:60px;
@@ -1563,20 +1572,23 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   margin:0 auto 1rem;
   border-radius:50%;
   background: #4D7838;
-  display:grid;place-items:center;
+  display:grid;
+  place-items:center;
 }
 .icon{
   width:28px;
   height:28px;
   stroke:var(--accent)
 }
-
-.card h3{
+.icon-wrap i{
+  color: #fff;
+}
+.benefits-card h3{
   margin:0.3rem 0;
   font-size:1.1rem;
   color:#666
 }
-.card p{
+.benefits-card p{
   margin:0;
   color: #666;
   font-size:0.9rem
@@ -1856,15 +1868,12 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
    BOOKING PAGE
    ============================== */
 .booking-section{
-  height: 300px;
-  background-color: #4D7838;
-  display: flex;
+  margin-top: 1rem;
   justify-content: center;
   align-items: center;
   text-align: center;
-  color: white;
-  padding: 0.25rem;
-  margin-bottom: 4rem;
+  color: #666;
+  margin-bottom: 0;
 }
 .booked-section {
   background-color: white;
@@ -1875,7 +1884,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
   padding: 0;
   display: flex;
   flex-direction: column;
-  margin-top: 3rem;
+  margin-top: 0;
   width: 100%;
 }
 .booked-container{

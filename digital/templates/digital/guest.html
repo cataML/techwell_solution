@@ -12,10 +12,10 @@
          <a href="{% url 'payments:checkout_digital' booking.pk %}" class="btn-secondary">
             Continue as Guest
         </a>
-        <a href="/digital/log_in/?next=/payments:checkout_digital/{{ booking.pk }}/" class="btn-primary">
+      
+        <a href="{% url 'digital:log_in' %}?next={% url 'payments:checkout_digital' booking.pk %}" class="btn-primary">
             Login
         </a>
-
     </div>
 </div>
 {% endblock %}
