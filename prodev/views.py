@@ -1,10 +1,17 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm, QuoteRequestForm
+from .models import ProdevService, Project
 
 # Create your views here.
 def index(request):
     form = ContactForm()
-    return render(request, 'prodev/index.html', {'form': form})
+    services = ProdevService.objects.filter(is_active=True)
+    projects = Project.objects.filter(is_active=True).order_by("-created_at")
+    return render(request, 'prodev/index.html', {
+        'form': form,
+        'services': services,
+        'projects': projects
+        })
     
 def contact(request):
     return render(request, 'prodev/contact.html')

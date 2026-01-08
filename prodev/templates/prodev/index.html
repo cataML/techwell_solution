@@ -104,50 +104,20 @@
     <p class=" para animate-on-scroll">Delivering technology-driven solutions to help businesses grow and scale.</p>
 
     <div class="service-list">
+      {% for service in services %}
       <div class="service-card animate-on-scroll">
-        <img src="https://blog.planview.com/wp-content/uploads/2020/01/Top-6-Software-Development-Methodologies.jpg" alt=" Software Development">
-        <h3>Software Development</h3>
-        <p>
-          I design and build robust, scalable applications tailored to client needs. 
-          From responsive websites to enterprise-grade systems, I ensure solutions are 
-          secure, user-friendly, and performance-driven. 
-        </p>
-        <ul>
-          <li>Custom web & mobile applications</li>
-          <li>API development & integration</li>
-          <li>System design & architecture</li>
-        </ul>
-      </div>
+        <img src="{{ service.image }}" alt="{{ service.title }}">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
 
-      <div class="service-card animate-on-scroll">
-        <img src="https://www.herzing.edu/sites/default/files/styles/fp_960_480/public/2021-03/Is%20Data%20Analytics%20Right%20for%20Me.jpg.webp?itok=XGcrEhsW" alt="Data Analysis">
-        <h3>Data Analysis</h3>
-        <p>
-          Leveraging data to provide actionable insights that drive smarter decisions. 
-          I use modern tools and techniques to analyze, visualize, and report on business-critical data.
-        </p>
         <ul>
-          <li>Data cleaning & preparation</li>
-          <li>Visualization dashboards</li>
-          <li>Predictive & trend analysis</li>
+          {% for item in service.item_list %}
+          <li>{{ item }}</li>
+          {% endfor %}
         </ul>
-      </div>
-
-      <div class="service-card animate-on-scroll">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqwUkUeGooPoKZvLCCvNdnqGC__WMjii7EQA&s" alt="Cloud Solutions">
-        <h3>Cloud Solutions</h3>
-        <p>
-          Helping businesses harness the power of cloud computing with secure and 
-          scalable solutions on AWS and Azure. I specialize in cloud migration, deployment, 
-          and optimization.
-        </p>
-        <ul>
-          <li>Cloud architecture & deployment</li>
-          <li>Migration of on-premise systems</li>
-          <li>Cost optimization & monitoring</li>
-        </ul>
-      </div>
     </div>
+    {% endfor %}
+  </div>
   </div>
 </section>
 <!-- Tech Stack -->
@@ -228,42 +198,26 @@
     <p>A selection of my work showcasing software development, cloud, data, and cybersecurity expertise.</p>
 
     <div class="projects-grid">
-      <!-- Project Cards -->
+      {% for project in projects %}
       <div class="project-card animate-on-scroll">
-        <img src="{% static 'images_prodev/EPR.png' %}" alt="EPR">
-        <h3>Employment Performance System</h3>
-        <div class="project-details">
-          <p class="description">Designed and developed a web-based Employee Performance System that tracks, evaluates, and manages employee performance metrics in real time.</p>
-          <p><strong>Tools Used:</strong> Django, PostgreSQL, AWS EC2, S3</p>
-          <p><strong>Outcome:</strong> Enhanced employee performance tracking and evaluation efficiency by 40%, reducing manual reporting errors and improving HR decision-making accuracy.</p>
-          <a href="#" class="btn">GitHub</a>
-        </div>
-        <button class="see-more">See More</button>
-      </div>
+        <img src="{{ project.image.url }}" alt="{{ project.title }}">
+    
+        <h3>{{ project.title }}</h3>
 
-      <div class="project-card animate-on-scroll">
-        <img src="https://images.surferseo.art/307368b5-782c-4d65-941a-1203d999aa71.png" alt="Data Analytics">
-        <h3>Interactive Data Analytics Dashboard</h3>
         <div class="project-details">
-          <p class="description">Built an interactive dashboard to visualize business performance metrics and customer insights.</p>
-          <p><strong>Tools Used:</strong> Python, Power BI, SQL</p>
-          <p><strong>Outcome:</strong> Enabled stakeholders to make data-driven decisions, reducing reporting time from days to hours.</p>
-          <a href="#" class="btn">GitHub</a>
-        </div>
-        <button class="see-more">See More</button>
-      </div>
+          <p class="description">{{ project.description }}</p>
+          <p><strong>Tools Used:</strong> {{ project.tools_used }}</p>
+          <p><strong>Outcome:</strong> {{ project.outcome }}</p>
 
-      <div class="project-card animate-on-scroll">
-        <img src="{% static 'images_prodev/therapy.jpg' %}" alt="Counselling">
-        <h3>Interactive Counselling Website System</h3>
-        <div class="project-details">
-          <p class="description">Developed a secure and user-friendly counselling website featuring online booking, client dashboards, and encrypted communication for therapy sessions.</p>
-          <p><strong>Tools Used:</strong> Django, HTML, CSS, Azure</p>
-          <p><strong>Outcome:</strong> Improved client engagement and session bookings by 40%, while ensuring secure payments and data confidentiality.</p>
-          <a href="#" class="btn">GitHub</a>
+          {% if project.github_link %}
+          <a href="{{ project.github_link }}" class="btn" target="_blank">GitHub</a>
+          {% endif %}
         </div>
+
         <button class="see-more">See More</button>
       </div>
+      {% endfor %}
+    </div>
     </div>
   </div>
 </section>

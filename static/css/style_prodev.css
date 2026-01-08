@@ -1224,6 +1224,7 @@ footer {
 
 .project-details p {
   margin-bottom: 12px;
+  text-align: start;
 }
 
 .project-card .btn {

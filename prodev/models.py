@@ -41,4 +41,33 @@ class QuoteRequest(models.Model):
     def __str__(self):
         return f"{self.full_name} - {self.get_plan_display()}"
 
+#Services model
+class ProdevService(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.URLField()
+    items = models.TextField(
+        help_text="Enter bullet points, one per line"
+    )
+    is_active = models.BooleanField(default=True)
+
+    def item_list(self):
+        return self.items.splitlines()
+
+    def __str__(self):
+        return self.title
+
+class Project(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    tools_used = models.CharField(max_length=255)
+    outcome = models.TextField()
+    image = models.ImageField(upload_to="projects/")
+    github_link = models.URLField(blank=True)
+    is_active = models.BooleanField(default=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
 
