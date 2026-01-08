@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from django.utils import timezone
 from .decorators import role_required
-from .models import DigitalProfile, BookNow, Appointment, Task, Payment, Message, StaffMessage, ClientProfile, Booking, ClientPayment, ClientMessage
+from .models import DigitalProfile, BookNow, Appointment, Task, Payment, Message, StaffMessage, ClientProfile, Booking, ClientPayment, ClientMessage, DigitalServices, DigitalBlog, DigitalTeam
 from django.db import models
 
 
@@ -26,16 +26,25 @@ SERVICE_PRICES = {
 }
 
 def index(request):
+    
     return render(request, 'digital/index.html')
 
 def about_us(request):
-    return render(request, 'digital/about_us.html')
+    team_members = DigitalTeam.objects.filter(is_active=True)
+    return render(request, 'digital/about_us.html',{
+        'team_members': team_members
+    })
 
 def service(request):
-    return render(request, 'digital/service.html')
+    services = DigitalServices.objects.filter(is_active=True)
+    return render(request, 'digital/service.html',{
+        'services' : services
+    })
 
 def blog(request):
-    return render(request, 'digital/blog.html')
+    blogs = DigitalBlog.objects.all().order_by('-date')
+    return render(request, 'digital/blog.html', {
+        'blogs': blogs})
   
 
 def Contact_us(request):

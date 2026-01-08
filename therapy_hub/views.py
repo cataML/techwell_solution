@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ContactForm, BookingForm, SignUpForm
 from django.contrib.auth import login, logout
-from .models import Profile, Booking, Session, Payments 
+from .models import Profile, Booking, Session, Payments, TeamMember, TherapyService, CaseStudy, Event
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -13,13 +13,43 @@ from django.db.models import Sum
 
 # Create your views here.
 def index(request):
-    return render(request, 'therapy_hub/index.html')
+    team = TeamMember.objects.filter(is_active=True)
+    services = TherapyService.objects.filter(is_active=True)
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()  
+    else:
+        form = ContactForm()
+
+    return render(request, 'therapy_hub/index.html', {
+        'team': team,
+        'form': form,
+        'services': services
+    })
+    
 
 def about(request):
-    return render(request, 'therapy_hub/about.html')
+    team = TeamMember.objects.filter(is_active=True)
+
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()  
+    else:
+        form = ContactForm()
+
+    return render(request, 'therapy_hub/about.html', {
+        'team': team,
+        'form': form
+    })
 
 def services(request):
-    return render(request, 'therapy_hub/services.html')
+    services = TherapyService.objects.filter(is_active=True)
+    return render(request, 'therapy_hub/services.html', {
+        'services': services
+    })
 
 def contact(request):
     return render(request, 'therapy_hub/contact.html')
@@ -83,11 +113,19 @@ def booking(request):
         'plan_key': selected_service,
         'amount': amount,
     })
-def case_study(request):
-    return render(request, 'therapy_hub/case_study.html')
 
-def events(request):
-    return render(request, 'therapy_hub/events.html')
+def case_study(request):
+    studies = CaseStudy.objects.filter(is_active=True)
+    return render(request, 'therapy_hub/case_study.html', {
+        'studies': studies
+    })
+
+
+def events_view(request):
+    events = Event.objects.all()
+    return render(request, 'therapy_hub/events.html', {
+        'events': events
+    })
 
 def courses(request):
     return render(request, 'therapy_hub/courses.html')

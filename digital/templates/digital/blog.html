@@ -19,57 +19,19 @@
     <div class="blog-layout">
       
       <div class="blog-grid" id="blogGrid">
-
-        <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1750666502982-99447b26c134?q=80&w=1470&auto=format&fit=crop" alt="Internet Speed Tips" class="blog-image">
-          <h3>How to Speed Up Your Internet at Home</h3>
-          <p class="excerpt">Practical tips to get faster and more reliable internet at home or in the cafe.</p>
-          <p class="date">Sept 23, 2025</p>
-          <div class="full-content">
-            <p>Having slow internet can be frustrating. Here are some proven steps:</p>
-            <ul>
-              <li>Place your router in a central location for better coverage.</li>
-              <li>Limit the number of connected devices during heavy use.</li>
-              <li>Update router firmware for improved performance.</li>
-              <li>Use wired Ethernet for high-stability tasks.</li>
-            </ul>
-          </div>
+          {% for blog in blogs %}
+          <div class="blog-card">
+            <img src="{{ blog.image }}" alt="{{ blog.title }}" class="blog-image">
+            <h3>{{ blog.title }}</h3>
+            <p class="excerpt">{{ blog.excerpt }}</p>
+            <p class="date">{{ blog.date }}</p>
+            <div class="full-content">
+              {{ blog.full_content|safe }}
+            </div>
           <button class="read-more-btn">Read More</button>
         </div>
-
-        <div class="blog-card">
-          <img src="https://images.unsplash.com/photo-1630327722923-5ebd594ddda9?q=80&w=1470&auto=format&fit=crop" alt="Printing Hacks" class="blog-image">
-          <h3>Top 5 Printing Hacks Students Should Know</h3>
-          <p class="excerpt">Save time, paper, and money when printing documents at a cyber cafe.</p>
-          <p class="date">Sept 20, 2025</p>
-          <div class="full-content">
-            <ul>
-              <li>Preview documents before printing.</li>
-              <li>Use double-sided printing.</li>
-              <li>Print in draft mode for simple pages.</li>
-              <li>Convert files to PDF for consistency.</li>
-            </ul>
-          </div>
-          <br>
-          <button class="read-more-btn">Read More</button>
-        </div>
-
-
-        <div class="blog-card">
-          <img src="https://rimeastafrica.org/wp-content/uploads/2017/06/ecitizen.png" alt="Government Services" class="blog-image">
-          <h3>Government Services Made Easy</h3>
-          <p class="excerpt">Step-by-step guide to submitting KRA, NTSA, HELB, and TSC applications online efficiently.</p>
-          <p class="date">Sept 18, 2025</p>
-          <div class="full-content">
-            <ul>
-              <li>KRA – filing returns & printing PIN.</li>
-              <li>NTSA – renewing licenses.</li>
-              <li>HELB – loan statements & clearance.</li>
-              <li>TSC – registration & promotions.</li>
-            </ul>
-          </div>
-          <button class="read-more-btn">Read More</button>
-        </div>
+        {% endfor %}
+      </div>
       </div>
       </div>
  </main>

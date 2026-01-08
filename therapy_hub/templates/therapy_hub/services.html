@@ -25,79 +25,26 @@
         professionals are here to walk with you on your journey toward healing and growth.</p>
     </section>
     <div class="services-grid">
-      <!-- Individual Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-            <img src="https://media.istockphoto.com/id/1401169994/photo/young-black-man-in-casualwear-sitting-on-couch-during-talk-with-psychoanalyst.webp?a=1&b=1&s=612x612&w=0&k=20&c=i3whWe-2aNzd8cEGe2dxbmr-XUyRV6m61fEXSyG6h4k=" alt="Individual Therapy">
-          </div>
-          <div class="card-content">
-            <h3>Individual Therapy</h3>
-            <p>Private one-on-one sessions in a safe, supportive space. Build resilience and discover healthy coping strategies tailored to your unique needs and circumstances.</p>
-            <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
-          </div>
+      {% for service in services %}
+      <div class="service-card">
+        <div class="card-image">
+          <img src="{{ service.image }}" alt="{{ service.title }}">
         </div>
-            
-            <!-- Couples Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1685575002714-f5808258e06d?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fENvdXBsZXMlMjBUaGVyYXB5JTIwYmxhY2t8ZW58MHx8MHx8fDA%3D" alt="Couples Therapy">
-          </div>
-          <div class="card-content">
-              <h3>Couples Therapy</h3>
-              <p>Guided sessions to strengthen relationships. Improve communication, resolve conflicts, and rebuild intimacy with professional guidance in a neutral space.</p>
-              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-            
-            <!-- Corporate Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-              <img src="https://plus.unsplash.com/premium_photo-1707155465527-c5a2935b21cc?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Q29ycG9yYXRlJTIwVGhlcmFweSUyMGJsYWNrfGVufDB8fDB8fHww" alt="Corporate Therapy">
-          </div>
-          <div class="card-content">
-              <h3>Corporate Therapy</h3>
-              <p>Workplace programs that boost employee wellbeing. Address stress, burnout, and team challenges to create a healthier, more productive work environment.</p>
-              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-            
-            <!-- Stress Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80" alt="Stress Therapy">
-          </div>
-          <div class="card-content">
-              <h3>Stress Therapy</h3>
-              <p>Learn practical techniques to handle daily stress. Regain balance and peace of mind through evidence-based approaches tailored to your lifestyle.</p>
-              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-            
-            <!-- Depression Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-              <img src="https://plus.unsplash.com/premium_photo-1664643217174-cb845e94b5c5?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8RGVwcmVzc2lvbiUyMFRoZXJhcHklMjBibGFja3xlbnwwfHwwfHx8MA%3D%3D" alt="Depression Therapy">
-          </div>
-          <div class="card-content">
-              <h3>Depression Therapy</h3>
-              <p>Compassionate support for those facing depression. Find hope and healing through proven methods in a safe, non-judgmental environment.</p>
-          </div>
-        </div>
-            
-            <!-- Anxiety Therapy -->
-        <div class="service-card">
-          <div class="card-image">
-              <img src="https://plus.unsplash.com/premium_photo-1670828052629-583e1489fb90?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8QW54aWV0eSUyMFRoZXJhcHklMjBibGFja3xlbnwwfHwwfHx8MA%3D%3D" alt="Anxiety Therapy">
-          </div>
-          <div class="card-content">
-              <h3>Anxiety Therapy</h3>
-              <p>Targeted sessions to manage worry and fear. Regain control and live with confidence through personalized strategies and professional support.</p>
-              <a href="{% url 'therapy_hub:case_study' %}" class="card-link">Learn more <i class="fas fa-arrow-right"></i></a>
-          </div>
-        </div>
-    </div>
 
-        <!-- Pagination-->
+        <div class="card-content">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.description }}</p>
+
+          <a href="{% url 'therapy_hub:case_study' %}" class="card-link">
+            Learn more <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+    
+
+<!-- Pagination -->
   <div class="pagination">
     <button class="prev">Prev</button>
     <span class="page-info"></span>

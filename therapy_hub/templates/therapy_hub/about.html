@@ -112,49 +112,23 @@
          we work together to create a safe and supportive environment for individuals, couples, and organizations across Kenya
       </p>
   </section>
-    <div  class="team-container">
-      <div class="team-card">
-        <div class="card-image">
-          <img src="{% static 'images_therapy/Erastus.png' %}" alt="">
-        </div>
-        <div class="card-content">
-          <h5> Erastus Ivelia</h5>
-        <h4> Founder & Lead Counsellor</h4>
-        <p>
-           Specializes in individual and couples therapy with over 7 years of experience in guiding 
-           clients toward healing and personal growth.
-        </p>
-        </div>
+<div class="team-container">
+  {% for member in team %}
+    <div class="team-card">
+      <div class="card-image">
+        <img src="{{ member.image.url }}" alt="{{ member.name }}">
       </div>
-        <div class="team-card">
-          <div class="card-image">
-          <img src="{% static 'images_therapy/Catherine.png' %}" alt="">
-        </div>
-        <div class="card-content">
-           <h5>Catherine Ivelia</h5>
-          <h4>Co-Founder & Director</h4>
-          <p>
-            Passionate about empowering communities, Catherine oversees wellness programs and 
-            brings a holistic approach to mental health support.
-        </p>
-        </div>
-         
-      </div>
-        <div class="team-card">
-          <div class="card-image">
-            <img src="{% static 'images_therapy/grace_naomi.jpg' %}" alt="">
-          </div>
-        
-        <div class="card-content">
-          <h5>Grace Naomi</h5>
-        <h4>Senior Counsellor</h4>
-        <p>
-         Expert in stress management and workplace wellness, dedicated to helping clients build resilience.
-        </p>
-        </div>
-      </div>
-      </div>
-    </section>
+      <div class="card-content">
+        <h5>{{ member.name }}</h5>
+        <h4>{{ member.title }}</h4>
+        <p>{{ member.bio }}</p>
+    </div>
+    </div>
+  {% empty %}
+    <p>No team members found.</p>
+  {% endfor %}
+</div>
+</section>
     <section class="book-section">
       <div class="book-card" style="background-color: #4D7838;">
         <h4 style="color: white;">Why Book With Us?</h4>

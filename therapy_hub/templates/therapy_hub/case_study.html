@@ -1,6 +1,6 @@
 {% extends "base_therapy.html" %}
 {% load static %}
-{% block title %} TechWell Therapy |  Contact{% endblock %}
+{% block title %} TechWell Therapy |  Case Study{% endblock %}
 
 {% block content %}
 <!--Hero section-->
@@ -27,168 +27,45 @@
     </p>
     </div>
     <div class="studies-container">
+      {% for study in studies %}
       <div class="studies-card">
         <div class="card-content">
-          <div class="card-image" 
-            style="background-image: url('https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80');">
+
+          <div class="card-image"
+            style="background-image: url('{{ study.image_url }}');">
           </div>
-          <h3>Managing Anxiety in Young Adults</h3>
-          <p><strong>Client Profile:</strong> Age: 24, experiencing work and social anxiety, struggling with constant worry, overthinking, and fear of judgment in everyday interactions.”</p>
+
+          <h3>{{ study.title }}</h3>
+
+          <p><strong>Client Profile:</strong> {{ study.client_profile }}</p>
+
           <div class="more-content">
             <h4>Challenge</h4>
-            <p>The client experienced panic attacks during presentations and avoided social gatherings, leading to isolation.</p>
+            <p>{{ study.challenge }}</p>
+
             <h4>Approach</h4>
             <ul>
-              <li>Weekly CBT sessions</li>
-              <li>Mindfulness and breathing techniques</li>
-              <li>Personalized anxiety-management plan</li>
+              {% for item in study.approach_list %}
+              <li>{{ item }}</li>
+              {% endfor %}
             </ul>
-            <h4>Outcome</h4>
-           <p>After 10 weeks, the client reported fewer panic attacks, improved confidence at work, and renewed social life.</p>
-          </div>
-          <button class="see-more-btn">See More</button>
-          <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
-        </div>
-      </div>
-    <div class="studies-card">
-      <div class="card-content">
-          <div class="card-image" 
-            style="background-image: url('https://plus.unsplash.com/premium_photo-1664478125455-704732b82837?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-         </div>
-          <h3>Supporting Couples in Conflict</h3>
-          <p><strong>Client Profile:</strong>Couple, Restoring Balance for a Couple Married for 7 Years Facing Conflict</p>
-        <div class="more-content">
-          <h4>Challenge</h4>
-          <p>The couple struggled with trust and recurring arguments, 
-            leading to emotional distance.
-          </p>
-          <h4>Approach</h4>
-          <ul>
-            <li>Structured couples therapy sessions</li>
-            <li>Active listening and conflict-resolution exercises</li>
-            <li>Guided homework to practice communication outside therapy</li>
-          </ul>
-          <h4>Outcome</h4>
-          <p>After 3 months, the couple reported healthier conversations, 
-            improved emotional intimacy, and a renewed sense of partnership.
-          </p>
-        </div>
-        <button class="see-more-btn">See More</button>
-        <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
-      </div>
-    </div>
-    <div class="studies-card">
-      <div class="card-image" 
-         style="background-image: url('https://plus.unsplash.com/premium_photo-1661380248194-41ddde1eb91c?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-      </div>
-      <div class="card-content">
-        <h3>Work-Life Balance for Professionals</h3>
-        <p><strong>Client Profile:</strong>Age: 35, Burnout and stress from demanding job</p>
-        <div class="more-content">
-          <h4>Challenge</h4>
-          <p>The client struggled with overwhelming responsibilities, insomnia, 
-            and low energy.
-          </p>
-          <h4>Approach</h4>
-          <ul>
-            <li>Stress-management techniques (time-blocking, prioritization)</li>
-            <li>Relaxation exercises and guided meditation</li>
-            <li>Encouraged healthy routines: diet, sleep hygiene, exercise</li>
-          </ul>
-          <h4>Outcome</h4>
-          <p>In 8 weeks, the client regained focus, reported better sleep, 
-            and developed a healthier work-life balance.
-          </p>
-      </div>
-      <button class="see-more-btn">See More</button>
-      <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
-     </div>
-    </div>
-    <div class="studies-card">
-      <div class="card-content">
-        <div class="card-image" 
-            style="background-image: url('https://plus.unsplash.com/premium_photo-1683121344795-00207fa6480b?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-        </div>
-        <h3>Building Self-Esteem in Adolescents</h3>
-        <p><strong>Client Profile:</strong>Age: 15, BLow self-confidence, negative self-talk, reluctance to participate in class</p>
-        <div class="more-content">
-          <h4>Challenge</h4>
-          <p>The client struggled with feelings of inadequacy, comparing themselves 
-            constantly to peers, and avoiding school activities.
-          </p>
-          <h4>Approach</h4>
-          <ul>
-            <li>Used positive psychology and strengths-based therapy</li>
-            <li>Introduced journaling and self-affirmations</li>
-            <li>Role-playing exercises to build confidence in social settings</li>
-            <li>Worked collaboratively with parents and teachers for reinforcement</li>
-          </ul>
-          <h4>Outcome</h4>
-          <p>Over 3 months, the client began engaging in group discussions, 
-            participated in school clubs, and expressed a more positive self-image.
-          </p>
-        </div>
-        <button class="see-more-btn">See More</button>
-        <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
-      </div>
-    </div>
-    <div class="studies-card">
-      <div class="card-content">
-        <div class="card-image" 
-         style="background-image: url('https://plus.unsplash.com/premium_photo-1681884243436-2136c89135dc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-        </div>
-        <h3>Finding Healing Through Grief and Loss Support</h3>        
-        <p><strong>Client Profile:</strong>Age: 45, Coping with the sudden loss of a loved one</p>
-        <div class="more-content">
-          <h4>Challenge</h4>
-          <p>The client experienced overwhelming sadness, difficulty sleeping, 
-            and loss of motivation in daily life.
-          </p>
-          <h4>Approach</h4>
-          <ul>
-            <li>Provided a safe space for processing emotions</li>
-            <li>Guided through stages of grief with compassionate listening</li>
-            <li>Introduced relaxation techniques and mindfulness for emotional regulation</li>
-            <li>Encouraged creation of personal rituals for remembrance</li>
-          </ul>
-          <h4>Outcome</h4>
-          <p>After 4 months, the client reported improved emotional stability, 
-            better sleep, and a healthier way of honoring their loved one while moving forward.
-          </p>
-        </div>
-        <button class="see-more-btn">See More</button>
-        <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
-    </div>
-     </div>
-     <div class="studies-card">
-        <div class="card-content">
-          <div class="card-image" 
-         style="background-image: url('https://plus.unsplash.com/premium_photo-1723604421326-bff3a6cdd353?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
-        </div>
-        <h3>Overcoming Teenage Depression: Building Hope and Emotional Resilience</h3>
-        <p><strong>Client Profile:</strong>Age: 16, mFeelings of worthlessness, withdrawal from school and friends</p>
-        <div class="more-content">
-        <h4>Challenge</h4>
-        <p>The teen was experiencing depressive symptoms, poor academic performance, 
-            and low motivation.
-        </p>
-        <h4>Approach</h4>
-        <ul>
-            <li>Collaborative sessions involving both the client and parents</li>
-            <li>Art-based therapy to encourage expression</li>
-            <li>Journaling and positive affirmation practices</li>
-            <li>Coordinated with the school counselor for academic support</li>
-        </ul>
+
         <h4>Outcome</h4>
-        <p>After 4 months, the teen showed improved mood, better communication with 
-            family, and re-engaged in school activities.
-        </p>
-        </div>
-        <button class="see-more-btn">See More</button>
-        <a href="therapy_hub:booking" class="cta-button">Start Your Journey</a>
+        <p>{{ study.outcome }}</p>
+      </div>
+
+      <button class="see-more-btn">See More</button>
+      <a href="{% url 'therapy_hub:booking' %}" class="cta-button">
+        Start Your Journey
+      </a>
+
     </div>
-    </div>
-    </div>
+  </div>
+  {% empty %}
+    <p>No case studies available at the moment.</p>
+  {% endfor %}
+</div>
+  
     <!-- Pagination controls -->
 <div class="pagination">
   <button class="prev">Prev</button>

@@ -15,6 +15,32 @@
 
     <div class="events-container">
 
+    {% for event in events %}
+    <div class="event-card">
+        <img src="{{ event.image }}" alt="{{ event.title }}">
+
+        <div class="event-content">
+            <h3>{{ event.title }}</h3>
+
+            <p class="event-date">
+                📅 {{ event.date|date:"F d, Y" }}
+                • ⏰ {{ event.start_time|time:"g:i A" }} – {{ event.end_time|time:"g:i A" }}
+            </p>
+
+            <p>{{ event.description }}</p>
+
+            <a href="{% url 'therapy_hub:contact' %}" class="event-btn">
+                {{ event.button_text }}
+            </a>
+        </div>
+    </div>
+    {% empty %}
+        <p>No upcoming events at the moment.</p>
+    {% endfor %}
+
+</div>
+    <div class="events-container">
+
         <div class="event-card">
             <img src="https://plus.unsplash.com/premium_photo-1714229505550-3518d761d549?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8TWluZGZ1bG5lc3MlMjAlMjYlMjBTdHJlc3MlMjBSZWxpZWYlMjBXb3Jrc2hvcCUyMGFmcmljYW58ZW58MHx8MHx8fDA%3D" alt="Mindfulness Workshop">
             <div class="event-content">

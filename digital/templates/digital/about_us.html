@@ -120,48 +120,18 @@
     <p class="team-intro">The people who make Techwell CyberCafé possible</p>
 
     <div class="team-grid">
-      
-      <!-- Team Member 1 -->
+      {% for member in team_members %}
       <div class="team-card">
-        <img src="{% static 'images_digital/Catherine.png' %}" alt="Catherine Mung'ohe">
-        <h4>Catherine Mung'ohe</h4>
-        <p class="role">Director</p>
+        <img src="{{ member.image.url }}" alt="{{ member.name }}">
+        <h4>{{ member.name }}</h4>
+        <p class="role">{{ member.role }}</p>
         <p class="desc">
-          Passionate about technology education, Catherine leads Techwell with vision and dedication, ensuring the café empowers everyone.
+          {{ member.description }}
         </p>
-      </div>
-
-      <!-- Team Member 2 -->
-      <div class="team-card">
-        <img src="{% static 'images_digital/Erastus.png' %}" alt="Erastus Ivelia">
-        <h4>Erastus Ivelia</h4>
-        <p class="role">Co-founder</p>
-        <p class="desc">
-          Erastus focuses on operational excellence and digital innovation, making sure our services are fast, reliable, and accessible.
-        </p>
-      </div>
-
-      <!-- Team Member 3 -->
-      <div class="team-card">
-        <img src="{% static 'images_digital/client4.jpg' %}" alt="Peter Pascal">
-        <h4>Peter Pascal</h4>
-        <p class="role">Trainer</p>
-        <p class="desc">
-          Peter specializes in digital skills training, helping clients master computers, software, and online tools efficiently.
-        </p>
-      </div>
-
-      <!-- Team Member 4 -->
-      <div class="team-card">
-        <img src="{% static 'images_digital/Niphah.jpg' %}" alt="Niphah Agatha">
-        <h4>Niphah Agatha</h4>
-        <p class="role">Customer Service</p>
-        <p class="desc">
-          Niphah ensures every client has a smooth experience, providing guidance and support with a friendly and professional approach.
-        </p>
-      </div>
-
     </div>
+    {% endfor %}
+</div>
+   </div>
   </div>
 </section>
 <!-- Why Choose Us Section -->

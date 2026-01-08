@@ -227,3 +227,40 @@ class ClientMessage(models.Model):
 
     def __str__(self):
         return f"Message from {self.sender.username} to {self.receiver.username}"
+
+#Services model
+class DigitalServices(models.Model):
+    title = models.CharField(max_length=100)
+    short_description = models.TextField()
+    image = models.URLField()
+    items = models.TextField(
+        help_text="Enter one item per line (bullet points)",
+        default="Not specified"
+    )
+    is_active = models.BooleanField(default=True)
+
+    def item_list(self):
+        return self.items.splitlines()
+
+    def __str__(self):
+        return self.title
+#Team model
+class DigitalTeam(models.Model):
+    name = models.CharField(max_length=100)
+    role = models.CharField(max_length=100)
+    description = models.TextField()
+    image = models.ImageField(upload_to='team/')
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return self.name
+#Blog model
+class DigitalBlog(models.Model):
+    title = models.CharField(max_length=200)
+    excerpt = models.TextField()
+    date = models.DateField()
+    image = models.URLField()
+    full_content = models.TextField(help_text="You can use HTML for lists and paragraphs")
+
+    def __str__(self):
+        return self.title

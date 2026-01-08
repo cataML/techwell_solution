@@ -1,17 +1,19 @@
 from django.urls import path
 from . import views
 from .views import contact_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'therapy_hub'
 
 urlpatterns = [
-    path('', contact_view, {"template_name": "therapy_hub/index.html"}, name='index'),
-    path('about/', contact_view, {"template_name": "therapy_hub/about.html"}, name='about'),
+    path('', views.index, name='index'),
+    path('about/', views.about, name='about'),
     path('services/', views.services, name='services'),
     path('contact/', contact_view, {"template_name": "therapy_hub/contact.html"}, name='contact'),
     path('booking/', views.booking, name='booking'),
     path('case_study/', views.case_study, name='case_study'),
-    path('events/', views.events, name='events'),
+    path('events/', views.events_view, name='events'),
     path('courses/', views.courses, name='courses'),
     path('signup/', views.signup_view, name='signup'),
     path('login/', views.login_view, name='login'),
@@ -28,3 +30,7 @@ urlpatterns = [
     path("terms_conditions/", views.terms_conditions, name="terms_conditions"),
     path("our_story/", views.our_story, name="our_story"),
   ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
