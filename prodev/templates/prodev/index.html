@@ -134,7 +134,7 @@
 
   <div class="skill animate-on-scroll">
     <span>
-      <h6><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Tailwind CSS</h6>
+      <h6><strong>Frontend:</strong> HTML5, CSS, JavaScript, Tailwind CSS</h6>
       <h6>85%</h6>
     </span>
     <div class="progress"><div class="progress-bar" style="width: 85%;"></div></div>
@@ -158,7 +158,7 @@
 
   <div class="skill animate-on-scroll">
     <span>
-      <h6><strong>Payment Integration:</strong> Stripe, M-Pesa</h6>
+      <h6><strong>Payment Integration:</strong> Stripe, Paypal, Paystack</h6>
       <h6>75%</h6>
     </span>
     <div class="progress"><div class="progress-bar" style="width: 75%;"></div></div>
@@ -229,67 +229,29 @@
     <h6>Sharing knowledge, industry insights, and thought leadership.</h6>
 
     <div class="blog-grid">
-      <article class="blog-card page-1 animate-on-scroll">
-        <h3>Embracing Cloud Computing for Business Growth</h3>
-        <p class="excerpt">How AWS and Azure help businesses scale operations while cutting costs.</p>
-        <p class="full hidden">
-          Cloud computing enables companies to innovate faster, reduce downtime, and optimize costs.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
+  {% for blog in blogs %}
+    <article class="blog-card page-{{ blog.page }} animate-on-scroll">
+      <h3>{{ blog.title }}</h3>
 
-      <article class="blog-card page-1 animate-on-scroll">
-        <h3>Data-Driven Decision Making in the Digital Era</h3>
-        <p class="excerpt">Turning raw data into meaningful, data-driven insights that support smarter business strategies.</p>
-        <p class="full hidden">
-          Businesses today thrive on data. Through tools like Power BI, SQL, and Python analytics, organizations can transform numbers into actionable insights.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
+      <p class="excerpt">
+        {{ blog.excerpt }}
+      </p>
 
-      <article class="blog-card page-1 animate-on-scroll">
-        <h3>Cybersecurity Best Practices for SMEs</h3>
-        <p class="excerpt">Practical steps small businesses can take to protect themselves from digital threats.</p>
-        <p class="full hidden">
-          SMEs often overlook cybersecurity, making them prime targets for attacks.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
+      <p class="full hidden">
+        {{ blog.content }}
+      </p>
 
-      <!-- Page 2 blogs -->
-      <article class="blog-card page-2 animate-on-scroll">
-        <h3>The Future of Software Engineering</h3>
-        <p class="excerpt">Key trends shaping how developers build and deliver solutions.</p>
-        <p class="full hidden">
-          Cloud-native development, DevOps, AI-assisted coding, and low-code platforms.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
-
-      <article class="blog-card page-2 animate-on-scroll">
-        <h3>Leveraging Artificial Intelligence in Business</h3>
-        <p class="excerpt">How AI is transforming industries through automation and smart decision-making.</p>
-        <p class="full hidden">
-          AI tools for customer service, fraud detection, and marketing personalization.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
-
-      <article class="blog-card page-2 animate-on-scroll">
-        <h3>Building Scalable Web Applications</h3>
-        <p class="excerpt">Best practices for creating web apps that grow with user demand.</p>
-        <p class="full hidden">
-          Scalability ensures a web app performs well under increasing traffic.
-        </p>
-        <button class="read-more">Read More</button>
-      </article>
-    </div>
+      <button class="read-more">Read More</button>
+    </article>
+  {% endfor %}
+  </div>
   </div>
   <!-- Pagination Controls --> 
    <div class="pagination"> 
     <button id="prevBtn" disabled>Prev</button>
     <span id="pageIndicator">Page 1 of 2</span> 
-    <button id="nextBtn">Next</button> </div> 
+    <button id="nextBtn">Next</button> 
+  </div> 
   </div>
 </section>
 
@@ -299,7 +261,7 @@
   <div class="pricing-grid animate-on-scroll">
     <div class="plan-card animate-on-scroll">
       <h3 class="plan-name">BASIC PLAN</h3>
-      <p class="plan-price">Ksh. 50,000 <span>Per Month</span></p>
+      <p class="plan-price">Ksh. 50,000</p>
       <ul class="plan-features">
         <li>✔ Responsive Web Design</li>
         <li>✔ UI/UX Design & Prototyping</li>
@@ -316,7 +278,7 @@
 
     <div class="plan-card featured animate-on-scroll">
       <h3 class="plan-name">STANDARD PLAN</h3>
-      <p class="plan-price">Ksh. 100,000 <span>Per Month</span></p>
+      <p class="plan-price">Ksh. 100,000</p>
       <ul class="plan-features">
         <li>✔ Responsive Web Design</li>
         <li>✔ UI/UX Design & Prototyping</li>
@@ -333,7 +295,7 @@
 
     <div class="plan-card animate-on-scroll">
       <h3 class="plan-name">PREMIUM PLAN</h3>
-      <p class="plan-price">Ksh. 150,000 <span>Per Month</span></p>
+      <p class="plan-price">Ksh. 150,000</p>
       <ul class="plan-features">
         <li>✔ Responsive Web Design</li>
         <li>✔ UI/UX Design & Prototyping</li>

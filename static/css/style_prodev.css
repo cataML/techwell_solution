@@ -311,11 +311,15 @@ footer {
     font-weight: bold;
     transform: translateX(5px);
 }
-.footer-links i {
+.footer-section i {
     margin-right: 8px;
     font-size: 14px;
 }
-     
+.footer-section p {
+    margin-right: 8px;
+    font-size: 14px;
+    text-align: start;
+}   
 .social-links {
     display: flex;
     margin-top: 2.5rem;

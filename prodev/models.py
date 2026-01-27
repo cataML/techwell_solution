@@ -71,3 +71,12 @@ class Project(models.Model):
         return self.title
 
 
+class BlogPost(models.Model):
+    title = models.CharField(max_length=200)
+    excerpt = models.TextField()
+    content = models.TextField()
+    page = models.PositiveIntegerField(default=1)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
