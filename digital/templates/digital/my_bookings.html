@@ -4,60 +4,65 @@
 
 {% block content %}
 <aside class="sidebar">
-    <!-- Sidebar -->
-    <div >
-        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
-        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
-        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
-        <a href="{% url 'digital:payments' %}" class="nav-link active">Payments</a>
-        <a href="{% url 'digital:messages' %}" class="nav-link active">Messages</a>
-        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
-    </div>
+    <h2>Client Panel</h2>
+    <ul>
+        <li><a href="{% url 'digital:client' %}" class="nav-link">Dashboard</a></li>
+        <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+        <li><a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a></li>
+        <li><a href="{% url 'digital:client_payments' %}" class="nav-link">Payments</a></li>
+        <li><a href="{% url 'digital:client_messages' %}" class="nav-link">Messages</a></li>
+        <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+    </ul>
 </aside>
-<main class="main">
+
+<main class="main-content">
     <div class="container">
-    <h1>My Bookings</h1>
-    {% if bookings %}
-    <table>
-        <thead>
-            <tr>
-                <th>Booking ID</th>
-                <th>Date</th>
-                <th>Time</th>
-                <th>Workstation</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for booking in bookings %}
-            <tr>
-                <td>#{{ booking.id }}</td>
-                <td>{{ booking.date }}</td>
-                <td>{{ booking.start_time }} - {{ booking.end_time }}</td>
-                <td>{{ booking.workstation }}</td>
-                <td>
-                    <span class="status {{ booking.status }}">
-                        {{ booking.get_status_display }}
-                    </span>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p>You have no bookings yet.</p>
-    {% endif %}
-</div>
-<td>
-    <span class="status {{ booking.status }}">
-        {{ booking.get_status_display }}
-    </span>
-    {% if booking.status == 'pending' %}
-        <form method="POST" action="{% url 'cancel_booking' booking.id %}" style="display:inline;">
-            {% csrf_token %}
-            
-        </form>
-    {% endif %}
-</td>
+        <h1>My Bookings</h1>
+
+        {% if bookings %}
+        <table class="bookings-table">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Service</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for booking in bookings %}
+                <tr>
+                    <td>#{{ booking.id }}</td>
+                    <td>{{ booking.date }}</td>
+                    <td>{{ booking.time }}</td>
+                    <td>{{ booking.service }}</td>
+                    <td>
+                        <span class="status {{ booking.status }}">
+                            {{ booking.get_status_display }}
+                        </span>
+                    </td>
+                    <td>
+                        {% if booking.status == 'pending' %}
+                        <form method="POST" action="{% url 'digital:cancel_booking' booking.id %}" style="display:inline;">
+                            {% csrf_token %}
+                            <button type="submit" class="btn cancel-btn">Cancel</button>
+                        </form>
+                        {% else %}
+                        <span class="text-muted">N/A</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div class="empty-state">
+            <p>You have no bookings yet.</p>
+            <a href="{% url 'digital:book_now' %}" class="btn primary-btn">Book a Service</a>
+        </div>
+        {% endif %}
+    </div>
 </main>
 {% endblock %}

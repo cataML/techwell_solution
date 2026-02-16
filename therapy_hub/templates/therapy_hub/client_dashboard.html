@@ -32,7 +32,11 @@
 
         <div class="client1-card">
             <div class="icon-container">
-                <i class="fas fa-user-circle fa-3x"></i>
+                {% if request.user.therapy_profile.avatar %}
+                    <img src="{{ request.user.therapy_profile.avatar.url }}" class="dashboard-avatar" alt="Profile Photo">
+                {% else %}
+                    <i class="fas fa-user-circle fa-3x"></i>
+                {% endif %}
             </div>
             <h3>My Profile</h3>
             <p>Update your personal details.</p>

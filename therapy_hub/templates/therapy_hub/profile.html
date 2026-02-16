@@ -10,13 +10,17 @@
     <div class="profile-card">
         <!-- Profile Photo -->
         <div class="profile-avatar">
-            {% if user.profile.avatar %}
-                <img id="avatar-preview" src="{{ user.profile.avatar.url }}" alt="Profile Photo">
+            {% if profile.avatar %}
+                <img id="avatar-preview" src="{{ profile.avatar.url }}" alt="Profile Photo">
             {% else %}
                 <i class="fas fa-user-circle fa-6x" id="avatar-placeholder"></i>
             {% endif %}
         </div>
-
+    {% if messages %}
+    {% for message in messages %}
+        <div class="alert alert-success">{{ message }}</div>
+    {% endfor %}
+    {% endif %}
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
 

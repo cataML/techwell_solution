@@ -61,8 +61,13 @@ class DigitalProfile(models.Model):
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     specialization = models.CharField(max_length=100, blank=True, null=True)
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='client')
+    profile_picture = models.ImageField( upload_to='profile_pics/', blank=True, null=True)
 
-
+    theme = models.CharField(max_length=50, choices=[('light', 'Light'), ('dark', 'Dark')], default='light')
+    language = models.CharField(max_length=50, choices=[('English', 'English'), ('Spanish', 'Spanish'), ('French', 'French')], default='English')
+    country = models.CharField(max_length=100, 
+    choices=[('Kenya', 'Kenya'), ('USA', 'USA'), ('UK', 'UK'), ('Other', 'Other')], default='Kenya')
+    
     def __str__(self):
         return f"{self.user.username} - {self.role}"
 
@@ -106,34 +111,55 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.user.username} ({self.get_role_display()})"
 class Appointment(models.Model):
-    client_name = models.CharField(max_length=150)
-    staff = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='appointments')
+    STATUS_CHOICES = [
+        ('scheduled', 'Scheduled'),
+        ('completed', 'Completed'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    client_name = models.CharField(max_length=100)
+
+    staff = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+
     date = models.DateField()
     time = models.TimeField()
-    status = models.CharField(max_length=30, default='scheduled')  # scheduled / done / canceled
-    created_at = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ['date', 'time']
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='scheduled'
+    )
+
+    completed_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.client_name} — {self.date} {self.time}"
-
+        return f"{self.client_name} - {self.date}"
 
 class Task(models.Model):
-    title = models.CharField(max_length=200)
-    assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='tasks')
-    deadline = models.DateField(null=True, blank=True)
-    priority = models.CharField(max_length=20, default='normal')  # low / normal / high
+    PRIORITY_CHOICES = [
+        ('high', 'High'),
+        ('normal', 'Normal'),
+        ('low', 'Low'),
+    ]
+
+    title = models.CharField(max_length=255)
+    assigned_to = models.ForeignKey(User, on_delete=models.CASCADE, related_name='tasks', null=True)
+    priority = models.CharField(max_length=10, choices=PRIORITY_CHOICES, default='normal')
+    deadline = models.DateField(blank=True, null=True)
     done = models.BooleanField(default=False)
+    completed_at = models.DateTimeField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['deadline']
+        ordering = ['done', 'deadline', '-created_at']
 
     def __str__(self):
-        return self.title
-
+        return f"{self.title} ({'Done' if self.done else 'Pending'})"
 
 class Payment(models.Model):
     client_name = models.CharField(max_length=150)
@@ -148,57 +174,58 @@ class Payment(models.Model):
         return f"{self.client_name} — {self.amount}"
 
 
+
 class Message(models.Model):
-    sender = models.CharField(max_length=150)
-    recipient = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='messages')
-    subject = models.CharField(max_length=200, blank=True)
-    body = models.TextField(blank=True)
-    read = models.BooleanField(default=False)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ['-created_at']
-
-    def preview(self):
-        return (self.body[:120] + '...') if len(self.body) > 120 else self.body
-
-    def __str__(self):
-        return f"Message from {self.sender}"
-    
-class StaffMessage(models.Model):
-    staff = models.ForeignKey(User, on_delete=models.CASCADE)
-    sender = models.CharField(max_length=200)
-    preview = models.TextField()
+    sender = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='sent_messages'
+    )
+    recipient = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='received_messages', 
+    )
+    message = models.TextField(default="Hello")
     date_sent = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['date_sent']   # important for chat flow
+
     def __str__(self):
-        return f"Message to {self.staff.username}"
+        return f"{self.sender} → {self.recipient}"
+    
     
 class ClientProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name=models.CharField(max_length=100, blank=True)
+    last_name=models.CharField(max_length=100, blank=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    location = models.CharField(max_length=100, blank=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
 
     def __str__(self):
         return self.user.username
     
+
 class Booking(models.Model):
     STATUS_CHOICES = [
         ('pending', 'Pending'),
-        ('confirmed', 'Confirmed'),
+        ('approved', 'Approved'),
+        ('completed', 'Completed'),
         ('cancelled', 'Cancelled'),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    workstation = models.CharField(max_length=50)
+    service = models.CharField(max_length=100, null=True)
     date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
+    time = models.TimeField()
+    amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='pending')
 
     def __str__(self):
-        return f"Booking #{self.id} - {self.user.username}"
+        return f"{self.user.username} - {self.service}"
 
 class ClientPayment(models.Model):
     STATUS_CHOICES = [
@@ -208,6 +235,8 @@ class ClientPayment(models.Model):
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    service = models.CharField(max_length=100, blank=True, null=True)
+    quantity = models.IntegerField(default=1)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     date = models.DateTimeField(auto_now_add=True)
     method = models.CharField(max_length=50)  # e.g., Cash, Card, Mpesa
@@ -217,16 +246,6 @@ class ClientPayment(models.Model):
     def __str__(self):
         return f"Payment #{self.id} - {self.user.username}"
 
-class ClientMessage(models.Model):
-    sender = models.ForeignKey(User, on_delete=models.CASCADE, related_name='sent_messages')
-    receiver = models.ForeignKey(User, on_delete=models.CASCADE, related_name='received_messages')
-    subject = models.CharField(max_length=200)
-    content = models.TextField()
-    date_sent = models.DateTimeField(auto_now_add=True)
-    is_read = models.BooleanField(default=False)
-
-    def __str__(self):
-        return f"Message from {self.sender.username} to {self.receiver.username}"
 
 #Services model
 class DigitalServices(models.Model):

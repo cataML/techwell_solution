@@ -45,21 +45,20 @@
     </div>
 
     <button class="learn-more-btn">Learn More</button>
-    <a href="{% url 'digital:book_now' %}" class="learn-more-btn">Book now</a>
-
   </div>
   {% endfor %}
-
 </div>
+<a href="{% url 'digital:book_now' %}" class="learn-btn">Book now</a>
 </div>
-=<div class="pagination">
+<div class="pagination">
       <button id="prevBtn" disabled>Prev</button>
       <span id="pageInfo">1 / 2</span>
       <button id="nextBtn">Next</button>
     </div>
   </div>
+ 
 </section>
-<section class="pricing-section">
+<section class="section-pricing">
   <div class="pricing-container">
     <h2>Our Pricing</h2>
     <p class="subtitle">Affordable and transparent rates for all your digital, printing, and government service needs.</p>
@@ -230,7 +229,7 @@
 <!-- Why Choose Us Section -->
 <section class="why-choose">
   <div class="why-container">
-    <h2>Why Choose Us</h2>
+    <h class="why">Why Choose Us</h2>
     <div class="choose-grid">
       <div class="choose-card">
         <i class="fas fa-bolt"></i>
@@ -380,8 +379,8 @@
     </div>
   </div>
 </section>
-<section class="cta-section">
-  <div class="container">
+<section class="cta">
+  <div class="cta-container">
     <h2>Ready to Get Started?</h2>
     <p class="subtitle">Whether you need internet access, printing, TSC services, or document assistance, we’ve got you covered.</p>
 

@@ -3,23 +3,22 @@
 {% block title %} TechWell CyberCafe |  Contact us{% endblock %}
 {% block content %}
  <!-- Sidebar -->
-  <aside class="sidebar">
+ <aside class="sidebar">
     <h2>Staff Panel</h2>
-    <nav>
-      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
-      <a href="{% url 'digital:staff_appointments' %}" class="nav-link">Appointments</a>
-      <a href="{% url 'digital:staff_tasks' %}" class="nav-link">Tasks</a>
-      <a href="{% url 'digital:staff_payments' %}" class="nav-link">Payments</a>
-      <a href="{% url 'digital:staff_messages' %}" class="nav-link">Messages</a>
-    </nav>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
   </aside>
 <main class="main">
     <header>
-        <h1>Payments</h1>
+        <h1>Earnings</h1>
         <p>Total: {{ payments|length }}</p>
     </header>
 
-    <section class="card">
+    <section class="dash-card">
         {% if payments %}
         <table class="payments-table">
             <thead>
@@ -40,7 +39,7 @@
             </tbody>
         </table>
         {% else %}
-        <p>No payments found.</p>
+        <p>No earnings found.</p>
         {% endif %}
     </section>
 </main>

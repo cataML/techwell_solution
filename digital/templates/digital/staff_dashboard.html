@@ -2,85 +2,73 @@
 {% load static %}
 {% block title %} TechWell CyberCafe |  Contact us{% endblock %}
 {% block content %}
-<div class="container-dash">
+<div class="dashboard-container">
 
   <!-- Sidebar -->
   <aside class="sidebar">
     <h2>Staff Panel</h2>
-    <nav>
-      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
-      <a href="{% url 'digital:staff_appointments' %}" class="nav-link">Appointments</a>
-      <a href="{% url 'digital:staff_tasks' %}" class="nav-link">Tasks</a>
-      <a href="{% url 'digital:staff_payments' %}" class="nav-link">Payments</a>
-      <a href="{% url 'digital:staff_messages' %}" class="nav-link">Messages</a>
-    </nav>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
   </aside>
 
-  <!-- Main content -->
-  <main class="main">
-    <header>
-      <h1>Welcome, {{ staff_name }}</h1>
-      <p>Role: <span class="role">{{ staff_role|capfirst }}</span></p>
-    </header>
+  <!-- Main Content -->
+  <main class="main-dashboard">
+    <h1>Welcome, {{ request.user.first_name }}</h1>
 
-    <!-- Stats -->
-    <div class="stats">
-      <div class="stat-card">
-        <h3>Today's Appointments</h3>
-        <p class="stat-number">{{ todays_appointments }}</p>
+    <div class="dash-cards">
+      <!-- Appointments Card -->
+      <div class="dash-card">
+        <i class="fa-solid fa-calendar-check card-icon"></i>
+        <h3>Appointments</h3>
+        <p>View and manage your appointments</p>
+        <a href="{% url 'digital:staff_appointments' %}" class="dash-btn">Go</a>
       </div>
-      <div class="stat-card">
-        <h3>Pending Tasks</h3>
-        <p class="stat-number">{{ pending_tasks }}</p>
+
+      <!-- Tasks Card -->
+      <div class="dash-card">
+        <i class="fa-solid fa-tasks card-icon"></i>
+        <h3>Tasks</h3>
+        <p>View your assigned tasks</p>
+        <a href="{% url 'digital:staff_tasks' %}" class="dash-btn">Go</a>
       </div>
-      <div class="stat-card">
-        <h3>Payments Received</h3>
-        <p class="stat-number">KES {{ payments_received }}</p>
+
+      <!-- Staff Payments Card -->
+      <div class="dash-card">
+        <i class="fa-solid fa-wallet card-icon"></i>
+        <h3>Staff Payments</h3>
+        <p>Check your payment history</p>
+        <a href="{% url 'digital:staff_payments' %}" class="dash-btn">Go</a>
+      </div>
+
+      <!-- Messages Card -->
+      <div class="dash-card">
+        <i class="fa-solid fa-envelope card-icon"></i>
+        <h3>Messages</h3>
+        <p>Check messages from management</p>
+        <a href="{% url 'digital:messages' %}" class="dash-btn">Go</a>
       </div>
     </div>
-
-    <!-- Appointments -->
-    <section class="card">
-      <h2>Upcoming Appointments</h2>
-      {% if appointments %}
-      <ul class="list">
-        {% for appt in appointments %}
-        <li>
-          <div>
-            <p>{{ appt.client_name }}</p>
-            <p>{{ appt.date }} • {{ appt.time }}</p>
-          </div>
-          <span class="status">{{ appt.status }}</span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p>No upcoming appointments.</p>
-      {% endif %}
-    </section>
-
-    <!-- Tasks -->
-    <section class="card">
-      <h2>Pending Tasks</h2>
-      {% if tasks %}
-      <ul class="list">
-        {% for task in tasks %}
-        <li>
-          <div>
-            <p>{{ task.title }}</p>
-            {% if task.deadline %}<p>Due: {{ task.deadline }}</p>{% endif %}
-          </div>
-          <span class="priority {% if task.priority == 'high' %}high{% elif task.priority == 'normal' %}normal{% else %}low{% endif %}">
-            {{ task.priority|capfirst }}
-          </span>
-        </li>
-        {% endfor %}
-      </ul>
-      {% else %}
-      <p>No pending tasks.</p>
-      {% endif %}
-    </section>
-
   </main>
 </div>
+<script>
+function openConfirmModal(button) {
+    const title = button.dataset.title;
+    const url = button.dataset.url;
+
+    document.getElementById("modalText").innerText =
+        `Mark "${title}" as completed?`;
+
+    document.getElementById("completeForm").action = url;
+
+    document.getElementById("confirmModal").classList.remove("hidden");
+}
+
+function closeConfirmModal() {
+    document.getElementById("confirmModal").classList.add("hidden");
+}
+</script>
 {% endblock %}

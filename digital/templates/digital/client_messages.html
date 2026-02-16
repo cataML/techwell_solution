@@ -1,0 +1,61 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Client Panel</h2>
+        <ul>
+            <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+            <li><a href="{% url 'digital:my_bookings' %}" class="nav-link">My Bookings</a></li>
+            <li><a href="{% url 'digital:client_payments' %}" class="nav-link">Payments</a></li>
+            <li><a href="{% url 'digital:client_messages' %}" class="nav-link">Messages</a></li>
+            <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+        </ul>
+    </aside>
+
+   <section class="sms-inbox">
+  <h2>Inbox</h2>
+
+  {% for msg in messages %}
+    <div class="message-card">
+      <p><strong>From:</strong> {{ msg.sender.username }}</p>
+      <p>{{ msg.message }}</p>
+      <small>{{ msg.date_sent }}</small>
+
+      <!-- Reply Button -->
+      <a href="?reply_to={{ msg.sender.id }}" class="reply-btn">
+        <i class="fa-solid fa-reply"></i> Reply
+      </a>
+    </div>
+  {% empty %}
+    <p>No messages yet.</p>
+  {% endfor %}
+</section>
+<section class="sms-inbox">
+<h2>Send Message</h2>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <select name="recipient" required>
+    <option value="">Select Staff</option>
+    {% for Staff in staff_users %}
+      <option value="{{ staff.id }}">
+        {% if request.GET.reply_to == staff.id|stringformat:"s" %}
+        selected
+        {% endif %}
+        
+        {{ staff.username }}</option>
+    {% endfor %}
+  </select>
+
+  <textarea name="message" placeholder="Write message..." required></textarea>
+
+  <button type="submit">Send</button>
+</form> 
+</section> 
+</div>
+{% endblock %}         

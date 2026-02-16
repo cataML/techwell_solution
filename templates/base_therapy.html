@@ -65,11 +65,28 @@
         </ul>
         <a href="{% url 'therapy_hub:booking' %}" class="book-button">Book Now</a>
     </div>
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'therapy_hub:logout' %}" class="book-button">Logout</a>
-    {% else %}
-        <a href="{% url 'therapy_hub:login' %}" class="book-button">Login</a>
-    {% endif %} 
+     
+<div class="user-action">
+  {% if user.is_authenticated %}
+    <div class="profile-dropdown" onclick="toggleDropdown(event)">
+      {% if user_profile and user_profile.image %}
+        <img src="{{ profile.avatar.url }}" alt="Profile" class="profile-icon">
+      {% else %}
+        <i class="fa fa-user profile-icon"></i>
+      {% endif %}
+
+      <div class="dropdown-menu">
+        <a href="{% url 'therapy_hub:profile' %}">Profile</a>
+        <a href="{% url 'therapy_hub:settings' %}">Settings</a>
+        <a href="{% url 'therapy_hub:logout' %}">Logout</a>
+      </div>
+    </div>
+  {% else %}
+    <a href="{% url 'therapy_hub:login' %}" class="login-icon">
+      <a href="{% url 'therapy_hub:login' %}" class="book-button">Login</a>
+    </a>
+  {% endif %}
+</div>
 </div>
 
     {% block content %}
@@ -136,5 +153,19 @@
             <p>&copy; 2025  <b>Techwell Therapy</b>. Healing Minds, Empowering Futures. | All rights reserved.</p>
         </div>
     </footer>
+<script>
+function toggleDropdown(event) {
+  event.stopPropagation(); // Prevent immediate close
+  const menu = event.currentTarget.querySelector('.dropdown-menu');
+  menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+}
+
+// Close dropdown if clicked outside
+document.addEventListener('click', function() {
+  document.querySelectorAll('.profile-dropdown .dropdown-menu').forEach(menu => {
+    menu.style.display = 'none';
+  });
+});
+</script>
 </body>
 </html>

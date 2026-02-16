@@ -25,6 +25,7 @@ urlpatterns = [
     path('earnings-report/', views.earnings_report, name='earnings_report'),
     path("appointments/", views.appointments, name="appointments"),
     path("profile/", views.profile, name="profile"),
+    path('settings/', views.settings, name='settings'),
     path("sessions/history/", views.session_history, name="session_history"),
      path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path("terms_conditions/", views.terms_conditions, name="terms_conditions"),

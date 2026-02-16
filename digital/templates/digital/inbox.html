@@ -1,0 +1,43 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Contact us{% endblock %}
+{% block content %}
+ <!-- Sidebar -->
+ <aside class="sidebar">
+    <h2>Staff Panel</h2>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
+  </aside>
+<div class="inbox-container">
+
+    <div class="inbox-header">
+        <h2>Inbox</h2>
+    </div>
+
+    {% if messages %}
+        <ul class="message-list">
+            {% for msg in messages %}
+                <li class="message-item">
+                    <div class="message-top">
+                        <strong>{{ msg.sender.username }}</strong>
+                        <span class="date">{{ msg.date_sent|date:"M d, Y H:i" }}</span>
+                    </div>
+
+                    <p class="message-preview">
+                        {{ msg.message|truncatewords:15 }}
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <div class="empty-box">
+            <p>No messages yet.</p>
+        </div>
+    {% endif %}
+
+</div>
+  {% endblock %}

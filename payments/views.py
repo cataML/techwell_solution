@@ -157,7 +157,7 @@ def verify_payment(request):
                               {"error": "Digital booking not found."})
 
         # Unknown app
-        return HttpResponse("Unknown app in metadata.", status=400)
+        return redirect("digital:dashboard")
 
     # If transaction not successful
     return HttpResponse("Payment not successful.", status=400)
@@ -355,7 +355,7 @@ def checkout_digital(request, pk):
 
     context = {
         'booking': booking,
-        'amount': booking.amount,   # ✅ FROM DATABASE
+        'amount': booking.amount,   
         'service_name': booking.service,
         'source': 'digital',
     }

@@ -6,7 +6,6 @@
 
     {% if request.user.digital_profile.role == 'client' %}
     <div class="card">
-        <i class="fa fa-user"></i>
         <h3>Client Dashboard</h3>
         <p>View your sessions, payments, and messages.</p>
         <a href="{% url 'digital:client' %}">Enter</a>

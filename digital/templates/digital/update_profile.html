@@ -3,28 +3,62 @@
 {% block title %} TechWell CyberCafe |  Profile{% endblock %}
 
 {% block content %}
-<aside class="sidebar">
+<div class="dashboard-container">
     <!-- Sidebar -->
-      <div >
-        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
-        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
-        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
-        <a href="#" class="nav-link active">Payments</a>
-        <a href="#" class="nav-link active">Messages</a>
-        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
-      </div>
-</aside>
+    <aside class="sidebar">
+        <h2>Client Panel</h2>
+        <ul>
+            <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+            <li><a href="{% url 'digital:my_bookings' %}" class="nav-link">My Bookings</a></li>
+            <li><a href="{% url 'digital:client_payments' %}" class="nav-link">Payments</a></li>
+            <li><a href="{% url 'digital:client_messages' %}" class="nav-link">Messages</a></li>
+            <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+        </ul>
+    </aside>
 <main class="main">
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+<div class="profile-container">
+    <h1>{{ profile.user.username }}'s Profile</h1>
 
-    <h3>Account Information</h3>
-    {{ user_form.as_p }}
+    <!-- Profile Picture -->
+    <div class="profile-pic-container">
+        {% if profile.profile_picture %}
+            <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" class="profile-pic">
+        {% else %}
+            <img src="{% static 'default_profile.png' %}" alt="Default Profile" class="profile-pic">
+        {% endif %}
+    </div>
 
-    <h3>Profile Information</h3>
-    {{ profile_form.as_p }}
+    <!-- Profile Info Table -->
+    <table class="profile-table">
+    <tr>
+        <th>Full Name</th>
+        <td>{{ profile.full_name|default:"Not set" }}</td>
+    </tr>
 
-    <button type="submit">Update Profile</button>
-</form>
-</main>
+    <tr>
+        <th>Email</th>
+        <td>{{ profile.user.email }}</td>
+    </tr>
+
+    <tr>
+        <th>Phone</th>
+        <td>{{ profile.phone_number|default:"Not set" }}</td>
+    </tr>
+
+    <tr>
+        <th>Specialization</th>
+        <td>{{ profile.specialization|default:"Not set" }}</td>
+    </tr>
+
+    <tr>
+        <th>Role</th>
+        <td>{{ profile.role }}</td>
+    </tr>
+</table>
+
+    <!-- Edit Button -->
+    <div class="edit-button">
+        <a href="{% url 'digital:edit_profile' %}" class="btn">Edit Profile</a>
+    </div>
+</div>
 {% endblock %}

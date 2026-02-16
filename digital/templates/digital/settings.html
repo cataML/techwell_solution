@@ -1,0 +1,53 @@
+{% extends "base_digital.html" %}
+{% load static %}
+
+{% block title %}TechWell | Settings {% endblock %}
+
+{% block content %}
+<div class="setting-container">
+
+    <h1>Settings</h1>
+
+    <!-- Theme / Language / Country -->
+    <div class="settings-section">
+        <h2 >Preferences</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+    <div class="form-group">
+        <div class="theme-switch">
+            <input type="checkbox" id="theme-toggle" name="theme" value="dark" {% if profile.theme == 'dark' %}checked{% endif %}>
+            <label for="theme-toggle" class="switch-label">
+            <span class="switch-inner"></span>
+            <span class="switch-switch"></span>
+            <span class="switch-text">{% if profile.theme == 'dark' %}Dark{% else %}Light{% endif %}</span>
+        </div>
+    </div>
+
+            <div class="form-group">
+                <label>Language</label>
+                {{ settings_form.language }}
+            </div>
+
+            <div class="form-group">
+                <label>Country</label>
+                {{ settings_form.country }}
+            </div>
+
+            <button type="submit" name="save_settings" class="book-btn">Save Preferences</button>
+        </form>
+    </div>
+
+    <!-- Change Password -->
+    <div class="settings-section">
+        <h2>Change Password</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {{ password_form.as_p }}
+            <button type="submit" name="change_password" class="book-btn">Change Password</button>
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %} TechWell CyberCafe |  Payments{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>Client Panel</h2>
+        <ul>
+            <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+            <li><a href="{% url 'digital:my_bookings' %}" class="nav-link">My Bookings</a></li>
+            <li><a href="{% url 'digital:client_payments' %}" class="nav-link">Payments</a></li>
+            <li><a href="{% url 'digital:client_messages' %}" class="nav-link">Messages</a></li>
+            <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main content -->
+ <main class="main">
+    <header>
+        <h1>My Payments</h1>
+        <p>Total Payments: {{ payments|length }}</p>
+    </header>
+
+    <section class="dash-card">
+        {% if payments %}
+        <table class="payments-table">
+            <thead>
+                <tr>
+                    <th>Service / Booking</th>
+                    <th>Quantity</th>
+                    <th>Amount</th>
+                    <th>Method</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pay in payments %}
+                <tr>
+                    <td>
+                        {% if pay.booking %}
+                            {{ pay.booking }}
+                        {% elif pay.service %}
+                            {{ pay.service }}
+                        {% else %}
+                            ---
+                        {% endif %}
+                    </td>
+                    <td>{{ pay.quantity }}</td>
+                    <td>KES {{ pay.amount }}</td>
+                    <td>{{ pay.method }}</td>
+                    <td>
+                        {% if pay.status == "completed" %}
+                            <span style="color:green;">Completed</span>
+                        {% elif pay.status == "pending" %}
+                            <span style="color:orange;">Pending</span>
+                        {% else %}
+                            <span style="color:red;">Failed</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ pay.date|date:"M d, Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No payments found.</p>
+        {% endif %}
+    </section>
+</main>
+</div>
+  {% endblock %}

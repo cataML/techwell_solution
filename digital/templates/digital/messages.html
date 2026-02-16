@@ -3,54 +3,56 @@
 {% block title %} TechWell CyberCafe |  Dashboard{% endblock %}
 
 {% block content %}
-<aside class="sidebar">
-    <!-- Sidebar -->
-      <div >
-        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
-        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
-        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
-        <a href="{% url 'digital:payments' %}" class="nav-link active">Payments</a>
-        <a href="{% url 'digital:messages' %}" class="nav-link active">Messages</a>
-        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
-      </div>
-</aside>
+<div class="dashboard-container">
 
-    <!-- Main content -->
-  <main class="main">
-    <div class="container">
-    <h1>Messages</h1>
-    {% if messages %}
-    <table>
-        <thead>
-            <tr>
-                <th>From</th>
-                <th>Subject</th>
-                <th>Content</th>
-                <th>Date</th>
-                <th>Status</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for message in messages %}
-            <tr>
-                <td>{{ message.sender.username }}</td>
-                <td>{{ message.subject }}</td>
-                <td>{{ message.content|truncatewords:10 }}</td>
-                <td>{{ message.date_sent|date:"Y-m-d H:i" }}</td>
-                <td>
-                    {% if message.is_read %}
-                        <span class="status read">Read</span>
-                    {% else %}
-                        <span class="status unread">Unread</span>
-                    {% endif %}
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% else %}
-        <p>No messages found.</p>
-    {% endif %}
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>Staff Panel</h2>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
+  </aside>
+
+    <header>
+<main class="main">
+<section class="sms-inbox">
+    <h2>Inbox</h2>
+
+{% for msg in messages %}
+  <div class="message-card">
+    <p><strong>From:</strong> {{ msg.sender.username }}</p>
+    <p>{{ msg.message }}</p>
+    <small>{{ msg.date_sent }}</small>
+     <a href="?reply_to={{ msg.sender.id }}" class="reply-btn">
+        <i class="fa-solid fa-reply"></i> Reply
+      </a>
+  </div>
+{% empty %}
+  <p>No messages yet.</p>
+{% endfor %}
+</section>
+<section class="sms-inbox">
+<h2>Send Message</h2>
+
+<form method="POST">
+  {% csrf_token %}
+
+  <select name="recipient" required>
+    <option value="">Select Client</option>
+    {% for client in clients %}
+      <option value="{{ client.id }}">{{ client.username }}</option>
+    {% endfor %}
+  </select>
+
+  <textarea name="message" placeholder="Write message..." required></textarea>
+
+  <button type="submit">Send</button>
+</form> 
+
+  </section>                                      
+</main> 
 </div>
-  </main>
 {% endblock %}

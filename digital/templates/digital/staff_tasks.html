@@ -5,38 +5,131 @@
  <!-- Sidebar -->
   <aside class="sidebar">
     <h2>Staff Panel</h2>
-    <nav>
-      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
-      <a href="{% url 'digital:staff_appointments' %}" class="nav-link">Appointments</a>
-      <a href="{% url 'digital:staff_tasks' %}" class="nav-link">Tasks</a>
-      <a href="{% url 'digital:staff_payments' %}" class="nav-link">Payments</a>
-      <a href="{% url 'digital:staff_messages' %}" class="nav-link">Messages</a>
-    </nav>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
   </aside>
 <main class="main">
     <header>
-        <h1>Pending Tasks</h1>
-        <p>Total: {{ tasks|length }}</p>
+      <h1>Tasks</h1>
+      <p>Role: <span class="role">{{ staff_role|capfirst }}</span></p>
     </header>
 
-    <section class="card">
-        {% if tasks %}
-        <ul class="list">
-            {% for task in tasks %}
-            <li>
+    <!-- Pending Tasks -->
+    <section class="task-card">
+      <h2>Pending Tasks</h2>
+      {% if tasks|length %}
+        <ul class="list" id="pending-tasks-list">
+          {% for task in tasks %}
+            {% if not task.done %}
+              <li class="list-item">
                 <div>
-                    <p><strong>{{ task.title }}</strong></p>
-                    {% if task.deadline %}<p>Due: {{ task.deadline }}</p>{% endif %}
+                  <p>{{ task.title }}</p>
+                  {% if task.deadline %}<small>Due: {{ task.deadline|date:"M d, Y" }}</small>{% endif %}
                 </div>
-                <span class="priority {% if task.priority == 'high' %}high{% elif task.priority == 'normal' %}normal{% else %}low{% endif %}">
-                    {{ task.priority|capfirst }}
-                </span>
-            </li>
-            {% endfor %}
+                <form method="POST" action="{% url 'digital:mark_task_done' task.id %}">
+                  {% csrf_token %}
+                  <button type="submit" class="mark-done-btn">Mark as Done</button>
+                </form>
+              </li>
+            {% endif %}
+          {% endfor %}
         </ul>
-        {% else %}
+      {% else %}
         <p>No pending tasks.</p>
-        {% endif %}
+      {% endif %}
     </section>
+
+    <!-- Completed Tasks -->
+    <section class="task-card">
+      <h2>Completed Tasks</h2>
+      <ul class="list" id="completed-tasks-list">
+        {% for task in tasks %}
+          {% if task.done %}
+            <li class="list-item completed">
+              <div>
+                <p>{{ task.title }}</p>
+                {% if task.deadline %}<small>Was due: {{ task.deadline|date:"M d, Y" }}</small>{% endif %}
+                <small>Completed on {{ task.completed_at|date:"M d, Y H:i" }}</small>
+              </div>
+              <span class="badge done">Completed</span>
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </section>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+  </main>
+</div>
 </main>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const buttons = document.querySelectorAll(".mark-done-btn");
+
+    buttons.forEach(btn => {
+        btn.addEventListener("click", function(e) {
+            e.preventDefault();
+
+            const form = this.closest("form");
+            const url = form.action;
+            const csrfToken = form.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": csrfToken,
+                    "X-Requested-With": "XMLHttpRequest"
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                if(data.success){
+                    // Fade out pending task
+                    const pendingItem = form.closest("li");
+                    pendingItem.classList.add("fade-out");
+                    pendingItem.addEventListener("animationend", () => pendingItem.remove());
+
+                    // Update badge
+                    const badge = document.querySelector(".sidebar .badge");
+                    if(data.pending_count > 0){
+                        badge.textContent = data.pending_count;
+                    } else {
+                        badge.remove();
+                    }
+
+                    // Add to completed list with fade-in
+                    const taskTitle = form.closest("li").querySelector("p").textContent;
+                    const completedList = document.querySelector("#completed-tasks-list");
+                    const completedItem = document.createElement("li");
+                    completedItem.className = "list-item completed fade-in";
+                    completedItem.innerHTML = `
+                        <div>
+                            <p>${taskTitle}</p>
+                            <small>Completed just now</small>
+                        </div>
+                        <span class="badge done">Completed</span>
+                    `;
+                    completedList.prepend(completedItem);
+
+                    // Show toast
+                    const toast = document.getElementById("toast");
+                    toast.textContent = `Task "${taskTitle}" marked as completed!`;
+                    toast.classList.add("show");
+                    setTimeout(() => toast.classList.remove("show"), 3000);
+                }
+            })
+            .catch(error => console.log("Error:", error));
+        });
+    });
+});
+</script>
 {% endblock %}

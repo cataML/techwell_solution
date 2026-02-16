@@ -8,18 +8,6 @@
     <p class="intro">
       We’d love to hear from you! Reach out for inquiries, bookings, or support.
     </p>
-    <div class="contact-button">
-      <a href="{% url 'digital:service' %}" class="btn-pri">Explore Services</a>
-      <a href="{% url 'digital:book_now' %}" class="btn-sec">Book a Service</a>
-    </div>
-  </div>
-</section>
-
-<section id="contact-form" class="contact-section animate-on-load">
-  <div class="container">
-    <h2>Send Us a Message</h2>
-    <p class="intro">Fill out the form and we’ll get back to you shortly.</p>
-
     <form method="POST" class="contact-form">
       {% csrf_token %}
       {{ form.non_field_errors }}

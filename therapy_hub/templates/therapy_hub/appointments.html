@@ -3,11 +3,10 @@
 {% block title %}Techwell Therapy | Appointments{% endblock %}
 
 {% block content %}
+<h1 class="page-title">My Appointments</h1>
+<hr>
 <div class="appointments-container">
-    
-    <h1 class="page-title">My Appointments</h1>
-
-    <!-- Upcoming Appointments -->
+       <!-- Upcoming Appointments -->
     <section class="appointment-section">
         <h2>Upcoming Sessions</h2>
 
@@ -34,7 +33,7 @@
     <section class="appointment-section">
         <h2>Book a New Appointment</h2>
         <p>Choose a suitable date and time for your therapy session.</p>
-
+<br>
         <a href="{% url 'therapy_hub:booking' %}" class="btn-primary">Book Now</a>
     </section>
 

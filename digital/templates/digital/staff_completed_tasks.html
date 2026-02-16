@@ -1,0 +1,50 @@
+{% extends "base_digital.html" %}
+{% load static %}
+{% block title %}TechWell CyberCafe | Completed Tasks{% endblock %}
+
+{% block content %}
+<div class="container-dash">
+
+  <!-- Sidebar -->
+ <aside class="sidebar">
+    <h2>Staff Panel</h2>
+    <nav>
+      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link">Dashboard</a>
+      <a href="{% url 'digital:staff_completed_appointments' %}" class="nav-link">
+        Completed Appointments
+      </a>
+       <a href="{% url 'digital:staff_tasks' %}" class="nav-link ">Tasks</a>
+      <a href="{% url 'digital:staff_completed_tasks' %}" class="nav-link">Completed Tasks</a>
+    </nav>
+  </aside>
+
+  <!-- Main content -->
+  <main class="main">
+    <header>
+      <h1>Completed Tasks</h1>
+      <p>Role: <span class="role">{{ staff_role|capfirst }}</span></p>
+    </header>
+
+    <!-- Completed Tasks Section -->
+    <section class="card">
+      {% if completed_tasks %}
+      <ul class="list">
+        {% for task in completed_tasks %}
+        <li class="list-item completed">
+          <div>
+            <p>{{ task.title }}</p>
+            {% if task.deadline %}<small>Was due: {{ task.deadline }}</small>{% endif %}
+            <small>Completed on {{ task.completed_at }}</small>
+          </div>
+          <span class="badge done">Completed</span>
+        </li>
+        {% endfor %}
+      </ul>
+      {% else %}
+      <p>No completed tasks.</p>
+      {% endif %}
+    </section>
+
+  </main>
+</div>
+{% endblock %}

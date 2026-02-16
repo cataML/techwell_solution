@@ -3,27 +3,46 @@
 {% block title %}Techwell Therapy | Payments{% endblock %}
 
 {% block content %}
-<h2>Your Payments</h2>
-
-<h3>Payment History</h3>
-<div class="card-list">
-    {% for payment in payments %}
-        <div class="card">
-            <p>Amount: KES {{ payment.amount }}</p>
-            <p>Method: {{ payment.method }}</p>
-            <p>Reference: {{ payment.reference }}</p>
-            <p>Date: {{ payment.paid_at }}</p>
-
-            {% if payment.booking %}
-                <a href="{% url 'payments:checkout_therapy' payment.booking.id %}" class="btn">
-                    View Booking
-                </a>
-            {% endif %}
-        </div>
-    {% empty %}
-        <p>You have not made any payments yet.</p>
-    {% endfor %}
-</div>
+<h2 class="hh2">Your Payments</h2>
+<hr>
+<br>
+<h3 class="hh3">Payment History</h3>
+{% if payments %}
+    <table class="payments-table">
+        <thead>
+            <tr>
+                <th>Amount (KES)</th>
+                <th>Method</th>
+                <th>Reference</th>
+                <th>Date</th>
+                <th>Booking</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in payments %}
+                <tr>
+                    <td>{{ payment.amount }}</td>
+                    <td>{{ payment.method }}</td>
+                    <td>{{ payment.reference }}</td>
+                    <td>{{ payment.paid_at|date:"d M Y, H:i" }}</td>
+                    <td>
+                        {% if payment.booking %}
+                            <a href="{% url 'payments:checkout_therapy' payment.booking.id %}" class="btn">
+                                View Booking
+                            </a>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p class="para">You have not made any payments yet.</p>
+{% endif %}
+<br>
+<br>
 {% for payment in payments %}
 <tr>
     <td>{{ payment.reference }}</td>
@@ -38,5 +57,6 @@
         {% endif %}
     </td>
 </tr>
+
 {% endfor %}
 {% endblock %}

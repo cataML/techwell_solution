@@ -59,13 +59,25 @@
     <div class="nav-buttons">
         <a href="{% url 'digital:book_now' %}" class="book-btn">Book now</a>
 
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'digital:logout' %}" class="login-btn">Logout</a>
-        {% else %}
-            <a href="{% url 'digital:log_in' %}" class="login-btn">Login</a>
-        {% endif %}
-    </div>
+{% if user.is_authenticated %}
+<div class="profile-dropdown" onclick="toggleDropdown(event)">
+    {% if user.digital_profile.profile_picture %}
+        <img src="{{ user.digital_profile.profile_picture.url }}" alt="Profile" class="profile-icon">
+    {% else %}
+        <i class="fa fa-user profile-icon"></i>
+    {% endif %}
 
+    <div class="dropdown-menu">
+        <a href="{% url 'digital:update_profile' %}">Profile</a>
+        <a href="{% url 'digital:settings' %}">Settings</a>
+        <a href="{% url 'digital:logout' %}">Logout</a>
+    </div>
+</div>
+{% else %}
+<a href="{% url 'digital:log_in' %}" class="book-btn">Login</a>
+{% endif %}
+
+</div>
 </div>
 {% block content %}
 {% endblock %}
@@ -144,6 +156,69 @@
       console.warn("Menu toggle or nav links element not found.");
     }
   });
+  </script>
+<script>
+function toggleDropdown(event) {
+  event.stopPropagation();
+
+  const dropdown = event.currentTarget.querySelector('.dropdown-menu');
+
+  // Close other open dropdowns first
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    if (menu !== dropdown) {
+      menu.style.display = 'none';
+    }
+  });
+
+  dropdown.style.display =
+    dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function() {
+  document.querySelectorAll('.dropdown-menu').forEach(menu => {
+    menu.style.display = 'none';
+  });
+});
+</script>
+<script>
+function applyTheme(theme) {
+    if(theme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
+    } else {
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
+    }
+
+    // Update toggle text if toggle exists
+    const text = document.querySelector('.switch-text');
+    if(text) text.textContent = theme === 'dark' ? 'Dark' : 'Light';
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('theme-toggle');
+
+    // 1. Get theme from cookie
+    const cookieTheme = document.cookie.replace(/(?:(?:^|.*;\s*)theme\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    const theme = cookieTheme || (toggle && toggle.checked ? 'dark' : 'light');
+
+    // 2. Apply theme on page load
+    applyTheme(theme);
+
+    // 3. Set toggle checkbox if it exists
+    if(toggle) toggle.checked = theme === 'dark';
+
+    // 4. Listen for toggle changes
+    if(toggle){
+        toggle.addEventListener('change', () => {
+            const newTheme = toggle.checked ? 'dark' : 'light';
+            applyTheme(newTheme);
+            // Save theme to cookie for 30 days
+            document.cookie = `theme=${newTheme}; path=/; max-age=${30*24*60*60}`;
+        });
+    }
+});
 </script>
 </body>
 </html>

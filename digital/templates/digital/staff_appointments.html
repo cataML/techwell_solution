@@ -5,13 +5,12 @@
  <!-- Sidebar -->
   <aside class="sidebar">
     <h2>Staff Panel</h2>
-    <nav>
-      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
-      <a href="{% url 'digital:staff_appointments' %}" class="nav-link">Appointments</a>
-      <a href="{% url 'digital:staff_tasks' %}" class="nav-link">Tasks</a>
-      <a href="{% url 'digital:staff_payments' %}" class="nav-link">Payments</a>
-      <a href="{% url 'digital:staff_messages' %}" class="nav-link">Messages</a>
-    </nav>
+    <ul>
+      <li><a href="{% url 'digital:staff_appointments' %}"><i class="fa-solid fa-calendar-check"></i> Appointments</a></li>
+      <li><a href="{% url 'digital:staff_tasks' %}"><i class="fa-solid fa-tasks"></i> Tasks</a></li>
+      <li><a href="{% url 'digital:staff_payments' %}"><i class="fa-solid fa-wallet"></i> Staff Payments</a></li>
+      <li><a href="{% url 'digital:messages' %}"><i class="fa-solid fa-envelope"></i> Messages</a></li>
+    </ul>
   </aside>
 <main class="main">
 
@@ -20,23 +19,48 @@
         <p>Total: {{ appointments|length }}</p>
     </header>
 
-    <section class="card">
-        {% if appointments %}
-        <ul class="list">
-            {% for appt in appointments %}
-            <li>
-                <div>
-                    <p><strong>Client:</strong> {{ appt.client_name }}</p>
-                    <p><strong>Date:</strong> {{ appt.date }} • <strong>Time:</strong> {{ appt.time }}</p>
-                    <p><strong>Status:</strong> {{ appt.status|capfirst }}</p>
-                </div>
-            </li>
-            {% endfor %}
-        </ul>
-        {% else %}
-        <p>No appointments found.</p>
-        {% endif %}
-    </section>
+    <section class="dash-card">
+  <h2>Upcoming Appointments</h2>
 
+  {% if appointments %}
+  <table class="appointments-table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Date</th>
+        <th>Time</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for appt in appointments %}
+      <tr>
+        <td>{{ appt.client_name }}</td>
+        <td>{{ appt.date }}</td>
+        <td>{{ appt.time }}</td>
+        <td>{{ appt.status|capfirst }}</td>
+        <td>
+          {% if appt.status == 'scheduled' %}
+          <form
+            method="post"
+            action="{% url 'digital:complete_appointment' appt.id %}"
+            style="display:inline;"
+          >
+            {% csrf_token %}
+            <button type="submit" class="btn-complete">Complete</button>
+          </form>
+          {% else %}
+          <span class="status-completed">Completed</span>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p>No upcoming appointments.</p>
+  {% endif %}
+</section>
 </main>
 {% endblock %}

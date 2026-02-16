@@ -3,69 +3,94 @@
 {% block title %} TechWell CyberCafe |  Dashboard{% endblock %}
 
 {% block content %}
-<aside class="sidebar">
+
     <!-- Sidebar -->
-      <div >
-        <a href="{% url 'digital:client' %}" class="nav-link active">Dashboard</a>
-        <a href="{% url 'digital:update_profile' %}" class="nav-link active">My Profile</a>
-        <a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a>
-        <a href="{% url 'digital:payments' %}" class="nav-link active">Payments</a>
-        <a href="{% url 'digital:messages' %}" class="nav-link active">Messages</a>
-        <a href="{% url 'digital:logout' %}" class="nav-link active">Logout</a>
-      </div>
-</aside>
+    <aside class="sidebar">
+        <h2>Client Panel</h2>
+        <ul>
+            <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+            <li><a href="{% url 'digital:my_bookings' %}" class="nav-link">My Bookings</a></li>
+            <li><a href="{% url 'digital:client_payments' %}" class="nav-link">Payments</a></li>
+            <li><a href="{% url 'digital:client_messages' %}" class="nav-link">Messages</a></li>
+            <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+        </ul>
+    </aside>
 
-    <!-- Main content -->
-  <main class="main">
-    <div class="col-md-9">
-      <h2 class="mb-3">Welcome, {{ request.user.username }}</h2>
+    <!-- Main Content -->>
 
-      <!-- Quick Stats -->
-      <div class="row text-center">
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm p-3">
-            <h5>Bookings</h5>
-            <p class="display-6">{{ bookings_count|default:"0" }}</p>
-          </div>
+        <!-- Top Navbar -->
+        <div class="topbar">
+            <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+            <div class="user-info">
+                <span>Welcome, {{ request.user.username }}</span>
+            </div>
         </div>
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm p-3">
-            <h5>Payments</h5>
-            <p class="display-6">{{ payments_count|default:"0" }}</p>
-          </div>
-        </div>
-        <div class="col-md-4 mb-3">
-          <div class="card shadow-sm p-3">
-            <h5>Messages</h5>
-            <p class="display-6">{{ messages_count|default:"0" }}</p>
-          </div>
-        </div>
-      </div>
 
-      <!-- Recent Activity -->
-      <div class="card shadow-sm mt-4">
-        <div class="card-header">
-          <h5 class="mb-0">Recent Activity</h5>
+<div class="dashboard-wrapper">
+
+    <main class="dashboard-container">
+
+        <!-- LEFT SIDE (Action Cards) -->
+        <div class="cards-section">
+
+            <div class="dashboard-header">
+                <h1>Welcome, {{ request.user.username }}</h1>
+                <p>Manage your cyber cafe account</p>
+            </div>
+
+            <div class="cards-grid">
+
+                <div class="action-card">
+                    <h3>👤 My Profile</h3>
+                    <p>Update your personal details.</p>
+                    <a href="{% url 'digital:update_profile' %}" class="card-btn">Update yor profile</a>
+                </div>
+
+                <div class="action-card">
+                    <h3>📅 My Bookings</h3>
+                    <p>View and manage bookings.</p>
+                    <a href="{% url 'digital:my_bookings' %}" class="card-btn">View Bookings</a>
+                </div>
+
+                <div class="action-card">
+                    <h3>💳 Payments</h3>
+                    <p>Track transactions.</p>
+                    <a href="{% url 'digital:client_payments' %}" class="card-btn">View Payments</a>
+                </div>
+
+                <div class="action-card">
+                    <h3>💬 Messages</h3>
+                    <p>Check support messages.</p>
+                    <a href="{% url 'digital:messages' %}" class="card-btn">View Messages</a>
+                </div>
+            </div>
         </div>
-        <div class="card-body">
-          {% if recent_bookings %}
-            <ul class="list-group">
-              {% for booking in recent_bookings %}
-                <li class="list-group-item">
-                  <strong>{{ booking.service }}</strong> on {{ booking.date }} at {{ booking.time }}
-                  <span class="badge bg-info float-end">{{ booking.status }}</span>
-                </li>
-              {% endfor %}
-            </ul>
-          {% else %}
-            <p class="text-muted">No recent activity.</p>
-          {% endif %}
+
+
+        <!-- RIGHT SIDE (Stats Panel) -->
+        <div class="stats-panel">
+
+            <h3>Account Overview</h3>
+
+            <div class="stat-box">
+                <h4>Total Bookings</h4>
+                <p>{{ bookings_count|default:"0" }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>Total Payments</h4>
+                <p>KES {{ payments_total|default:"0" }}</p>
+            </div>
+
+            <div class="stat-box">
+                <h4>Unread Messages</h4>
+                <p>{{ unread_messages|default:"0" }}</p>
+            </div>
+
         </div>
-      </div>
-    </div>
-  </div>
+
+    </main>
+
 </div>
-</main>
-    <!-- General Actions -->
     
 {% endblock %}

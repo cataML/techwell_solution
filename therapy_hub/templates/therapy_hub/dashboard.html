@@ -5,8 +5,7 @@
 <div class="dashboard-container">
 
     {% if request.user.therapy_profile.role == 'client' %}
-    <div class="card">
-        <i class="fa fa-user"></i>
+    <div class="dashh-card">
         <h3>Client Dashboard</h3>
         <p>View your sessions, payments, and messages.</p>
         <a href="{% url 'therapy_hub:client_dashboard' %}">Enter</a>
@@ -21,9 +20,10 @@
         <a href="{% url 'therapy_hub:counsellor_dashboard' %}">Enter</a>
     </div>
     {% endif %}
-
-    <p>Username: {{ request.user.username }}</p>
-    <p>Role: {{ request.user.therapy_profile.role }}</p>
+    <div>
+        <p>Username: {{ request.user.username }}</p>
+        <p>Role: {{ request.user.therapy_profile.role }}</p>
+    </div>
 </div>
 
 {% endblock %}

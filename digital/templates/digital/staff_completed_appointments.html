@@ -1,0 +1,38 @@
+{% extends "base_digital.html" %}
+{% block title %}Completed Appointments{% endblock %}
+
+{% block content %}
+  <aside class="sidebar">
+    <h2>Staff Panel</h2>
+    <nav>
+      <a href="{% url 'digital:staff_dashboard' %}" class="nav-link active">Dashboard</a>
+      <a href="{% url 'digital:staff_completed_appointments' %}" class="nav-link">
+        Completed Appointments
+      </a>
+       <a href="{% url 'digital:staff_tasks' %}" class="nav-link active">Tasks</a>
+      <a href="{% url 'digital:staff_completed_tasks' %}" class="nav-link">Completed Tasks</a>
+    </nav>
+  </aside>
+<main class="main">
+<section class="complete-card">
+  <h2>Completed Appointments</h2>
+
+  {% if appointments %}
+  <ul class="list">
+    {% for appt in appointments %}
+    <li class="list-item completed">
+      <div>
+        <p>{{ appt.client_name }}</p>
+        <p>{{ appt.date }} • {{ appt.time }}</p>
+        <small>Completed on {{ appt.completed_at }}</small>
+      </div>
+      <span class="badge done">Completed</span>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p>No completed appointments.</p>
+  {% endif %}
+</section>
+</main>
+{% endblock %}

@@ -93,5 +93,21 @@ class UserForm(forms.ModelForm):
 
 class ClientProfileForm(forms.ModelForm):
     class Meta:
-        model = ClientProfile
-        fields = ['phone', 'bio', 'profile_picture']
+        model = DigitalProfile
+        fields = ['full_name', 'phone_number', 'specialization', 'role', 'profile_picture'] 
+
+class ClientSettingsForm(forms.ModelForm):
+    class Meta:
+        model = DigitalProfile
+        fields = ['theme', 'language', 'country']
+
+    theme = forms.ChoiceField(
+        choices=[('light', 'Light'), ('dark', 'Dark')],
+        widget=forms.RadioSelect
+    )
+    language = forms.ChoiceField(
+        choices=[('English','English'), ('Spanish','Spanish'), ('French','French'), ('Swahili', 'Swahili')]
+    )
+    country = forms.ChoiceField(
+        choices=[('Kenya','Kenya'), ('USA','USA'), ('UK','UK'), ('Other','Other')]
+    )

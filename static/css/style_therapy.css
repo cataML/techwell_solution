@@ -156,6 +156,66 @@
      margin: 2px 0;
     transition: 0.3s;
 }
+
+.user-action {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+  border: 2px solid #ccc;
+  transition: border 0.3s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.profile-icon:hover {
+  border-color: #007BFF;
+}
+
+.profile-dropdown .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  min-width: 140px;
+  z-index: 100;
+}
+
+.profile-dropdown .dropdown-menu a {
+  display: block;
+  padding: 10px 15px;
+  color: #333;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.profile-dropdown .dropdown-menu a:hover {
+  background-color: #f0f0f0;
+}
+
+@media (min-width: 768px) {
+  .profile-dropdown:hover .dropdown-menu {
+    display: block;
+  }
+}
+
+.login-icon i {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
 /* ==============================
    RESPONSIVE WEBSITE
    ============================== */
@@ -2677,7 +2737,7 @@ input[type="checkbox"]:checked ~ label.read-more-btn::after {
 }
 /* ==============================
     DASHBOARD STYLES
-  ============================== */
+  ============================== *
 header{
     margin: 2rem;
     text-align: center;
@@ -2686,28 +2746,31 @@ header{
    }
 header h1{
   color: #333;
-}
+}*/
 .dashboard-container {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
     padding: 2rem;
-    max-width: 1200px;
+    width: 100%;
     margin: auto;
-    flex-direction: column;
+    flex-direction: row-reverse;
+    justify-content: center;
+
 
 }
-.card {
+.dashh-card {
     background-color: white;
-    flex: 1 1 250px;
-    padding: 1.5rem;
-    border-radius: 10rem;
+    padding: 2.5rem;
+    border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 50%;
+    align-self: center;
 }
-.card h3 {
+.dashh-card h3 {
     color: #4D7838;         
 }
-.card a{
+.dashh-card a{
   display: inline-block;
   padding: 0.5rem 1rem;
   background-color: #4D7838;
@@ -2716,13 +2779,13 @@ header h1{
   text-decoration: none;
   margin-top: 0.5rem;
 }
+
 /* ==============================
     COUNCELLOR-DASHBOARD STYLES
    ============================== */
 header{
     margin: 2rem;
     text-align: center;
-    color: #333;
     width: 100%;
    }
 header h1{
@@ -3078,22 +3141,20 @@ table th {
 /* ==============================
     APPOINTMENT PAGE
    ============================== */
-   .payment-dashboard-container {
+   .page-title{
+    margin-top: 25px;
+   }
+   .appointments-container{
     max-width: 1200px;
     margin: 50px auto;
     padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    
 }
 
-.dashboard-title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #315E26;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-/* Summary Cards */
-.summary-cards {
+/* appointment Cards */
+.appointment-card {
     display: flex;
     gap: 25px;
     justify-content: center;
@@ -3380,6 +3441,7 @@ table th {
     text-align: left;
     padding: 12px 15px;
     font-weight: 600;
+    color: #4D7838;
 }
 
 .report-table td {
@@ -3518,7 +3580,7 @@ input:focus {
 
 /* ==============================
     PROFILE PAGE
-  ============================== */
+  ============================== *
   .session-history-container {
     max-width: 900px;
     margin: 50px auto;
@@ -3565,7 +3627,7 @@ input:focus {
     margin-top: 20px;
 }
 
-/* Buttons */
+/* Buttons *
 .btn-secondary {
     padding: 6px 12px;
     background: #efefef;
@@ -3595,18 +3657,87 @@ input:focus {
 /* ==============================
     PAYMENT PAGE
  ============================== */
-h2 {
+.hh2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
+    margin: 1rem;
+    color: #4D7838;
+    text-align: center;
+    font-weight: bold;
 }
 
-h3 {
+.hh3 {
     font-size: 1.5rem;
     margin-bottom: 0.8rem;
     color: #555;
+    text-align: center;
 }
 
+.payments-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 20px;
+    font-family: Arial, sans-serif;
+}
+
+.payments-table th,
+.payments-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.payments-table th {
+    background-color: #fff;
+    font-weight: bold;
+}
+
+.payments-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.payments-table tr:hover {
+    background-color: #eef;
+}
+
+.payments-table a.btn {
+    padding: 4px 8px;
+    background-color: #3b5c28;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.payments-table a.btn:hover {
+    background-color: #0056b3;
+}
+.para{
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 .card-list {
     display: flex;
     flex-wrap: wrap;
@@ -3615,11 +3746,11 @@ h3 {
 }
 
 .card {
-    background-color: #f8f8f8;
+    background-color: #c52b2b;
     border-radius: 10px;
     padding: 1rem 1.2rem;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: calc(33.33% - 1rem); /* 3 cards per row with gap */
+    width: calc(33.33% - 1rem); 
     box-sizing: border-box;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -3649,7 +3780,7 @@ h3 {
     background-color: #0056b3;
 }
 
-/* Table styling for payment list */
+/* Table styling for payment list *
 table {
     width: 100%;
     border-collapse: collapse;

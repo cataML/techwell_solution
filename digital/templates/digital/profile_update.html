@@ -2,15 +2,80 @@
 {% load static %}
 {% block title %} TechWell CyberCafe |  Update Profile{% endblock %}
 {% block content %}
-<div style="max-width: 600px; margin: 2rem auto; padding: 1.5rem; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-    <h2>✏️ Update Your Profile</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" style="padding: .75rem 1.25rem; background: #301934; color: #fff; border: none; border-radius: 6px; cursor: pointer;">
-            Save Changes
-        </button>
-        <a href="{% url 'digital:client' %}" style="margin-left: 1rem; text-decoration: none; color: #555;">Cancel</a>
-    </form>
+<div class="dashboard-wrapper">
+
+    <!-- FIXED SIDEBAR -->
+    <aside class="sidebar">
+        <h2>Client Panel</h2>
+        <ul>
+            <li><a href="{% url 'digital:update_profile' %}" class="nav-link">My Profile</a></li>
+            <li><a href="{% url 'digital:my_bookings' %}" class="nav-link active">My Bookings</a></li>
+            <li><a href="{% url 'digital:payments' %}" class="nav-link">Payments</a></li>
+            <li><a href="{% url 'digital:messages' %}" class="nav-link">Messages</a></li>
+            <li><a href="{% url 'digital:logout' %}" class="nav-link logout">Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+
+        <div class="bookings-wrapper">
+
+            <div class="bookings-header">
+                <h2>My Bookings</h2>
+                <p>View and manage your cyber cafe service bookings</p>
+            </div>
+
+            <div class="bookings-card">
+
+                {% if bookings %}
+                <table class="bookings-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Amount</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.service }}</td>
+                            <td>{{ booking.date }}</td>
+                            <td>{{ booking.time }}</td>
+                            <td>KES {{ booking.amount }}</td>
+                            <td>
+                                <span class="status {{ booking.status }}">
+                                    {{ booking.status }}
+                                </span>
+                            </td>
+                            <td>
+                                {% if booking.status == "pending" %}
+                                <a href="{% url 'digital:cancel_booking' booking.id %}" class="btn cancel-btn">Cancel</a>
+                                {% else %}
+                                <span class="text-muted">N/A</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                {% else %}
+                <div class="empty-state">
+                    <h3>No Bookings Yet</h3>
+                    <p>You have not made any bookings yet.</p>
+                    <a href="{% url 'digital:services' %}" class="btn primary-btn">Book a Service</a>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+    </main>
 </div>
 {% endblock %}

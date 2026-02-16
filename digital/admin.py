@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ContactMessage, BookNow, Appointment, Task, Payment, Message, StaffMessage, ClientProfile, Booking, ClientPayment, ClientMessage, DigitalServices, DigitalBlog, DigitalTeam
+from .models import ContactMessage, BookNow, Appointment, Task, Payment, Message, ClientProfile, Booking, ClientPayment, DigitalServices, DigitalBlog, DigitalTeam
 
 
 admin.register(BookNow)
@@ -15,14 +15,26 @@ class ClientPaymentAdmin(admin.ModelAdmin):
     search_fields = ("user__username",)
 
 admin.site.register(ContactMessage)
-admin.site.register(Appointment)
+@admin.action(description="Mark selected appointments as completed")
+def mark_completed(modeladmin, request, queryset):
+    queryset.update(status='completed')
+
+@admin.register(Appointment)
+class AppointmentAdmin(admin.ModelAdmin):
+    list_display = ('client_name', 'date', 'time', 'status')
+    list_filter = ('status', 'date')
+    list_editable = ('status',)
+    actions = [mark_completed]
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj and obj.status == 'completed':
+            return ('status',)
+        return ()
 admin.site.register(Task)
 admin.site.register(Payment)
 admin.site.register(Message)
-admin.site.register(StaffMessage)
 admin.site.register(ClientProfile)
 admin.site.register(Booking)
-admin.site.register(ClientMessage)
 
 
 @admin.register(DigitalServices)

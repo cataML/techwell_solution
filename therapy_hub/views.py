@@ -220,24 +220,35 @@ def appointments(request):
 @login_required(login_url='/therapy_hub/login/')
 def profile(request):
     user = request.user
+    profile, _ = Profile.objects.get_or_create(user=user)
+
     if request.method == "POST":
         user.first_name = request.POST.get("first_name")
         user.last_name = request.POST.get("last_name")
         user.email = request.POST.get("email")
-        user.profile.phone = request.POST.get("phone")
 
-        if 'avatar' in request.FILES:
-            user.profile.avatar = request.FILES['avatar']
+        profile.phone = request.POST.get("phone")
+
+        if "avatar" in request.FILES:
+            profile.avatar = request.FILES["avatar"]
 
         password = request.POST.get("password")
         if password:
             user.set_password(password)
+            update_session_auth_hash(request, user)  
 
         user.save()
-        user.profile.save()
-        return redirect('therapy_hub:profile')
+        profile.save()
+        messages.success(request, "Profile updated successfully.")
 
-    return render(request, "therapy_hub/profile.html")
+        return redirect("therapy_hub:client_dashboard")
+
+    return render(request, "therapy_hub/profile.html", {
+        "profile": profile
+    })
+@login_required(login_url='/therapy_hub/login/')
+def settings(request):
+    return render(request, 'therapy_hub/settings')
 
 @login_required(login_url='/therapy_hub/login/')
 def session_history(request):
