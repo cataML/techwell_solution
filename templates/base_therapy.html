@@ -69,8 +69,11 @@
 <div class="user-action">
   {% if user.is_authenticated %}
     <div class="profile-dropdown" onclick="toggleDropdown(event)">
-      {% if user_profile and user_profile.image %}
-        <img src="{{ profile.avatar.url }}" alt="Profile" class="profile-icon">
+      
+      {% if user.therapy_profile.avatar %}
+        <img src="{{ user.therapy_profile.avatar.url }}" 
+             alt="Profile" 
+             class="profile-icon">
       {% else %}
         <i class="fa fa-user profile-icon"></i>
       {% endif %}
@@ -82,10 +85,9 @@
       </div>
     </div>
   {% else %}
-    <a href="{% url 'therapy_hub:login' %}" class="login-icon">
-      <a href="{% url 'therapy_hub:login' %}" class="book-button">Login</a>
-    </a>
+    <a href="{% url 'therapy_hub:login' %}" class="book-button">Login</a>
   {% endif %}
+</div>
 </div>
 </div>
 

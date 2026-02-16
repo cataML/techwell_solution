@@ -83,18 +83,38 @@ class Profile(models.Model):
         return f"{self.user.username} - {self.role}"
 
 class Session(models.Model):
-    client = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='sessions')
-    counselor = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True, related_name='counselor_sessions')
+
+    STATUS_CHOICES = [
+        ('upcoming', 'Upcoming'),
+        ('completed', 'Completed'),
+    ]
+
+    client = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='client_sessions'
+    )
+
+    counselor = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='counselor_sessions'
+    )
+
     date = models.DateTimeField()
-    notes = models.TextField(blank=True, null=True)
     duration_minutes = models.PositiveIntegerField(default=60)
+    notes = models.TextField(blank=True, null=True)
+
     status = models.CharField(
         max_length=20,
-        choices=[('completed', 'Completed'), ('upcoming', 'Upcoming')],
+        choices=STATUS_CHOICES,
         default='upcoming'
     )
+
     def __str__(self):
-        return f"Session {self.id} with {self.client.username} on {self.date.strftime('%Y-%m-%d')}"
+        return f"Session {self.id} - {self.client.username} ({self.date.strftime('%Y-%m-%d %H:%M')})"
     
 class User(AbstractUser):
     ROLE_CHOICES = (

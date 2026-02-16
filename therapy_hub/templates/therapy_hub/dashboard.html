@@ -6,6 +6,7 @@
 
     {% if request.user.therapy_profile.role == 'client' %}
     <div class="dashh-card">
+        <i class="fa fa-user-md"></i>
         <h3>Client Dashboard</h3>
         <p>View your sessions, payments, and messages.</p>
         <a href="{% url 'therapy_hub:client_dashboard' %}">Enter</a>
@@ -13,7 +14,7 @@
     {% endif %}
 
     {% if request.user.therapy_profile.role == 'counsellor' %}
-    <div class="card">
+    <div class="dashh-card">
         <i class="fa fa-user-md"></i>
         <h3>Counsellor Dashboard</h3>
         <p>Manage your clients, schedule, and session notes.</p>

@@ -3511,11 +3511,14 @@ table th {
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.08);
     text-align: center;
+    
 }
 
 .profile-avatar {
-    margin-bottom: 25px;
+    margin-bottom: 55px;
     color: #4D7838;
+    width: 100px;
+    justify-self: center;
 }
 
 /* Form */
@@ -3579,66 +3582,106 @@ input:focus {
 }
 
 /* ==============================
-    PROFILE PAGE
-  ============================== *
-  .session-history-container {
-    max-width: 900px;
-    margin: 50px auto;
+    DASHDASH PAGE
+  ============================== */
+  
+.counsellor-container {
+    max-width: 1000px;
+    margin: 0 auto;
     padding: 20px;
 }
 
-.page-title {
-    font-size: 32px;
-    color: #315E26;
-    text-align: center;
-    margin-bottom: 30px;
+.counsellor-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
-.session-table {
+.counsellor-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 5px;
+}
+
+table {
     width: 100%;
     border-collapse: collapse;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.05);
-    overflow: hidden;
 }
 
-.session-table th, .session-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #e7e7e7;
+table th, table td {
     text-align: left;
-    font-size: 14px;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
 }
 
-.session-table th {
-    background: #f9f9f9;
-    color: #333;
-    font-weight: 600;
+table tr:hover {
+    background-color: #f9f9f9;
 }
 
-.session-table tr:last-child td {
-    border-bottom: none;
+.status-upcoming {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
-.empty-message {
-    text-align: center;
-    color: #555;
-    font-size: 15px;
-    margin-top: 20px;
+.status-completed {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.9rem;
 }
 
-/* Buttons *
-.btn-secondary {
-    padding: 6px 12px;
-    background: #efefef;
-    color: #333;
-    border-radius: 6px;
-    text-decoration: none;
-    font-size: 13px;
+.client-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
 }
 
-.btn-secondary:hover {
-    background: #ddd;
+.client-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: #fafafa;
+}
+
+.client-list li:hover {
+    background-color: #f0f0f0;
+}
+
+.client-status-active {
+    background-color: #d1e7dd;
+    color: #0f5132;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.client-status-inactive {
+    background-color: #e2e3e5;
+    color: #6c757d;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+}
+
+.earnings p {
+    margin: 5px 0;
+}
+
+.earnings-amount {
+    font-size: 2rem;
+    color: #28a745;
+    font-weight: bold;
 }
 /* ==============================
     RESPONSIVE STYLES
@@ -3715,8 +3758,121 @@ input:focus {
   text-align: center;
 }
 
+/* ==============================
+    EARNING REPORT PAGE
+ ============================== */
+.earnings-report-section {
+    padding: 40px 20px;
+    background-color: #f9fafb;
+}
 
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
+.report-header h2 {
+    font-size: 28px;
+    color: #4D7838;
+    margin-bottom: 8px;
+}
+
+.report-header p {
+    color: #555;
+    font-size: 15px;
+}
+.report-table thead tr th{
+  color: #fff;
+}
+.report-table-container {
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.report-table thead {
+    background-color: #d1fae5;
+}
+
+.report-table th,
+.report-table td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+}
+
+.report-table th {
+    color: #4D7838;
+    font-weight: 600;
+}
+
+.report-table tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.report-table tbody tr:hover {
+    background-color: #f3f4f6;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.amount {
+    color: #15803d;
+    font-weight: 600;
+}
+
+.status.completed {
+    color: #16a34a;
+    font-weight: 500;
+}
+
+.status.pending {
+    color: #dc2626;
+    font-weight: 500;
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
+
+tfoot {
+    background-color: #ecfdf5;
+}
+
+.total {
+    color: #4D7838;
+    font-weight: bold;
+}
+
+.report-footer {
+    text-align: center;
+    margin-top: 25px;
+}
+
+.back-btn {
+    display: inline-block;
+    background-color: #4D7838;
+    color: #ffffff;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #15803d;
+}
 
 
 

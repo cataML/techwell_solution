@@ -5,9 +5,10 @@ from .models import Profile, Booking, Session, Payments, TeamMember, TherapyServ
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
-from django.urls import reverse
-from urllib.parse import urlencode
 from django.db.models import Sum
+from django.utils import timezone
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 
@@ -191,11 +192,60 @@ def client_dashboard(request):
 
 @login_required(login_url='/therapy_hub/login/')
 def counsellor_dashboard(request):
-    return render(request, 'therapy_hub/counsellor_dashboard.html')
 
-from django.shortcuts import render
+    counsellor = request.user
+    now = timezone.now()
 
-from django.db.models import Sum
+    # Upcoming sessions
+    upcoming_sessions = Session.objects.filter(
+        counselor=counsellor,
+        status='upcoming',
+        date__gte=now
+    ).order_by('date')
+
+    # Completed sessions (this month)
+    completed_sessions = Session.objects.filter(
+        counselor=counsellor,
+        status='completed',
+        date__month=now.month,
+        date__year=now.year
+    )
+
+    SESSION_FEE = 2000  # Example, replace with your actual pricing
+    earnings = completed_sessions.count() * SESSION_FEE
+
+    # Get unique clients
+    client_ids = Session.objects.filter(
+        counselor=counsellor
+    ).values_list('client', flat=True).distinct()
+
+    clients = []
+
+    for client_id in client_ids:
+        client = User.objects.get(id=client_id)
+
+        next_session = Session.objects.filter(
+            counselor=counsellor,
+            client=client,
+            date__gte=now,
+            status='upcoming'
+        ).order_by('date').first()
+
+        clients.append({
+            "username": client.username,
+            "next_session": next_session.date if next_session else None,
+            "status": "active" if next_session else "inactive"
+        })
+
+    context = {
+        "upcoming_sessions": upcoming_sessions,
+        "clients": clients,
+        "earnings": earnings
+    }
+
+    return render(request, 'therapy_hub/counsellor_dashboard.html', context)
+
+
 @login_required(login_url='/therapy_hub/login/')
 def earnings_report(request):
     detailed_earnings = Booking.objects.all().order_by('-date')
@@ -252,8 +302,8 @@ def settings(request):
 
 @login_required(login_url='/therapy_hub/login/')
 def session_history(request):
-    sessions = Session.objects.filter(client=request.user).order_by('-date')
-    context = {"sessions": sessions}
+    upcoming_sessions = Session.objects.filter(counselor=request.user).order_by('-date')
+    context = {"upcoming_sessions": upcoming_sessions}
     return render(request, "therapy_hub/session_history.html", context)
 
 @login_required(login_url='/therapy_hub/login/')
